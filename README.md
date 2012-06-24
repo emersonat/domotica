@@ -11,7 +11,7 @@
 
 Essa interface possui metodos que retornam strings com algumas propriedades
 de segurança usadas pelo sistema como por exemplo chaves para os metódos de 
-criptografia.
+criptografia
 
 --------------------------------------------------------------------------
 
