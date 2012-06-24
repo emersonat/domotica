@@ -1,24 +1,24 @@
 # Domotica
 
-**Automa??o residencial com JAVA e Arduino**
+**Automaçãoo residencial com JAVA e Arduino**
 
 ------------------------------------------------------------------------
-** Instru??es para configuracao **
+** Instruções para configuracao **
 
 -------------------------------------------------------------------------
 **Implementar a Interface: PropriedadesSeguranca.java**
 
 Essa interface possui metodos que retornam strings com algumas propriedades
-de seguran?a usadas pelo sistema como por exemplo chaves para os met?dos de 
+de segurança usadas pelo sistema como por exemplo chaves para os metódos de 
 criptografia.
 
 --------------------------------------------------------------------------
 
 **Configurando Banco de Dados:**
 
-Criar arquivo:  *Context.xml* na pasta META-INF
+Criar arquivo:  *Context.xml* na pasta META-INF ou colocar no arquivo *Context.xml* do Tomcat
 
-Exemplo de configura??o:
+Exemplo de configuração:
 
 `<Context path="/domotica" reloadable="true">    
 
@@ -38,9 +38,9 @@ Exemplo de configura??o:
 -----------------------------------------------------------------------------------------------
 **Key Arduino:**
 
-No Arquivo: *source01* na pasta resources temos o codigo que ser? execultado no arduino.
+No Arquivo: *source01* na pasta resources temos o codigo que será  execultado no arduino.
 
-Para usar esse codigo deve-se setar a chave do Arduino (essa chave ? utilizada para identificar o ARDUINO).
+Para usar esse codigo deve-se setar a chave do Arduino (essa chave será utilizada para identificar o ARDUINO).
 
 tamanho maximo da chave 32 caracteres.
 
@@ -50,7 +50,7 @@ tamanho maximo da chave 32 caracteres.
  
 Banco: Postgres 
 
-Servidor de Aplica??o: Tomcat 
+Servidor de Aplicação: Tomcat 
 
 Framework:Spring 
 
