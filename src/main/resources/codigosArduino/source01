@@ -1,0 +1,120 @@
+
+#include <SPI.h>
+#include <Ethernet.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+
+
+byte mac[] = { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED };
+
+IPAddress ip(192,168,1, 177);
+
+EthernetServer server(80);
+
+
+static String keyArduino = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"; // <-- colocar uma chave com 32 caracteres
+
+
+
+void setup()
+{
+  Ethernet.begin(mac, ip);
+  server.begin();
+  Serial.begin(9600);
+  
+  pinMode(13, OUTPUT); 
+  pinMode(6, OUTPUT); 
+  
+}
+
+boolean chaveValida(String httpReq){
+  int indexKey = httpReq.indexOf("key=");
+  String  keyParam = httpReq.substring(indexKey + 4, indexKey + 36);  
+ 
+  Serial.println(keyParam);
+  
+  if( keyArduino.equals(keyParam) ){
+    return true;
+  }else {
+    return false;
+  }  
+}
+
+int converteInt(String n){
+   if(n.equals("06")){
+      return 6;
+   } else if( n.equals("13") ){
+      return 13; 
+   } else {
+      return 0; 
+   }
+}  
+
+void ligaDesligaPorta(int port){
+  
+  digitalWrite(port, HIGH);
+  delay(2000);
+  digitalWrite(port, LOW);
+  
+}
+
+
+void loop()
+{
+  // listen for incoming clients
+  EthernetClient client = server.available();
+  if (client) {
+    
+    boolean currentLineIsBlank = true;
+    String httpReq = ""; 
+   
+    while (client.connected()) {
+      if (client.available()) {
+        char c = client.read();
+        httpReq += c ;
+        
+        if (c == '\n' && currentLineIsBlank) {
+          client.println("HTTP/1.1 200 OK");
+          client.println("Content-Type: text/html");
+          client.println();
+          
+          if(chaveValida(httpReq)){
+            
+             // Carregando parametros
+                
+             int indexPorta  = httpReq.indexOf("port=");
+             String portaParam = httpReq.substring(indexPorta  + 5, indexPorta  + 7);
+    
+             int indexOp  = httpReq.indexOf("op=");
+             String opParam = httpReq.substring( indexOp + 3, indexOp + 5);
+             
+             
+             if(opParam.equals("01"))
+             {
+                ligaDesligaPorta( converteInt(portaParam) ); 
+                client.println("<result>OK</result>"); 
+             } 
+    
+                
+          } else {  
+             client.println("<result>ERROR:Chave invalida</result>"); 
+          } 
+            
+             
+          break;
+        }
+           
+        if (c == '\n') {
+            currentLineIsBlank = true;
+        } else if (c != '\r') {
+            currentLineIsBlank = false;
+        }
+      }
+    }
+   
+    
+    delay(1);
+    client.stop();
+  }
+}

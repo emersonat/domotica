@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	version="2.5">
+	<display-name>domotica</display-name>
+	
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+	
+
+	
+	<!--************************************************************************ 
+	 								SPRING 3										   
+	 ***************************************************************************-->
+	<listener>
+        <listener-class>
+            org.springframework.web.context.ContextLoaderListener
+        </listener-class>
+    </listener> 
+    
+    <context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>/WEB-INF/app-config.xml</param-value>
+	</context-param>
+    
+    <listener>
+		<listener-class>
+			org.springframework.web.context.request.RequestContextListener
+		</listener-class>
+  	</listener>
+  	
+  	  	  	 	
+  	<servlet>
+		<servlet-name>rest</servlet-name>
+		<servlet-class>	org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		 <init-param>
+    		 <param-name>contextConfigLocation</param-name>
+      		<param-value>/WEB-INF/empty.xml</param-value><!-- Arquivo de configuração vazio para evitar o carregamento duplicado de configurações -->
+   		 </init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>rest</servlet-name>
+		<url-pattern>/api/*</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>rest</servlet-name>
+		<url-pattern>*.html</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>rest</servlet-name>
+		<url-pattern>/resources/*</url-pattern>
+	</servlet-mapping>
+	
+	
+	
+	
+	
+
+	<!-- Filtro Dao -->
+	<filter>
+		<filter-name>openEntityManagerInViewFilter</filter-name>
+		<filter-class>org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter</filter-class>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>openEntityManagerInViewFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+
+	
+	
+	
+
+
+</web-app>

@@ -1,0 +1,78 @@
+package br.com.emersondeandrade.aplicacao.mobile.controllers;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.View;
+
+import br.com.emersondeandrade.aplicacao.ResponseStatus;
+import br.com.emersondeandrade.aplicacao.mobile.CookiesService;
+import br.com.emersondeandrade.modelo.core.casa.CasaFacade;
+import br.com.emersondeandrade.modelo.exeption.ExecultarComandoExeption;
+import br.com.emersondeandrade.modelo.exeption.NotConectedExeption;
+import br.com.emersondeandrade.modelo.exeption.ObjectNaoEncontradoExeption;
+
+
+@Controller
+@Scope("request")
+@RequestMapping(value = "/mobile")
+public class AcionarDispositivoMobileController extends ControllerMobile {
+
+	
+	
+	@Autowired
+	CasaFacade casaFacade;
+	
+	
+	@Autowired
+	@Qualifier("jsonview")
+	View jsonview;
+			
+	
+	
+	
+	@RequestMapping(value = "/acionar",method = RequestMethod.GET)	
+	public ModelAndView acionar(@RequestParam("keyDispositivo") String keyDispositivo,HttpServletRequest r){
+		
+		ModelAndView modelAndView = new ModelAndView(this.jsonview);// resposta json
+				
+		try {
+			 casaFacade.acionar( getCasa() ,keyDispositivo);
+			 modelAndView.addObject("status", ResponseStatus.OK);
+			 modelAndView.addObject("msg",  "Dispositivo acionado com sucesso!!");
+	
+		 } catch (NotConectedExeption e) {
+			 modelAndView.addObject("status", ResponseStatus.ERRO_DISPOSITIVO_NAO_CONECTADO);
+			 modelAndView.addObject("msg",  "Erro dispositivo não conectado!!");
+			e.printStackTrace();
+		
+		 } catch (ExecultarComandoExeption e) {
+			 modelAndView.addObject("status", ResponseStatus.ERRO_EXECULTAR_COMANDO);
+			 modelAndView.addObject("msg",  "Erro ao execultar comando!! ");
+			 e.printStackTrace();
+		
+		 } catch (ObjectNaoEncontradoExeption e) {
+			modelAndView.addObject("status", ResponseStatus.ERRO_EXECULTAR_COMANDO);
+			 modelAndView.addObject("msg",  "Erro ao execultar comando!! ");
+			e.printStackTrace();
+		}  
+					
+		return modelAndView;
+	}
+
+
+
+
+	
+	
+	
+	
+	
+}

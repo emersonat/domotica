@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+   
+    
+    <!-- templates -->
+	<definition name="template-main" template="/WEB-INF/views/web/template/head.jsp">
+	 	 <put-attribute name="primary-content" value="" />
+	</definition>
+    
+    
+	
+	<!-- Pages -->
+ 	<definition name="web/principal" extends="template-main">
+  		<put-attribute name="body" value="/WEB-INF/views/web/principal.jsp" />
+ 	</definition>
+ 	
+ 	
+	
+	
+</tiles-definitions>

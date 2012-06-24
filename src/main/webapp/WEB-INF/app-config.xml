@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+	 http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+	  http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
+
+	
+
+	<context:component-scan base-package="br.com.emersondeandrade" annotation-config="true"/>
+	
+	<context:annotation-config />
+	
+	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" ></bean>
+	
+		
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/mobile/*" />
+			<mvc:mapping path="/mobile/config/*" />
+			<bean class="br.com.emersondeandrade.aplicacao.mobile.FiltroAutenticacaoMobile" />
+		</mvc:interceptor>
+	</mvc:interceptors>
+		
+	<mvc:annotation-driven/>
+	
+	<!-- Ativa o JTA do spring por annotation -->
+	<tx:annotation-driven transaction-manager="transactionManager" />
+
+		
+	<!-- Gerenciador de transacoes baseado em JPA -->
+	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="entityManagerFactory" />
+	</bean>
+	
+			
+	<!-- Fabrica de entity managers -->
+	<bean id="entityManagerFactory"	class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="persistenceUnitName" value="MAIN_POSTGRES"></property>
+	</bean>
+
+
+
+
+	<!-- Views resolvers -->
+	<bean id="jsonview" class="org.springframework.web.servlet.view.json.MappingJacksonJsonView">
+	</bean>
+		
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+	    <property name="viewClass" value="org.springframework.web.servlet.view.tiles2.TilesView"/>
+	</bean>
+	
+		
+	<!-- Email -->
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl"/>
+	
+	
+	
+	<!-- Internacionalização -->
+	<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+      <property name="basename" value="resources/i18n"/>
+  	</bean>
+  	
+	
+		
+	<!-- Configuracao template -->
+	<bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">
+ 		 <property name="definitions">
+   			<list>
+    			<value>/WEB-INF/tiles-definitions.xml</value>
+   			</list>
+  		</property>
+ 	</bean> 
+  
+</beans>
+	
+
+	
+	
+	
+	
+	
+	
+
+
+			

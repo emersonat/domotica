@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<persistence version="1.0"
+	xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd">
+
+
+
+	<persistence-unit name="MAIN_POSTGRES" transaction-type="RESOURCE_LOCAL">
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		
+		
+		<!-- DATA SOURCE  -->
+		<non-jta-data-source>java:comp/env/jdbc/domoticaDB</non-jta-data-source>
+		
+		<!-- Classes -->
+		<class>br.com.emersondeandrade.modelo.core.arduino.Arduino</class>
+		<class>br.com.emersondeandrade.modelo.core.arduino.ArduinoWIZNET_W5100</class>
+		<class>br.com.emersondeandrade.modelo.core.arduino.ArduinoTeste</class>
+		<class>br.com.emersondeandrade.modelo.core.casa.Casa</class>
+		<class>br.com.emersondeandrade.modelo.core.dispositivo.Dispositivo</class>	
+		<class>br.com.emersondeandrade.infraEstrutura.propriedadesSistema.PropriedadeSistema </class>
+		<class>br.com.emersondeandrade.modelo.core.historico.Historico</class>
+		<class>br.com.emersondeandrade.modelo.core.mobile.RegistroMobile</class>
+		<class>br.com.emersondeandrade.modelo.core.usuario.Usuario</class>
+				
+		<properties>
+											
+			<!-- CONFIGURACAO HIBERNATE -->
+			<property name="hibernate.show_sql" value="true" />
+			<property name="hibernate.format_sql" value="true" />
+			<property name="hibernate.hbm2ddl.auto" value="update" />
+					
+			<!-- CONFIGURACOES  DO BANCO  -->
+			<property name="hibernate.connection.lc_ctype" value="LATIN1"/>
+			<property name="hibernate.connection.charSet" value="LATIN1"/>
+			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
+				
+		</properties>
+	</persistence-unit>
+
+</persistence>
