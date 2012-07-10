@@ -40,12 +40,7 @@ public class Usuario {
 	
 		
 	
-	public Casa getCasaDefault(){
-		if(this.getCasas() != null && !this.getCasas().isEmpty() ){
-			return this.getCasas().get(0);
-		}
-		return null;
-	}
+	
 	
 
 	public int getId() {

@@ -75,9 +75,9 @@
 	<nav id="main-nav">
 		
 		<ul class="container_12">
-			<li class="home current"><a href="#" title="Home">Home</a>
+			<li class="home current"><a href="/domotica/web/principal/open.html" title="Home">Home</a>
 				<ul>
-					<li class="with-menu"><a href="#" title="<spring:message code="trocar.casa" text="Trocar de casa"/>">${user.casaDefault.nome}</a>
+					<li class="with-menu"><a href="#" title="<spring:message code="trocar.casa" text="Trocar de casa"/>">${casa.nome}</a>
 						<div class="menu">
 							<img src="/domotica/tema/images/menu-open-arrow.png" width="16" height="16">
 							<ul>

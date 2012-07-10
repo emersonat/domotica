@@ -43,6 +43,7 @@ public class LoginController {
 			modelAndView.addObject("valid", true);
 			modelAndView.addObject("redirect", "web/principal/open.html"); 
 			session().setAttribute("user", usuario);
+			session().setAttribute("casa", usuario.getCasas().get(0));
 		} else {
 			modelAndView.addObject("valid", false);
 		}
