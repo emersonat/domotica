@@ -1,6 +1,7 @@
 package br.com.emersondeandrade.modelo.core.arduino;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
@@ -83,6 +84,8 @@ public abstract class Arduino implements Serializable {
 	@Transient	
 	public static final String PARAM_VALUE_OP_LIGA_DESLIGA = "01";
 		
+	
+	public abstract List<Integer> getPortasDisponiveis();
 	
 	
 	

@@ -4,9 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-
-	
-	
+		
 		<section class="grid_6">
 			<div class="block-border"><div class="block-content">
 				<h1><spring:message code="painel.controle"  text="Painel controle"/> </h1>

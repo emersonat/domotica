@@ -17,7 +17,7 @@
   		<put-attribute name="body" value="/WEB-INF/views/web/principal.jsp" />
  	</definition>
  	
- 	<definition name="web/cadastros/dispositivo" extends="template-main">
+ 	 <definition name="web/cadastros/dispositivo" extends="template-main">
   		<put-attribute name="body" value="/WEB-INF/views/web/cadastros/dispositivo.jsp" />
  	</definition>
  	

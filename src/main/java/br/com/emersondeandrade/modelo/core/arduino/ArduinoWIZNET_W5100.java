@@ -6,7 +6,9 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Properties;
 
 import javax.persistence.DiscriminatorValue;
@@ -23,12 +25,20 @@ public class ArduinoWIZNET_W5100 extends Arduino {
 		
 
 	private static final long serialVersionUID = 1L;
-	
+	private static List<Integer> portasDisponiveis;
 	
 
+	static{
+		portasDisponiveis = new ArrayList<Integer>();
+		portasDisponiveis.add(6);
+		portasDisponiveis.add(13);
+	}
+	
+	
 
 	public ArduinoWIZNET_W5100() {
 		setModelo( ModeloArduino.WIZNET_W5100 );
+		
 		
 	}
 	
@@ -128,6 +138,13 @@ public class ArduinoWIZNET_W5100 extends Arduino {
 	
 			
 		
+	}
+
+
+
+	@Override
+	public List<Integer> getPortasDisponiveis() {
+		return portasDisponiveis;
 	}
 
 
