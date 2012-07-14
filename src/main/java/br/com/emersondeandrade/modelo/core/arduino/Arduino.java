@@ -1,6 +1,7 @@
 package br.com.emersondeandrade.modelo.core.arduino;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -20,6 +21,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
+import br.com.emersondeandrade.modelo.core.dispositivo.TipoComando;
 import br.com.emersondeandrade.modelo.exeption.ExecultarComandoExeption;
 import br.com.emersondeandrade.modelo.exeption.NotConectedExeption;
 
@@ -84,9 +86,13 @@ public abstract class Arduino implements Serializable {
 	@Transient	
 	public static final String PARAM_VALUE_OP_LIGA_DESLIGA = "01";
 		
-	
-	public abstract List<Integer> getPortasDisponiveis();
-	
+			
+	private static List<Integer> portasDisponiveis;
+	static{
+		portasDisponiveis = new ArrayList<Integer>();
+		portasDisponiveis.add(6);
+		portasDisponiveis.add(13);
+	}
 	
 	
 	
@@ -94,6 +100,21 @@ public abstract class Arduino implements Serializable {
 
 	
 	
+	public List<Integer> getPortasDisponiveis() {
+		return portasDisponiveis;
+	}
+	
+	
+	public List<TipoComando> getComandosPossiveis(int porta) {
+	    List<TipoComando> list = new ArrayList<TipoComando>();
+		if(porta == 6 || porta == 13){
+			list.add(TipoComando.LIGAR_DESLIGAR);
+			list.add(TipoComando.MANTER_DESLIGADO);
+			list.add(TipoComando.MANTER_LIGADO);
+		}
+		
+		return list;
+	}
 	
 	
 	

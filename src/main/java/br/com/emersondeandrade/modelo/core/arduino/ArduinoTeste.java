@@ -1,8 +1,5 @@
 package br.com.emersondeandrade.modelo.core.arduino;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
@@ -15,14 +12,7 @@ import br.com.emersondeandrade.modelo.exeption.NotConectedExeption;
 public class ArduinoTeste extends Arduino {
 		
 	private static final long serialVersionUID = 1L;
-	private static List<Integer> portasDisponiveis;
-	
 
-	static{
-		portasDisponiveis = new ArrayList<Integer>();
-		portasDisponiveis.add(6);
-		portasDisponiveis.add(13);
-	}
 
 	public ArduinoTeste() {
 		setModelo(ModeloArduino.ARDUINO_TESTE);
@@ -36,9 +26,6 @@ public class ArduinoTeste extends Arduino {
 	}
 
 
-	@Override
-	public List<Integer> getPortasDisponiveis() {
-		return portasDisponiveis;
-	}
+	
 
 }

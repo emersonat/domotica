@@ -5,6 +5,34 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 
+<script type="text/javascript">
+$(document).ready(function(){
+	
+	$('#porta').change(function(){
+		
+		$.ajax({
+			url: '/domotica/web/dispositivo/comandos.html',
+			dataType: 'json',
+			type: 'GET',
+			data: {numeroPorta: $('#porta').val()  },
+			success: function(data)
+			{
+				var options = "";
+	            $.each(data, function(key, value){
+	               options += '<option value="' + key + '">' + value + '</option>';
+	            });
+	            $("#tipo-evento").html(options);
+	            alert(options)
+			}
+		});
+		
+	});
+	
+	
+	
+});
+</script>
+
 	<section class="grid_4">
 			<div class="block-border"><form class="block-content form" id="simple_form" method="post" action="">
 				<h1><spring:message code="cadastro.dispositivo"  text="Cadastro dispositivos"/></h1>
@@ -22,7 +50,7 @@
 						
 						<p>
 								<label for="simple-select"><spring:message code="porta"  text="Porta"/></label>
-								<select name="porta" id="porta" class="full-width">
+								<select name="porta" id="porta" class="full-width" onchange="">
 									<option value="-1"><spring:message code="selecione"  text="Selecione"/></option>
 									<c:forEach items="${casa.arduino.portasDisponiveis}" var="porta">
 										<option value="${porta}">${porta}</option>
