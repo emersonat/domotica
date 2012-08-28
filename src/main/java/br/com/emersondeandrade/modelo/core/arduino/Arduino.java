@@ -16,11 +16,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
+import br.com.emersondeandrade.modelo.core.casa.Casa;
+import br.com.emersondeandrade.modelo.core.dispositivo.Dispositivo;
 import br.com.emersondeandrade.modelo.core.dispositivo.TipoComando;
 import br.com.emersondeandrade.modelo.exeption.ExecultarComandoExeption;
 import br.com.emersondeandrade.modelo.exeption.NotConectedExeption;
@@ -58,6 +61,20 @@ public abstract class Arduino implements Serializable {
 	@Column(name="modelo",	insertable = false, updatable = false)
 	private ModeloArduino modelo;
 	
+	@OneToOne(mappedBy = "casa")
+	private Casa casa;
+	
+	
+	@Column(nullable = false)
+	private String portas;
+	
+	@Transient
+	private List<Integer> listaPortas = new ArrayList<Integer>();
+	
+	
+	
+	
+
 	/**
 	 * codigo da operacao do arduino
 	 * 01 = liga e desliga porta
@@ -87,12 +104,7 @@ public abstract class Arduino implements Serializable {
 	public static final String PARAM_VALUE_OP_LIGA_DESLIGA = "01";
 		
 			
-	private static List<Integer> portasDisponiveis;
-	static{
-		portasDisponiveis = new ArrayList<Integer>();
-		portasDisponiveis.add(6);
-		portasDisponiveis.add(13);
-	}
+	
 	
 	
 	
@@ -100,9 +112,30 @@ public abstract class Arduino implements Serializable {
 
 	
 	
-	public List<Integer> getPortasDisponiveis() {
-		return portasDisponiveis;
+	public  List<Integer> getPortasDisponiveis(){
+		for(Dispositivo d :getCasa().getDispositivos() ){
+			if( d.isAtivo()  ){
+				
+			}
+		}
 	}
+	
+	
+	
+	
+	public List<Integer> getPortas() {
+		if(listaPortas.isEmpty()){
+			String[] split = portas.split(";");
+			for(String s : split){
+				listaPortas.add(Integer.parseInt(s)  );
+			}
+		}
+		return listaPortas;
+	
+	}
+	
+	
+		
 	
 	
 	public List<TipoComando> getComandosPossiveis(int porta) {
@@ -180,6 +213,19 @@ public abstract class Arduino implements Serializable {
 	public void setModelo(ModeloArduino modelo) {
 		this.modelo = modelo;
 	}
+	
+	public Casa getCasa() {
+		return casa;
+	}
+
+
+
+	public void setCasa(Casa casa) {
+		this.casa = casa;
+	}
+
+	
+	
 
 
 
