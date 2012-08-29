@@ -121,5 +121,19 @@ public class Casa implements Serializable {
 	}
 
 	
+	public List<Dispositivo> getDispositivosAtivos(){
+		List<Dispositivo> result = new ArrayList<Dispositivo>();
+		
+		for(Dispositivo d : getDispositivos()){
+			if(d.isAtivo())
+				result.add(d);
+		}
+		
+		return result;
+		
+		
+		
+	}
+	
 
 }

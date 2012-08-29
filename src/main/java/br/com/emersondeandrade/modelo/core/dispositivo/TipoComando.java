@@ -17,6 +17,24 @@ public enum TipoComando {
 	private int id;
 	private String i18n;
 	
+	public static TipoComando getById(int id) throws IllegalArgumentException {
+				
+		switch (id) {
+		case 1:
+			return TipoComando.LIGAR_DESLIGAR;
+			
+		case 2:
+			return TipoComando.MANTER_LIGADO;
+			
+		case 3:
+			return TipoComando.MANTER_DESLIGADO;
+			
+		}
+		
+		throw new IllegalArgumentException();
+			
+	}
+	
 	private TipoComando(int id,String i18n) {
 		this.id = id;
 		this.i18n = i18n;

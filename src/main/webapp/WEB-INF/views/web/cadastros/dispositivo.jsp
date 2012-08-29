@@ -17,12 +17,13 @@ $(document).ready(function(){
 			data: {numeroPorta: $('#porta').val()  },
 			success: function(data)
 			{
+				
 				var options = "";
 	            $.each(data, function(key, value){
-	               options += '<option value="' + key + '">' + value + '</option>';
+	               	options += '<option value="' + key + '">' + value + '</option>';
 	            });
 	            $("#tipo-evento").html(options);
-	            alert(options)
+	            
 			}
 		});
 		
@@ -34,7 +35,7 @@ $(document).ready(function(){
 </script>
 
 	<section class="grid_4">
-			<div class="block-border"><form class="block-content form" id="simple_form" method="post" action="">
+			<div class="block-border"><form:form class="block-content form" commandName="disp" id="salvarDispositivoForm" method="post" action="/domotica/web/dispositivo/salvar.html">
 				<h1><spring:message code="cadastro.dispositivo"  text="Cadastro dispositivos"/></h1>
 				
 				<fieldset class="grey-bg required">
@@ -45,24 +46,24 @@ $(document).ready(function(){
 					
 						<p>
 							<label for="simple-required"><spring:message code="nome"  text="Nome"/></label>
-							<input type="text" name="simple-required" id="simple-required"  maxlength="50" size="50" value="" class="full-width">
+							<form:input  name="simple-required" id="simple-required"  path="nome" maxlength="50" size="50" value="" class="full-width"/>
 						</p>
 						
 						<p>
 								<label for="simple-select"><spring:message code="porta"  text="Porta"/></label>
-								<select name="porta" id="porta" class="full-width" onchange="">
+								<form:select path="numeroPorta" name="porta" id="porta" class="full-width" onchange="">
 									<option value="-1"><spring:message code="selecione"  text="Selecione"/></option>
 									<c:forEach items="${casa.arduino.portasDisponiveis}" var="porta">
 										<option value="${porta}">${porta}</option>
 									</c:forEach>
-								</select>
+								</form:select>
 						</p>
 												
 						<p>
 								<label for="simple-select"><spring:message code="tipo.evento"  text="Tipo de evento"/></label>
-								<select name="tipo-evento" id="tipo-evento" class="full-width">
+								<form:select path="tipoComando"  name="tipo-evento" id="tipo-evento" class="full-width">
 									<option value="-1"><spring:message code="selecione"  text="Selecione"/></option>
-								</select>
+								</form:select>
 						</p>
 						
 						
@@ -70,7 +71,7 @@ $(document).ready(function(){
 						
 						<p class="colx2-left">
 							<label for="simple-switch-on"><spring:message code="ligado"  text="Ligado"/></label>
-							<input type="checkbox" name="simple-switch-on" id="simple-switch-on" value="1" checked="checked" class="switch">
+							<form:checkbox  name="simple-switch-on" id="simple-switch-on" path="ativo"  class="switch"/>
 						</p>
 			
 				</fieldset>
@@ -78,11 +79,11 @@ $(document).ready(function(){
 			
 				<fieldset class="grey-bg no-margin">
 					<p class="input-with-button">
-						<button type="button">Create</button>
+						<button type="submit">Salvar</button>
 					</p>
 				</fieldset>
 					
-			</form></div>
+			</form:form></div>
 		</section>
 	
 	

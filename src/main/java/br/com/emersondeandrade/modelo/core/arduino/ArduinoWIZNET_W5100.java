@@ -7,6 +7,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Properties;
 
 import javax.persistence.DiscriminatorValue;
@@ -126,6 +127,21 @@ public class ArduinoWIZNET_W5100 extends Arduino {
 			
 		
 	}
+
+
+
+	@Override
+	public List<Integer> getPortasDisponiveis() {
+		
+		getCasa().getDispositivosAtivos();
+		
+		
+		return null;
+	}
+
+	
+
+	
 
 
 

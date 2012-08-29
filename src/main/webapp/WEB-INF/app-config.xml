@@ -48,6 +48,7 @@
 
 	<!-- Views resolvers -->
 	<bean id="jsonview" class="org.springframework.web.servlet.view.json.MappingJacksonJsonView">
+	    
 	</bean>
 		
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
@@ -76,6 +77,9 @@
   		</property>
  	</bean> 
   
+	
+	
+	
 </beans>
 	
 
