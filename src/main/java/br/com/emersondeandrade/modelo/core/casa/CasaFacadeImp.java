@@ -94,6 +94,16 @@ public class CasaFacadeImp implements CasaFacade {
 	}
 
 
+
+
+
+
+
+	public Casa getCasaById(int id) {
+		return casaRepositorio.getById(id);
+	}
+
+
 	
 	
 	

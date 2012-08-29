@@ -23,6 +23,10 @@ public final class CriptografiaImp implements Criptografia{
    
    
    
+   public void setPropSeg(PropriedadesSeguranca propSeg) {
+	   this.propSeg = propSeg;
+   }
+
    public String cript(String str){  
       String strCript = str;  
         
@@ -75,6 +79,7 @@ public final class CriptografiaImp implements Criptografia{
    
    public static  void main(String[] args) {  
       Criptografia s = new CriptografiaImp() ;
+      
         
       String cript = s.cript("teste");  
       String decript = s.decript(cript);  
@@ -84,13 +89,16 @@ public final class CriptografiaImp implements Criptografia{
       
       
       // MD5
-      String key = "teste";
+      String key = "xpto";
 	  System.out.println(new CriptografiaImp().encodeMD5(key));
       
         
    }
 
    
+
+   
+  
    public String encodeMD5(String str) {
 		str += propSeg.getSaltMD5();
 		

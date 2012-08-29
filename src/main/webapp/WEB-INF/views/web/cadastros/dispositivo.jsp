@@ -53,7 +53,7 @@ $(document).ready(function(){
 								<label for="simple-select"><spring:message code="porta"  text="Porta"/></label>
 								<form:select path="numeroPorta" name="porta" id="porta" class="full-width" onchange="">
 									<option value="-1"><spring:message code="selecione"  text="Selecione"/></option>
-									<c:forEach items="${casa.arduino.portasDisponiveis}" var="porta">
+									<c:forEach items="${casa.arduino.portasLivres}" var="porta">
 										<option value="${porta}">${porta}</option>
 									</c:forEach>
 								</form:select>

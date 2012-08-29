@@ -7,7 +7,7 @@ import br.com.emersondeandrade.modelo.exeption.ObjectNaoEncontradoExeption;
 public interface RepositorioPadrao<T> {
 		
 	
-	public T  getById(int id) throws ObjectNaoEncontradoExeption;
+	public T  getById(int id);
 	
 	public List<T> listAll();
 	

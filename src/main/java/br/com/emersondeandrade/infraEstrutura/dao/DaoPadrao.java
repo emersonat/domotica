@@ -6,10 +6,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.com.emersondeandrade.modelo.exeption.ObjectNaoEncontradoExeption;
 import br.com.emersondeandrade.modelo.repositorio.RepositorioPadrao;
 
 
@@ -35,7 +33,7 @@ public abstract class DaoPadrao<T>  implements RepositorioPadrao<T>   {
 	}
 	
 	
-	public T getById(int id) throws ObjectNaoEncontradoExeption {
+	public T getById(int id)  {
 		
 		return (T) entityManager.getReference(klass , id); 
 		  

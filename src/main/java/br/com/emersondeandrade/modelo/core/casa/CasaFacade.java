@@ -27,6 +27,9 @@ public interface CasaFacade {
 	
 	
 	public void salvarArduino(Arduino arduino);
+
+
+	public Casa getCasaById(int id);
 		
 	
 	

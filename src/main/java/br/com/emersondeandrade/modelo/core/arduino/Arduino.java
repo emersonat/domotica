@@ -11,6 +11,7 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -61,7 +62,7 @@ public abstract class Arduino implements Serializable {
 	@Column(name="modelo",	insertable = false, updatable = false)
 	private ModeloArduino modelo;
 	
-	@OneToOne(mappedBy = "casa")
+	@OneToOne(mappedBy = "arduino")
 	private Casa casa;
 	
 	
@@ -112,14 +113,19 @@ public abstract class Arduino implements Serializable {
 
 	
 	
-	public  List<Integer> getPortasDisponiveis(){
+	public  List<Integer> getPortasLivres(){
+		List<Integer> toRemove = new ArrayList<Integer>();
 		for(Dispositivo d :getCasa().getDispositivos() ){
 			if( d.isAtivo()  ){
-				
+				toRemove.add(Integer.parseInt( d.getNumeroPorta()) );
 			}
 		}
+		
+		List<Integer> result = new ArrayList<Integer>(getPortas());
+		result.removeAll(toRemove);
+		
+		return result;
 	}
-	
 	
 	
 	

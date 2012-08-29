@@ -130,14 +130,6 @@ public class ArduinoWIZNET_W5100 extends Arduino {
 
 
 
-	@Override
-	public List<Integer> getPortasDisponiveis() {
-		
-		getCasa().getDispositivosAtivos();
-		
-		
-		return null;
-	}
 
 	
 

@@ -29,25 +29,11 @@ public class ArduinoTeste extends Arduino {
 	}
 
 
-	@Override
-	public List<Integer> getPortasDisponiveis() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	
 
 		
-	@Override
-	public List<Integer> getPortas() {
-		//TODO hard code
-		List<Integer> list = new ArrayList<Integer>();
-		list.add(6);
-		list.add(13);
-		
-		return list;
-		
-	}
+	
 
 
 	

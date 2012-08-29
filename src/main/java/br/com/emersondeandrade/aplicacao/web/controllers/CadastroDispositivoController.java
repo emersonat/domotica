@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.View;
 
 import br.com.emersondeandrade.modelo.core.arduino.Arduino;
+import br.com.emersondeandrade.modelo.core.casa.CasaFacade;
 import br.com.emersondeandrade.modelo.core.dispositivo.Dispositivo;
 import br.com.emersondeandrade.modelo.core.dispositivo.TipoComando;
 
@@ -30,7 +31,8 @@ public class CadastroDispositivoController extends ControllerWeb {
 	@Autowired
 	MessageSource i18n;
 	
-	
+	@Autowired
+	CasaFacade casaFacade;
 	
 		
 	
@@ -38,7 +40,9 @@ public class CadastroDispositivoController extends ControllerWeb {
 	public ModelAndView open(){
 		
 		ModelAndView modelAndView = new ModelAndView("web/cadastros/dispositivo");
+		
 		modelAndView.addObject("disp", new Dispositivo());
+		modelAndView.addObject("casa", getCasa());
 		
 		return modelAndView;
 		
