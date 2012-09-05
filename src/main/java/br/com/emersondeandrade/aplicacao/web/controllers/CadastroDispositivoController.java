@@ -1,14 +1,19 @@
 package br.com.emersondeandrade.aplicacao.web.controllers;
 
+import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -43,6 +48,7 @@ public class CadastroDispositivoController extends ControllerWeb {
 		
 		modelAndView.addObject("disp", new Dispositivo());
 		modelAndView.addObject("casa", getCasa());
+		modelAndView.addObject("listaPortas", getCasa().getArduino().getPortasLivres());
 		
 		return modelAndView;
 		
@@ -52,12 +58,42 @@ public class CadastroDispositivoController extends ControllerWeb {
 	
 	
 	@RequestMapping(value="/salvar")
-	public ModelAndView salvar(Dispositivo dispositivo){
+	public ModelAndView salvar(@Valid  Dispositivo dispositivo,BindingResult result){
+		
+		if(result.hasErrors()){
+			
+			System.out.println("Erro validacao");
+		}
+		
 		
 				
 		
 		return null;
 	}
+	
+	
+	@RequestMapping(value = "/changeAtivo")
+	public ModelAndView  changeAtivo(@RequestParam("ativo") boolean ativo, HttpServletRequest r){
+						
+		Locale locale = r.getLocale();
+				
+		Arduino arduino = getCasa().getArduino();
+				
+		ModelAndView modelAndView = new ModelAndView(this.jsonview);// resposta json
+				
+		List<Integer> listaPortas = ativo ? arduino.getPortasLivres(): arduino.getPortas();
+						
+		modelAndView.addObject(String.valueOf(-1) , i18n.getMessage("selecione" , null, locale));
+				
+		for (Integer porta: listaPortas){
+			modelAndView.addObject(String.valueOf( porta ), porta );
+			
+		}
+			
+		
+		return modelAndView;
+	}
+	
 	
 	
 	

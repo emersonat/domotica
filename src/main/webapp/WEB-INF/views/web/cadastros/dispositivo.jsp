@@ -30,6 +30,31 @@ $(document).ready(function(){
 	});
 	
 	
+	$('#ativo').click(function(){
+		
+			
+		$.ajax({
+			url: '/domotica/web/dispositivo/changeAtivo.html',
+			dataType: 'json',
+			type: 'GET',
+			data: {ativo: !$('input[name=ativo]').is(':checked')   },
+			success: function(data)
+			{
+				
+				var options = "";
+	            $.each(data, function(key, value){
+	               	options += '<option value="' + key + '">' + value + '</option>';
+	            });
+	            $("#porta").html(options);
+	           
+	            
+	            
+			}
+		});
+		
+	});
+	
+	
 	
 });
 </script>
@@ -53,7 +78,7 @@ $(document).ready(function(){
 								<label for="simple-select"><spring:message code="porta"  text="Porta"/></label>
 								<form:select path="numeroPorta" name="porta" id="porta" class="full-width" onchange="">
 									<option value="-1"><spring:message code="selecione"  text="Selecione"/></option>
-									<c:forEach items="${casa.arduino.portasLivres}" var="porta">
+									<c:forEach items="${listaPortas}" var="porta">
 										<option value="${porta}">${porta}</option>
 									</c:forEach>
 								</form:select>
@@ -71,7 +96,7 @@ $(document).ready(function(){
 						
 						<p class="colx2-left">
 							<label for="simple-switch-on"><spring:message code="ligado"  text="Ligado"/></label>
-							<form:checkbox  name="simple-switch-on" id="simple-switch-on" path="ativo"  class="switch"/>
+							<form:checkbox  name="ativo"  id="ativo" path="ativo"  class="switch"/>
 						</p>
 			
 				</fieldset>

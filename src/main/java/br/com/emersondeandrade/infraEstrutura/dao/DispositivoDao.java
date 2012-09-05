@@ -2,6 +2,7 @@ package br.com.emersondeandrade.infraEstrutura.dao;
 
 import java.util.List;
 
+import javax.persistence.EntityNotFoundException;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
@@ -9,7 +10,6 @@ import javax.persistence.TypedQuery;
 import org.springframework.stereotype.Repository;
 
 import br.com.emersondeandrade.modelo.core.dispositivo.Dispositivo;
-import br.com.emersondeandrade.modelo.exeption.ObjectNaoEncontradoExeption;
 import br.com.emersondeandrade.modelo.repositorio.DispositivoRepositorio;
 
 
@@ -37,7 +37,7 @@ public class DispositivoDao extends DaoPadrao<Dispositivo> implements Dispositiv
 	}
 
 
-	public Dispositivo getDispositivoByKey(String keyArduino,String key)	throws ObjectNaoEncontradoExeption {
+	public Dispositivo getDispositivoByKey(String keyArduino,String key)	throws EntityNotFoundException {
 				
 		TypedQuery<Dispositivo> query = entityManager.createQuery("from Dispositivo d where d.key = :key and d.casa.arduino.key = :keyArduino", Dispositivo.class);
 		
@@ -47,7 +47,7 @@ public class DispositivoDao extends DaoPadrao<Dispositivo> implements Dispositiv
 		try{
 			return query.getSingleResult();
 		} catch (NoResultException e) {
-			throw new ObjectNaoEncontradoExeption();
+			throw new EntityNotFoundException();
 		}
 		
 	

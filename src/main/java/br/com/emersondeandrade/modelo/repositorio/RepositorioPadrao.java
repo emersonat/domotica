@@ -2,8 +2,6 @@ package br.com.emersondeandrade.modelo.repositorio;
 
 import java.util.List;
 
-import br.com.emersondeandrade.modelo.exeption.ObjectNaoEncontradoExeption;
-
 public interface RepositorioPadrao<T> {
 		
 	

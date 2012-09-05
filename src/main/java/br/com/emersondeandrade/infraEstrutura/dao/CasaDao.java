@@ -1,5 +1,6 @@
 package br.com.emersondeandrade.infraEstrutura.dao;
 
+import javax.persistence.EntityNotFoundException;
 import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 
@@ -9,7 +10,6 @@ import org.springframework.stereotype.Repository;
 import br.com.emersondeandrade.infraEstrutura.criptografia.Criptografia;
 import br.com.emersondeandrade.modelo.core.casa.Casa;
 import br.com.emersondeandrade.modelo.core.mobile.RegistroMobile;
-import br.com.emersondeandrade.modelo.exeption.ObjectNaoEncontradoExeption;
 import br.com.emersondeandrade.modelo.repositorio.CasaRepositorio;
 
 
@@ -29,7 +29,7 @@ public class CasaDao extends DaoPadrao<Casa> implements CasaRepositorio{
 	
 	
 	
-	public Casa getCasaByKeyArduino(String key)	throws ObjectNaoEncontradoExeption {
+	public Casa getCasaByKeyArduino(String key)	throws EntityNotFoundException {
 				
 				
 		TypedQuery<Casa> query = entityManager.createQuery("from Casa c where c.arduino.key = :key", Casa.class);
@@ -39,7 +39,7 @@ public class CasaDao extends DaoPadrao<Casa> implements CasaRepositorio{
 		try{
 			return query.getSingleResult();
 		} catch (NoResultException e) {
-			throw new ObjectNaoEncontradoExeption();
+			throw new EntityNotFoundException();
 		}
 		
 		
@@ -47,7 +47,7 @@ public class CasaDao extends DaoPadrao<Casa> implements CasaRepositorio{
 	}
 
 	
-	public Casa getCasaByHashMobileAtivo(String hashMobile) throws ObjectNaoEncontradoExeption {
+	public Casa getCasaByHashMobileAtivo(String hashMobile) throws EntityNotFoundException {
 		
 		TypedQuery<RegistroMobile> query = entityManager.createQuery("from RegistroMobile r where r.hash = :hash and r.ativo = true", RegistroMobile.class);
 		
@@ -58,7 +58,7 @@ public class CasaDao extends DaoPadrao<Casa> implements CasaRepositorio{
 			 RegistroMobile registroMobile = query.getSingleResult();
 			 return registroMobile.getCasa();
 		} catch (NoResultException e) {
-			throw new ObjectNaoEncontradoExeption();
+			throw new EntityNotFoundException();
 		}
 		
 		

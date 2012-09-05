@@ -1,5 +1,6 @@
 package br.com.emersondeandrade.aplicacao.mobile;
 
+import javax.persistence.EntityNotFoundException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -13,7 +14,6 @@ import br.com.emersondeandrade.infraEstrutura.propriedadesSistema.PropriedadesSe
 import br.com.emersondeandrade.modelo.core.casa.Casa;
 import br.com.emersondeandrade.modelo.core.casa.CasaFacade;
 import br.com.emersondeandrade.modelo.core.mobile.MobileFacade;
-import br.com.emersondeandrade.modelo.exeption.ObjectNaoEncontradoExeption;
 
 
 
@@ -53,7 +53,7 @@ public class FiltroAutenticacaoMobile   extends HandlerInterceptorAdapter   {
 			controller.setCasa(casa);
 			controller.setHashMobile(hashMobile);
 			
-		}catch (ObjectNaoEncontradoExeption e) {
+		}catch (EntityNotFoundException e) {
 			
 			response.sendRedirect("/domotica/index_mobile.jsp");
 			

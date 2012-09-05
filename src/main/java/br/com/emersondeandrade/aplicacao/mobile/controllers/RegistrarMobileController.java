@@ -1,5 +1,6 @@
 package br.com.emersondeandrade.aplicacao.mobile.controllers;
 
+import javax.persistence.EntityNotFoundException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,7 +22,6 @@ import br.com.emersondeandrade.modelo.core.casa.CasaFacade;
 import br.com.emersondeandrade.modelo.core.mobile.MobileFacade;
 import br.com.emersondeandrade.modelo.core.mobile.RegistroMobile;
 import br.com.emersondeandrade.modelo.exeption.ExisteEntidadeExeption;
-import br.com.emersondeandrade.modelo.exeption.ObjectNaoEncontradoExeption;
 
 
 @Controller
@@ -53,7 +53,7 @@ public class RegistrarMobileController  extends ControllerMobile {
 		Casa casa = null;
 		try {
 			 casa = casaFacade.getCasaByKeyArduino( form.getKey() );
-		} catch (ObjectNaoEncontradoExeption e) {
+		} catch (EntityNotFoundException e) {
 			model.addAttribute("erro","Codigo invalido");
 			return "mobile/registrarMobile";
 			
@@ -89,7 +89,7 @@ public class RegistrarMobileController  extends ControllerMobile {
 		 				
 		try {
 			 casa = casaFacade.getCasaByHashMobile(hashMobile);
-		} catch (ObjectNaoEncontradoExeption e) {
+		} catch (EntityNotFoundException e) {
 			model.addAttribute(new FormRegistro());
 			return "mobile/registrarMobile";
 		}

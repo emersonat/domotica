@@ -1,5 +1,6 @@
 package br.com.emersondeandrade.aplicacao.mobile.controllers;
 
+import javax.persistence.EntityNotFoundException;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,11 +14,9 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.View;
 
 import br.com.emersondeandrade.aplicacao.ResponseStatus;
-import br.com.emersondeandrade.aplicacao.mobile.CookiesService;
 import br.com.emersondeandrade.modelo.core.casa.CasaFacade;
 import br.com.emersondeandrade.modelo.exeption.ExecultarComandoExeption;
 import br.com.emersondeandrade.modelo.exeption.NotConectedExeption;
-import br.com.emersondeandrade.modelo.exeption.ObjectNaoEncontradoExeption;
 
 
 @Controller
@@ -58,7 +57,7 @@ public class AcionarDispositivoMobileController extends ControllerMobile {
 			 modelAndView.addObject("msg",  "Erro ao execultar comando!! ");
 			 e.printStackTrace();
 		
-		 } catch (ObjectNaoEncontradoExeption e) {
+		 } catch (EntityNotFoundException e) {
 			modelAndView.addObject("status", ResponseStatus.ERRO_EXECULTAR_COMANDO);
 			 modelAndView.addObject("msg",  "Erro ao execultar comando!! ");
 			e.printStackTrace();

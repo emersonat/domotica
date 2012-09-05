@@ -2,6 +2,8 @@ package br.com.emersondeandrade.modelo.core.casa;
 
 import java.util.List;
 
+import javax.persistence.EntityNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +15,6 @@ import br.com.emersondeandrade.modelo.core.historico.Historico;
 import br.com.emersondeandrade.modelo.core.historico.HistoricoService;
 import br.com.emersondeandrade.modelo.exeption.ExecultarComandoExeption;
 import br.com.emersondeandrade.modelo.exeption.NotConectedExeption;
-import br.com.emersondeandrade.modelo.exeption.ObjectNaoEncontradoExeption;
 import br.com.emersondeandrade.modelo.repositorio.ArduinoRepositorio;
 import br.com.emersondeandrade.modelo.repositorio.CasaRepositorio;
 import br.com.emersondeandrade.modelo.repositorio.DispositivoRepositorio;
@@ -43,7 +44,7 @@ public class CasaFacadeImp implements CasaFacade {
 	
 		
 	
-	public void acionar(Casa casa ,String keyDispositivo) throws NotConectedExeption, ExecultarComandoExeption,ObjectNaoEncontradoExeption  {
+	public void acionar(Casa casa ,String keyDispositivo) throws NotConectedExeption, ExecultarComandoExeption,EntityNotFoundException  {
 		
 				
 		Dispositivo dispositivo = dispositivoRepositorio.getDispositivoByKey(casa.getArduino().getKey() ,keyDispositivo);
@@ -62,18 +63,18 @@ public class CasaFacadeImp implements CasaFacade {
 	
 	
 
-	public Dispositivo getDispositovoById(int idDispositivo) throws ObjectNaoEncontradoExeption {
+	public Dispositivo getDispositovoById(int idDispositivo) throws EntityNotFoundException {
 		return dispositivoRepositorio.getById(idDispositivo);
 	}
 	
 
-	public Casa getCasaByKeyArduino(String key)	throws ObjectNaoEncontradoExeption {
+	public Casa getCasaByKeyArduino(String key)	throws EntityNotFoundException  {
 			
 		return casaRepositorio.getCasaByKeyArduino(key);
 	}
 	
 	
-	public Casa getCasaByHashMobile(String hashMobile) throws ObjectNaoEncontradoExeption  {
+	public Casa getCasaByHashMobile(String hashMobile) throws EntityNotFoundException   {
 					
 		return casaRepositorio.getCasaByHashMobileAtivo(hashMobile);
 	}
