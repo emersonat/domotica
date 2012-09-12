@@ -8,6 +8,16 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	
+
+	$.fn.sortSelect = function() {
+	    var op = this.children("option");
+	    op.sort(function(a, b) {
+	        return a.text > b.text ? -1 : 1;
+	    })
+	     return this.empty().append(op);
+	}
+
+	
 	$('#porta').change(function(){
 		
 		$.ajax({
@@ -23,6 +33,8 @@ $(document).ready(function(){
 	               	options += '<option value="' + key + '">' + value + '</option>';
 	            });
 	            $("#tipo-evento").html(options);
+	            $("#tipo-evento").sortSelect();
+	            $("#tipo-evento").val(-1);
 	            
 			}
 		});
@@ -41,12 +53,16 @@ $(document).ready(function(){
 			success: function(data)
 			{
 				
+				
 				var options = "";
 	            $.each(data, function(key, value){
-	               	options += '<option value="' + key + '">' + value + '</option>';
+	            	
+	            	options += '<option value="' + key + '">' + value + '</option>';
 	            });
 	            $("#porta").html(options);
-	           
+	            $("#porta").sortSelect();
+	            $("#porta").val(-1);
+
 	            
 	            
 			}
@@ -55,8 +71,14 @@ $(document).ready(function(){
 	});
 	
 	
+	      
+	
+	
 	
 });
+
+
+
 </script>
 
 	<section class="grid_4">
@@ -104,7 +126,7 @@ $(document).ready(function(){
 			
 				<fieldset class="grey-bg no-margin">
 					<p class="input-with-button">
-						<button type="submit">Salvar</button>
+						<button type="submit"><spring:message code="salvar"  text="Salvar"/></button>
 					</p>
 				</fieldset>
 					

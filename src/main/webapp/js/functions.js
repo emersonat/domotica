@@ -1,5 +1,6 @@
 
 
+
 function acionar(keyDispositivo){
 		
 	 desabilitaTodosBotoes();	
@@ -48,3 +49,6 @@ function desabilitaTodosBotoes(){
 		 this.disabled="disabled";
 	 });
 }
+
+
+

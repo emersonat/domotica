@@ -81,7 +81,7 @@ public class CadastroDispositivoController extends ControllerWeb {
 				
 		ModelAndView modelAndView = new ModelAndView(this.jsonview);// resposta json
 				
-		List<Integer> listaPortas = ativo ? arduino.getPortasLivres(): arduino.getPortas();
+		List<Integer> listaPortas = ativo ? arduino.getPortasLivres(): arduino.getTodasPortas();
 						
 		modelAndView.addObject(String.valueOf(-1) , i18n.getMessage("selecione" , null, locale));
 				

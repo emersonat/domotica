@@ -121,7 +121,7 @@ public abstract class Arduino implements Serializable {
 			}
 		}
 		
-		List<Integer> result = new ArrayList<Integer>(getPortas());
+		List<Integer> result = new ArrayList<Integer>(getTodasPortas());
 		result.removeAll(toRemove);
 		
 		return result;
@@ -129,7 +129,7 @@ public abstract class Arduino implements Serializable {
 	
 	
 	
-	public List<Integer> getPortas() {
+	public List<Integer> getTodasPortas() {
 		if(listaPortas.isEmpty()){
 			String[] split = portas.split(";");
 			for(String s : split){
