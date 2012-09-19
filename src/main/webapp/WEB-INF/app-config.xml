@@ -15,7 +15,7 @@
 	
 	<context:annotation-config />
 	
-	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" ></bean>
+	
 	
 		
 	<mvc:interceptors>
@@ -78,6 +78,11 @@
  	</bean> 
   
 	
+	
+
+  <!-- Creates the JSR-303 Validator -->
+  <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+  </bean>    
 	
 	
 </beans>

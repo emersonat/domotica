@@ -62,9 +62,13 @@ $(document).ready(function(){
 	            $("#porta").html(options);
 	            $("#porta").sortSelect();
 	            $("#porta").val(-1);
-
-	            
-	            
+	           
+	            $('#tipo-evento')
+	            	.children()
+	            	.remove()
+	            	.end()
+		           	.append('<option selected value="-1">'+$("#i18n_selecione").text()+'</option>')
+	    	            
 			}
 		});
 		
@@ -80,14 +84,23 @@ $(document).ready(function(){
 
 
 </script>
-
+	<span id="i18n_selecione" style="display:none" ><spring:message code="selecione"  text="Selecione"/></span>
+	
 	<section class="grid_4">
-			<div class="block-border"><form:form class="block-content form" commandName="disp" id="salvarDispositivoForm" method="post" action="/domotica/web/dispositivo/salvar.html">
+			<div class="block-border">
+			
+			<form:form class="block-content form"  modelAttribute="disp" id="salvarDispositivoForm" method="post" action="/domotica/web/dispositivo/salvar.html">
 				<h1><spring:message code="cadastro.dispositivo"  text="Cadastro dispositivos"/></h1>
 				
 				<fieldset class="grey-bg required">
-					<ul class="message error no-margin" style="display:none">
-						<li>This is an <strong>error message</strong>, inside a form</li>
+					<ul class="message error no-margin" style="display:block">
+						<form:errors path="*"/>
+						<form:errors path="numeroPorta"/>
+						<form:errors/>
+						<spring:hasBindErrors name = "disp.*">
+								teste
+						</spring:hasBindErrors>
+						
 					</ul>
 					
 					

@@ -1,9 +1,7 @@
 package br.com.emersondeandrade.aplicacao.web.controllers;
 
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -13,6 +11,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -39,18 +38,18 @@ public class CadastroDispositivoController extends ControllerWeb {
 	@Autowired
 	CasaFacade casaFacade;
 	
+	
+	
 		
 	
 	@RequestMapping(value = "/open")
-	public ModelAndView open(){
+	public String open(ModelMap modelAndView){
+			
+		modelAndView.addAttribute("disp", new Dispositivo());
+		modelAndView.addAttribute("casa", getCasa());
+		modelAndView.addAttribute("listaPortas", getCasa().getArduino().getPortasLivres());
 		
-		ModelAndView modelAndView = new ModelAndView("web/cadastros/dispositivo");
-		
-		modelAndView.addObject("disp", new Dispositivo());
-		modelAndView.addObject("casa", getCasa());
-		modelAndView.addObject("listaPortas", getCasa().getArduino().getPortasLivres());
-		
-		return modelAndView;
+		return "web/cadastros/dispositivo";
 		
 	}
 	
@@ -58,17 +57,21 @@ public class CadastroDispositivoController extends ControllerWeb {
 	
 	
 	@RequestMapping(value="/salvar")
-	public ModelAndView salvar(@Valid  Dispositivo dispositivo,BindingResult result){
+	public String salvar(@Valid Dispositivo dispositivo,BindingResult result,ModelMap mv){
+				
 		
 		if(result.hasErrors()){
-			
-			System.out.println("Erro validacao");
+			result.rejectValue("numeroPorta","erro","erro");
+			mv.addAttribute("casa", getCasa());
+			mv.addAttribute("listaPortas", getCasa().getArduino().getPortasLivres());
+			mv.addAttribute("disp", dispositivo);
+			return "web/cadastros/dispositivo";
 		}
 		
 		
 				
 		
-		return null;
+		return "web/cadastros/dispositivo";
 	}
 	
 	
