@@ -13,9 +13,11 @@ public class TipoComandoBinder extends PropertyEditorSupport {
 	public void setAsText(String text) throws IllegalArgumentException {
 		
 		setValue( TipoComando.getById(Integer.parseInt(text)));
-		
-		
+			
 	}
+	
+	
+	
 	
 	
 	

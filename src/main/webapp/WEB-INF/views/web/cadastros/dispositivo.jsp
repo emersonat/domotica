@@ -89,20 +89,15 @@ $(document).ready(function(){
 	<section class="grid_4">
 			<div class="block-border">
 			
-			<form:form class="block-content form"  modelAttribute="disp" id="salvarDispositivoForm" method="post" action="/domotica/web/dispositivo/salvar.html">
+			<form:form class="block-content form"  commandName="dispositivo" id="salvarDispositivoForm" method="post" action="/domotica/web/dispositivo/salvar.html">
 				<h1><spring:message code="cadastro.dispositivo"  text="Cadastro dispositivos"/></h1>
 				
 				<fieldset class="grey-bg required">
-					<ul class="message error no-margin" style="display:block">
-						<form:errors path="*"/>
-						<form:errors path="numeroPorta"/>
-						<form:errors/>
-						<spring:hasBindErrors name = "disp.*">
-								teste
-						</spring:hasBindErrors>
-						
-					</ul>
-					
+					<spring:hasBindErrors name="dispositivo">
+						<ul class="message error no-margin" style="display:block">
+							<spring:message code="verifique.campos"   text="Verifique campos obrigatórios"/>						
+						</ul>
+					</spring:hasBindErrors>
 					
 						<p>
 							<label for="simple-required"><spring:message code="nome"  text="Nome"/></label>
@@ -110,19 +105,20 @@ $(document).ready(function(){
 						</p>
 						
 						<p>
-								<label for="simple-select"><spring:message code="porta"  text="Porta"/></label>
-								<form:select path="numeroPorta" name="porta" id="porta" class="full-width" onchange="">
-									<option value="-1"><spring:message code="selecione"  text="Selecione"/></option>
-									<c:forEach items="${listaPortas}" var="porta">
-										<option value="${porta}">${porta}</option>
-									</c:forEach>
+						
+							    <label for="simple-select"><spring:message code="porta"  text="Porta"/></label>
+								<form:select path="numeroPorta"  name="porta" id="porta"  class="full-width">
+									 <form:option value="-1" ><spring:message code='selecione'  text='Selecione'/></form:option>
+									 <form:options items="${listaPortas}" />
 								</form:select>
+													
 						</p>
 												
 						<p>
 								<label for="simple-select"><spring:message code="tipo.evento"  text="Tipo de evento"/></label>
-								<form:select path="tipoComando"  name="tipo-evento" id="tipo-evento" class="full-width">
-									<option value="-1"><spring:message code="selecione"  text="Selecione"/></option>
+								<form:select path="tipoComando" name="tipo-evento" id="tipo-evento" class="full-width">
+									 <form:option value="-1"><spring:message code="selecione"  text="Selecione"/></form:option>
+									 <form:options items="${listaComandosPossiveis}" itemValue="id" itemLabel="i18n"/>
 								</form:select>
 						</p>
 						

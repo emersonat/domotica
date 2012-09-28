@@ -155,7 +155,9 @@ public abstract class Arduino implements Serializable {
 		return list;
 	}
 	
-	
+	public List<TipoComando> getComandosPossiveis(String porta) {
+		return getComandosPossiveis(Integer.parseInt(porta));
+	}
 	
 	
 	

@@ -15,6 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
@@ -35,25 +36,33 @@ public class Dispositivo implements Serializable {
 
 	private int id;
 	
+	
 	@NotEmpty(message = "*")
 	@Size(max=2,min=2,message = "*")
 	private String numeroPorta;
 	
-
+	
+	@NotNull(message = "*")
 	private Casa casa; 	
 	
 	
+	@NotNull(message = "*")
 	private TipoComando tipoComando;
 	
 	
+	@NotNull(message = "*")
+	@NotEmpty(message = "*")
+	@Size(max=50 , message = "*")
 	private String nome;
 	
 
 	private String key;
 	
 	
-
+	@NotNull(message = "*")
+	@NotEmpty(message = "*")
 	private List<TiposEvento> tiposEventos;
+	
 	
 	
 	private boolean ativo = true;

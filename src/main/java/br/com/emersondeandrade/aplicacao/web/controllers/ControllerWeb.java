@@ -3,6 +3,7 @@ package br.com.emersondeandrade.aplicacao.web.controllers;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -36,6 +37,18 @@ public abstract class ControllerWeb {
 		Casa casa = (Casa) session().getAttribute("casa");
 		
 		return casaFacade.getCasaById(casa.getId());
+	}
+	
+	public boolean hasErrors(BindingResult result, String... fields ){
+		
+		for(String f: fields){
+			if(result.hasFieldErrors(f)){
+				return true;
+			}
+		}
+		
+		return false;
+		
 	}
 
 }
