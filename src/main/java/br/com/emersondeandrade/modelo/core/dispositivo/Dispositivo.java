@@ -55,12 +55,11 @@ public class Dispositivo implements Serializable {
 	@Size(max=50 , message = "*")
 	private String nome;
 	
-
+	
 	private String key;
 	
 	
-	@NotNull(message = "*")
-	@NotEmpty(message = "*")
+
 	private List<TiposEvento> tiposEventos;
 	
 	

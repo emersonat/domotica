@@ -1,14 +1,11 @@
 package br.com.emersondeandrade.aplicacao.web.controllers;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import javax.validation.Validator;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -17,7 +14,6 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -58,20 +54,32 @@ public class CadastroDispositivoController extends ControllerWeb {
 		
 	}
 	
+	private void internacionalizarListaComados(List<TipoComando> comandos,Locale locale){
 		
+		for(TipoComando tc : comandos ) {
+			tc.setI18n( i18n.getMessage( tc.getI18n() , null, locale) );
+		}
+		
+	}
 	
 	@RequestMapping(value="/salvar")
-	public String salvar(@Valid Dispositivo disp,BindingResult result,ModelMap mv){
-						
+	public String salvar(@Valid Dispositivo disp,BindingResult result,ModelMap mv, HttpServletRequest r ){
+		Locale locale = r.getLocale();				
+		
 		if(hasErrors(result, "nome","numeroPorta","tipoComando")){
 			mv.addAttribute("listaPortas", getCasa().getArduino().getPortasLivres());
-			mv.addAttribute("listaComandosPossiveis", getCasa().getArduino().getComandosPossiveis(disp.getNumeroPorta()));
+			
+			List<TipoComando> comandosPossiveis = getCasa().getArduino().getComandosPossiveis(disp.getNumeroPorta());
+			internacionalizarListaComados(comandosPossiveis, locale);
+			
+			mv.addAttribute("listaComandosPossiveis", comandosPossiveis );
 			return "web/cadastros/dispositivo";
 		}
 		
+		disp.setCasa( getCasa() );
 		
-				
-		
+		casaFacade.salvarDispositivo(disp);
+			
 		return "web/cadastros/dispositivo";
 	}
 	

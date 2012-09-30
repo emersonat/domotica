@@ -23,10 +23,15 @@ public final class CriptografiaImp implements Criptografia{
    
    
    
-   public void setPropSeg(PropriedadesSeguranca propSeg) {
+   public CriptografiaImp(PropriedadesSeguranca propSeg) {
 	   this.propSeg = propSeg;
    }
+   
+  public CriptografiaImp() {
+	// TODO Auto-generated constructor stub
+  }
 
+  
    public String cript(String str){  
       String strCript = str;  
         
@@ -78,19 +83,19 @@ public final class CriptografiaImp implements Criptografia{
    
    
    public static  void main(String[] args) {  
-      Criptografia s = new CriptografiaImp() ;
-      
+      //Criptografia s = new CriptografiaImp(new PropriedadesSegurancaProducao() ) ;
+         
         
-      String cript = s.cript("teste");  
-      String decript = s.decript(cript);  
+   //   String cript = s.cript("1");  
+     // String decript = s.decript(cript);  
         
-      System.out.println("Cripto: " + ">"+cript+"<");  
-      System.out.println("Decripto: " + decript);  
+      //System.out.println("Cripto: " + ">"+cript+"<");  
+      //System.out.println("Decripto: " + decript);  
       
       
       // MD5
-      String key = "xpto";
-	  System.out.println(new CriptografiaImp().encodeMD5(key));
+     // String key = "xpto";
+	  //System.out.println(new CriptografiaImp().encodeMD5(key));
       
         
    }
@@ -115,6 +120,8 @@ public final class CriptografiaImp implements Criptografia{
 			throw new RuntimeException(e);
 		}
    }
+
+
    
    
    

@@ -15,22 +15,20 @@ public interface CasaFacade {
 	
 	
 	public void acionar(Casa casa,String keyDispositivo) throws NotConectedExeption, ExecultarComandoExeption, EntityNotFoundException ;
-	
-	
+		
 	public Dispositivo getDispositovoById(int idDispositivo) throws EntityNotFoundException;
-
-	
+		
 	public Casa getCasaByKeyArduino(String keyArduino) throws EntityNotFoundException;
 	
 	public Casa getCasaByHashMobile(String hashMobile) throws EntityNotFoundException;
 	
 	public List<Historico> buscaTodosHistoricos(Casa casa,int initresult,int maxResult,String atributo, int ordem);
-	
-	
+		
 	public void salvarArduino(Arduino arduino);
-
-
+	
 	public Casa getCasaById(int id);
+	
+	public void salvarDispositivo(Dispositivo disp);
 		
 	
 	

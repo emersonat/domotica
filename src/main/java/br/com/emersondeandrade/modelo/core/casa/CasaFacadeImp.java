@@ -1,5 +1,6 @@
 package br.com.emersondeandrade.modelo.core.casa;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityNotFoundException;
@@ -102,6 +103,23 @@ public class CasaFacadeImp implements CasaFacade {
 
 	public Casa getCasaById(int id) {
 		return casaRepositorio.getById(id);
+	}
+
+
+
+
+
+	@Override
+	public void salvarDispositivo(Dispositivo disp) {
+		if(disp.getId() <= 0){
+			String key = criptService.cript(""+ new Date().getTime());
+			disp.setKey(key);
+			dispositivoRepositorio.salvar(disp);
+		} else {
+			 // auto implementar
+		}
+		
+		
 	}
 
 
