@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.emersondeandrade.infraEstrutura.propriedadesSistema.PropriedadesSeguranca;
+import br.com.emersondeandrade.infraEstrutura.propriedadesSistema.PropriedadesSegurancaProducao;
 
 @Service
 public final class CriptografiaImp implements Criptografia{  
@@ -83,19 +84,19 @@ public final class CriptografiaImp implements Criptografia{
    
    
    public static  void main(String[] args) {  
-      //Criptografia s = new CriptografiaImp(new PropriedadesSegurancaProducao() ) ;
+      Criptografia s = new CriptografiaImp(new PropriedadesSegurancaProducao() ) ;
          
         
-   //   String cript = s.cript("1");  
-     // String decript = s.decript(cript);  
+     //String cript = s.cript("teste");  
+    // String decript = s.decript(cript);  
         
       //System.out.println("Cripto: " + ">"+cript+"<");  
       //System.out.println("Decripto: " + decript);  
       
       
       // MD5
-     // String key = "xpto";
-	  //System.out.println(new CriptografiaImp().encodeMD5(key));
+      //String key = "rather75";
+	  //System.out.println(new CriptografiaImp(new PropriedadesSegurancaProducao() ).encodeMD5(key));
       
         
    }

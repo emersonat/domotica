@@ -17,8 +17,12 @@
   		<put-attribute name="body" value="/WEB-INF/views/web/principal.jsp" />
  	</definition>
  	
- 	 <definition name="web/cadastros/dispositivo" extends="template-main">
-  		<put-attribute name="body" value="/WEB-INF/views/web/cadastros/dispositivo.jsp" />
+ 	 <definition name="web/cadastros/cadastro_dispositivo" extends="template-main">
+  		<put-attribute name="body" value="/WEB-INF/views/web/cadastros/cadastro_dispositivo.jsp" />
+ 	</definition>
+ 	
+ 	 <definition name="web/listagens/lista_dispositivo" extends="template-main">
+  		<put-attribute name="body" value="/WEB-INF/views/web/listagens/lista_dispositivo.jsp" />
  	</definition>
  	
 	

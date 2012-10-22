@@ -21,7 +21,7 @@ $(document).ready(function(){
 	$('#porta').change(function(){
 		
 		$.ajax({
-			url: '/domotica/web/dispositivo/comandos.html',
+			url: '/domotica/web/cadastroDispositivo/comandos.html',
 			dataType: 'json',
 			type: 'GET',
 			data: {numeroPorta: $('#porta').val()  },
@@ -46,7 +46,7 @@ $(document).ready(function(){
 		
 			
 		$.ajax({
-			url: '/domotica/web/dispositivo/changeAtivo.html',
+			url: '/domotica/web/cadastroDispositivo/changeAtivo.html',
 			dataType: 'json',
 			type: 'GET',
 			data: {ativo: !$('input[name=ativo]').is(':checked')   },

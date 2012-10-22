@@ -26,7 +26,7 @@ import br.com.emersondeandrade.modelo.core.dispositivo.TipoComando;
 
 @Controller
 @Scope("request")
-@RequestMapping(value = "/web/dispositivo")
+@RequestMapping(value = "/web/cadastroDispositivo")
 public class CadastroDispositivoController extends ControllerWeb {
 		
 	@Autowired
@@ -50,7 +50,7 @@ public class CadastroDispositivoController extends ControllerWeb {
 		modelAndView.addAttribute("listaComandosPossiveis",  Collections.EMPTY_LIST  );
 			
 		
-		return "web/cadastros/dispositivo";
+		return "web/cadastros/cadastro_dispositivo";
 		
 	}
 	

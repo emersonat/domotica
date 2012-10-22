@@ -53,9 +53,9 @@ int converteInt(String n){
 
 void ligaDesligaPorta(int port){
   
-  digitalWrite(port, HIGH);
-  delay(2000);
   digitalWrite(port, LOW);
+  delay(2000);
+  digitalWrite(port, HIGH);
   
 }
 
