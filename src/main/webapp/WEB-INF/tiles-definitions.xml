@@ -25,5 +25,11 @@
   		<put-attribute name="body" value="/WEB-INF/views/web/listagens/lista_dispositivo.jsp" />
  	</definition>
  	
+ 	 <definition name="web/listagens/dispositivos" extends="template-main">
+  		<put-attribute name="body" value="/WEB-INF/views/web/listagens/dispositivos.jsp" />
+ 	</definition>
+ 	
+ 	
+ 	
 	
 </tiles-definitions>
