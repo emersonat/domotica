@@ -10,7 +10,12 @@
 	 	 <put-attribute name="primary-content" value="" />
 	</definition>
     
-    
+    <definition name="template-mobile" template="/WEB-INF/views/web/template/head_mobile.jsp">
+	 	 <put-attribute name="primary-content" value="" />
+	</definition>
+	
+	
+	
 	
 	<!-- Pages -->
  	<definition name="web/principal" extends="template-main">
@@ -28,6 +33,26 @@
  	 <definition name="web/listagens/dispositivos" extends="template-main">
   		<put-attribute name="body" value="/WEB-INF/views/web/listagens/dispositivos.jsp" />
  	</definition>
+ 	
+ 	
+ 	<!-- MOBILE -->
+ 	 <definition name="mobile/registrarMobile" extends="template-mobile">
+  		<put-attribute name="body" value="/WEB-INF/views/mobile/registrarMobile.jsp" />
+ 	</definition>
+ 	
+ 	<definition name="mobile/painelControle" extends="template-mobile">
+  		<put-attribute name="body" value="/WEB-INF/views/mobile/painelControle.jsp" />
+ 	</definition>
+ 	
+ 	<definition name="mobile/historico" extends="template-mobile">
+  		<put-attribute name="body" value="/WEB-INF/views/mobile/historico.jsp" />
+ 	</definition>
+ 	
+ 	<definition name="mobile/config" extends="template-mobile">
+  		<put-attribute name="body" value="/WEB-INF/views/mobile/config.jsp" />
+ 	</definition>
+ 	
+ 	
  	
  	
  	

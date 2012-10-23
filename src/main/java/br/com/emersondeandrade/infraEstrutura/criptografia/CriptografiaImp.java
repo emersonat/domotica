@@ -11,8 +11,8 @@ import javax.crypto.spec.SecretKeySpec;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.emersondeandrade.infraEstrutura.propriedadesSistema.PropriedadeSegurancaProducao;
 import br.com.emersondeandrade.infraEstrutura.propriedadesSistema.PropriedadesSeguranca;
-import br.com.emersondeandrade.infraEstrutura.propriedadesSistema.PropriedadesSegurancaProducao;
 
 @Service
 public final class CriptografiaImp implements Criptografia{  
@@ -84,7 +84,7 @@ public final class CriptografiaImp implements Criptografia{
    
    
    public static  void main(String[] args) {  
-      Criptografia s = new CriptografiaImp(new PropriedadesSegurancaProducao() ) ;
+      Criptografia s = new CriptografiaImp(new PropriedadeSegurancaProducao()) ;
          
         
      //String cript = s.cript("teste");  
@@ -95,7 +95,7 @@ public final class CriptografiaImp implements Criptografia{
       
       
       // MD5
-      //String key = "rather75";
+      //String key = "teste";
 	  //System.out.println(new CriptografiaImp(new PropriedadesSegurancaProducao() ).encodeMD5(key));
       
         
