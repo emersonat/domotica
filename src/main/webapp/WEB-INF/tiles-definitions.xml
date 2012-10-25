@@ -15,6 +15,7 @@
 	</definition>
 	
 	
+    
 	
 	
 	<!-- Pages -->
@@ -34,6 +35,8 @@
   		<put-attribute name="body" value="/WEB-INF/views/web/listagens/dispositivos.jsp" />
  	</definition>
  	
+ 	 
+ 	 
  	
  	<!-- MOBILE -->
  	 <definition name="mobile/registrarMobile" extends="template-mobile">

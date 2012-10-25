@@ -4,6 +4,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
+<c:if test="${contextPath == '/'}">
+	<c:set var="contextPath" value=""/>
+</c:if>
+<input type="hidden" id="contextPath" value="${contextPath}"><!-- for JS scrips -->
 
 <script type="text/javascript">
 $(document).ready(function(){
@@ -21,7 +26,7 @@ $(document).ready(function(){
 	$('#porta').change(function(){
 		
 		$.ajax({
-			url: '/domotica/web/cadastroDispositivo/comandos.html',
+			url: $('#contextPath').val() + '/web/cadastroDispositivo/comandos.html',
 			dataType: 'json',
 			type: 'GET',
 			data: {numeroPorta: $('#porta').val()  },
@@ -46,7 +51,7 @@ $(document).ready(function(){
 		
 			
 		$.ajax({
-			url: '/domotica/web/cadastroDispositivo/changeAtivo.html',
+			url: $('#contextPath').val() + '/web/cadastroDispositivo/changeAtivo.html',
 			dataType: 'json',
 			type: 'GET',
 			data: {ativo: !$('input[name=ativo]').is(':checked')   },
@@ -89,7 +94,7 @@ $(document).ready(function(){
 	<section class="grid_4">
 			<div class="block-border">
 			
-			<form:form class="block-content form"  commandName="dispositivo" id="salvarDispositivoForm" method="post" action="/domotica/web/dispositivo/salvar.html">
+			<form:form class="block-content form"  commandName="dispositivo" id="salvarDispositivoForm" method="post" action="${contextPath}/web/dispositivo/salvar.html">
 				<h1><spring:message code="cadastro.dispositivo"  text="Cadastro dispositivos"/></h1>
 				
 				<fieldset class="grey-bg required">

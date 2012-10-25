@@ -10,8 +10,6 @@
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 		
 		
-		<!-- DATA SOURCE  -->
-		<non-jta-data-source>java:comp/env/jdbc/domoticaDB</non-jta-data-source>
 		
 		<!-- Classes -->
 		<class>br.com.emersondeandrade.modelo.core.arduino.Arduino</class>

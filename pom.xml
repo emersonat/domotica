@@ -64,7 +64,6 @@
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
 			<version>3.6.9.Final</version>
-			
 		</dependency>
 
 		<dependency>
@@ -75,14 +74,20 @@
 		</dependency>
 
 		
-
-
 		<dependency>
 			<groupId>postgresql</groupId>
 			<artifactId>postgresql</artifactId>
-			<version>9.0-801.jdbc4</version>
-			<scope>provided</scope>
+			<version>8.4-702.jdbc4</version>
 		</dependency>
+		
+		
+		<!-- DATA SOURCE -->
+		<dependency>
+			<groupId>commons-dbcp</groupId>
+			<artifactId>commons-dbcp</artifactId>
+			<version>1.4</version>
+		</dependency>
+		
 
 		<dependency>
 			<groupId>javax.mail</groupId>
@@ -96,17 +101,14 @@
 			<version>1.1-rev-1</version>
 		</dependency>
 
+		
+		<!-- TEMPLATES -->
 		<dependency>
 		    <groupId>org.apache.tiles</groupId>
 		    <artifactId>tiles-extras</artifactId>
 		    <version>2.2.2</version>
  		 </dependency>
 		
-	
-		
-		
-		
-
 
 
 

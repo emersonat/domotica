@@ -8,7 +8,7 @@ function acionar(keyDispositivo){
 	
 	
 	$.ajax({
-		  url: "/domotica/mobile/acionar.html",
+		  url: $('#contextPath').val() +  "/mobile/acionar.html",
 		  context: document.body,
 		  data: ( {keyDispositivo: keyDispositivo}   ),
 		  dataType : "json",
@@ -23,7 +23,7 @@ function acionar(keyDispositivo){
 		
 		  error: function(){
 		  	
-			  window.location = "/domotica/mobile/verificaKey.html"; 
+			  window.location =  $('#contextPath').val() + "/mobile/verificaKey.html"; 
 		 
 		  }
 		  

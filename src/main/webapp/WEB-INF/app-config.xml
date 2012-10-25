@@ -16,6 +16,7 @@
 	<context:annotation-config />
 	
 	
+
 	
 		
 	<mvc:interceptors>
@@ -31,16 +32,29 @@
 	<!-- Ativa o JTA do spring por annotation -->
 	<tx:annotation-driven transaction-manager="transactionManager" />
 
+	
+	<!-- DATA SOURCE -->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="org.postgresql.Driver" />
+		<property name="url" value="URL_BANCO"/>
+		<property name="username" value="USER_NAME_BANCO" />
+		<property name="password" value="SENHA_BANCO" />
+		<property name="initialSize" value="5" />
+		<property name="maxActive" value="10" />
+	</bean>	
 		
+	
 	<!-- Gerenciador de transacoes baseado em JPA -->
 	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
 		<property name="entityManagerFactory" ref="entityManagerFactory" />
+		<property name="dataSource" ref="dataSource" />
 	</bean>
 	
 			
 	<!-- Fabrica de entity managers -->
 	<bean id="entityManagerFactory"	class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 		<property name="persistenceUnitName" value="MAIN_POSTGRES"></property>
+		<property name="dataSource" ref="dataSource" />
 	</bean>
 
 

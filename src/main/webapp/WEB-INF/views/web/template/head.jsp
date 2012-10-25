@@ -6,53 +6,57 @@
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 
 
+
+
 <html>
 
 	<head>
-	
+		
+		<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
+		
 		<title>DOMOTICA | <spring:message code="automacao.residencial" text="Automação Residencial" /></title>
 		<meta charset="utf-8">
 		
 		<!-- Global stylesheets -->
-		<link href="/domotica/tema/css/reset.css" rel="stylesheet" type="text/css">
-		<link href="/domotica/tema/css/common.css" rel="stylesheet" type="text/css">
-		<link href="/domotica/tema/css/form.css" rel="stylesheet" type="text/css">
-		<link href="/domotica/tema/css/standard.css" rel="stylesheet" type="text/css">
+		<link href="${contextPath}/tema/css/reset.css" rel="stylesheet" type="text/css">
+		<link href="${contextPath}/tema/css/common.css" rel="stylesheet" type="text/css">
+		<link href="${contextPath}/tema/css/form.css" rel="stylesheet" type="text/css">
+		<link href="${contextPath}/tema/css/standard.css" rel="stylesheet" type="text/css">
 		
 		<!-- Comment/uncomment one of these files to toggle between fixed and fluid layout -->
 		<!--<link href="css/960.gs.css" rel="stylesheet" type="text/css">-->
-		<link href="/domotica/tema/css/960.gs.fluid.css" rel="stylesheet" type="text/css">
+		<link href="${contextPath}/tema/css/960.gs.fluid.css" rel="stylesheet" type="text/css">
 		
 		<!-- Custom styles -->
-		<link href="/domotica/tema/css/simple-lists.css" rel="stylesheet" type="text/css">
-		<link href="/domotica/tema/css/block-lists.css" rel="stylesheet" type="text/css">
-		<link href="/domotica/tema/css/planning.css" rel="stylesheet" type="text/css">
-		<link href="/domotica/tema/css/table.css" rel="stylesheet" type="text/css">
-		<link href="/domotica/tema/css/calendars.css" rel="stylesheet" type="text/css">
-		<link href="/domotica/tema/css/wizard.css" rel="stylesheet" type="text/css">
-		<link href="/domotica/tema/css/gallery.css" rel="stylesheet" type="text/css">
+		<link href="${contextPath}/tema/css/simple-lists.css" rel="stylesheet" type="text/css">
+		<link href="${contextPath}/tema/css/block-lists.css" rel="stylesheet" type="text/css">
+		<link href="${contextPath}/tema/css/planning.css" rel="stylesheet" type="text/css">
+		<link href="${contextPath}/tema/css/table.css" rel="stylesheet" type="text/css">
+		<link href="${contextPath}/tema/css/calendars.css" rel="stylesheet" type="text/css">
+		<link href="${contextPath}/tema/css/wizard.css" rel="stylesheet" type="text/css">
+		<link href="${contextPath}/tema/css/gallery.css" rel="stylesheet" type="text/css">
 		
 		<!-- Favicon -->
-		<link rel="shortcut icon" type="image/x-icon" href="/domotica/tema/favicon.ico">
-		<link rel="icon" type="image/png" href="/domotica/tema/favicon-large.png">
+		<link rel="shortcut icon" type="image/x-icon" href="${contextPath}/tema/favicon.ico">
+		<link rel="icon" type="image/png" href="${contextPath}/tema/favicon-large.png">
 		
 		<!-- Generic libs -->
-		<script type="text/javascript" src="/domotica/tema/js/html5.js"></script>				<!-- this has to be loaded before anything else -->
-		<script type="text/javascript" src="/domotica/tema/js/jquery-1.4.2.min.js"></script>
-		<script type="text/javascript" src="/domotica/tema/js/old-browsers.js"></script>		<!-- remove if you do not need older browsers detection -->
+		<script type="text/javascript" src="${contextPath}/tema/js/html5.js"></script>				<!-- this has to be loaded before anything else -->
+		<script type="text/javascript" src="${contextPath}/tema/js/jquery-1.4.2.min.js"></script>
+		<script type="text/javascript" src="${contextPath}/tema/js/old-browsers.js"></script>		<!-- remove if you do not need older browsers detection -->
 		
 		<!-- Template libs -->
-		<script type="text/javascript" src="/domotica/tema/js/jquery.accessibleList.js"></script>
-		<script type="text/javascript" src="/domotica/tema/js/searchField.js"></script>
-		<script type="text/javascript" src="/domotica/tema/js/common.js"></script>
-		<script type="text/javascript" src="/domotica/tema/js/standard.js"></script>
+		<script type="text/javascript" src="${contextPath}/tema/js/jquery.accessibleList.js"></script>
+		<script type="text/javascript" src="${contextPath}/tema/js/searchField.js"></script>
+		<script type="text/javascript" src="${contextPath}/tema/js/common.js"></script>
+		<script type="text/javascript" src="${contextPath}/tema/js/standard.js"></script>
 		<!--[if lte IE 8]><script type="text/javascript" src="js/standard.ie.js"></script><![endif]-->
-		<script type="text/javascript" src="/domotica/tema/js/jquery.tip.js"></script>
-		<script type="text/javascript" src="/domotica/tema/js/jquery.hashchange.js"></script>
-		<script type="text/javascript" src="/domotica/tema/js/jquery.contextMenu.js"></script>
+		<script type="text/javascript" src="${contextPath}/tema/js/jquery.tip.js"></script>
+		<script type="text/javascript" src="${contextPath}/tema/js/jquery.hashchange.js"></script>
+		<script type="text/javascript" src="${contextPath}/tema/js/jquery.contextMenu.js"></script>
 		
 		<!-- Custom styles lib -->
-		<script type="text/javascript" src="/domotica/tema/js/list.js"></script>
+		<script type="text/javascript" src="${contextPath}/tema/js/list.js"></script>
 		
 		<!-- Charts library -->
 		<!--Load the AJAX API-->
@@ -65,21 +69,23 @@
 		</script>
 		
 		
+		
 	</head>
 	
 	
 	<body> 
+	<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 	
 	
 	<!-- Main nav -->
 	<nav id="main-nav">
 		
 		<ul class="container_12">
-			<li class="home current"><a href="/domotica/web/principal/open.html" title="Home">Home</a>
+			<li class="home current"><a href="${contextPath}/web/principal/open.html" title="Home">Home</a>
 				<ul>
 					<li class="with-menu"><a href="#" title="<spring:message code="trocar.casa" text="Trocar de casa"/>">${casa.nome}</a>
 						<div class="menu">
-							<img src="/domotica/tema/images/menu-open-arrow.png" width="16" height="16">
+							<img src="${contextPath}/tema/images/menu-open-arrow.png" width="16" height="16">
 							<ul>
 							
 							<c:forEach items="${user.casas}" var="casa">								

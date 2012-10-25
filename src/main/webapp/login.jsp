@@ -8,6 +8,11 @@
 <html>
 
 	<head>
+	<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
+	<c:if test="${contextPath == '/'}">
+		<c:set var="contextPath" value=""/>
+	</c:if>
+	
 	
 	<title>DOMOTICA | <spring:message code="automacao.residencial" text="Automação Residencial" /></title>
 		<meta charset="utf-8">
@@ -41,6 +46,8 @@
 	</head>
 
 	<body class="special-page login-bg dark">
+
+	<input type="hidden" id="contextPath" value="${contextPath}"><!-- for JS scrips -->
 <!-- The template uses conditional comments to add wrappers div for ie8 and ie7 - just add .ie, .ie7 or .ie6 prefix to your css selectors when needed -->
 <!--[if lt IE 9]><div class="ie"><![endif]-->
 <!--[if lt IE 8]><div class="ie7"><![endif]-->
@@ -72,7 +79,7 @@
 			<p class="message error no-margin">Error message</p>
 			-->
 			
-			<form class="form with-margin" name="login-form" id="login-form" method="post" action="/domotica/web/login.html">
+			<form class="form with-margin" name="login-form" id="login-form" method="post" action="${contextPath}/web/login.html">
 				<input type="hidden" name="a" id="a" value="send">
 				<p class="inline-small-label">
 					<label for="login"><span class="big"><spring:message code="email" text="Email" /></span></label>

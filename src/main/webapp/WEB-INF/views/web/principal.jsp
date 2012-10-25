@@ -4,6 +4,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
+<c:if test="${contextPath == '/'}">
+	<c:set var="contextPath" value=""/>
+</c:if>
+<input type="hidden" id="contextPath" value="${contextPath}"><!-- for JS scrips -->
 		
 		<section class="grid_6">
 			<div class="block-border"><div class="block-content">
@@ -14,11 +19,11 @@
 					
 					<li>
 
-						<!--  <a href="/domotica/web/dispositivo/open.html">  -->
+						<!--  <a href="${contextPath}/web/dispositivo/open.html">  -->
 						
-						<a href="/domotica/web/dispositivo/listar.html"> 
+						<a href="${contextPath}/web/dispositivo/listar.html"> 
 
-							<img src="/domotica/tema/images/icons/web-app/48/Bar-Chart.png" width="48" height="48"><spring:message code="dispositivos"  text="Dispositivos"/>
+							<img src="${contextPath}/tema/images/icons/web-app/48/Bar-Chart.png" width="48" height="48"><spring:message code="dispositivos"  text="Dispositivos"/>
 						</a>
 				
 					</li>
