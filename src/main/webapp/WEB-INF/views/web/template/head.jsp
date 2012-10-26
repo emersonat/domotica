@@ -6,13 +6,16 @@
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 
 
-
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
+<c:if test="${contextPath == '/'}">
+	<c:set var="contextPath" value=""/>
+</c:if>
 
 <html>
 
 	<head>
 		
-		<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
+		
 		
 		<title>DOMOTICA | <spring:message code="automacao.residencial" text="Automação Residencial" /></title>
 		<meta charset="utf-8">
@@ -74,8 +77,7 @@
 	
 	
 	<body> 
-	<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
-	
+	<input type="text" id="contextPath" value="${contextPath}" /><!-- for JS scrips -->	
 	
 	<!-- Main nav -->
 	<nav id="main-nav">

@@ -29,7 +29,7 @@
 			<span class="ui-block-a" >Configurações</span>
 			
 			<span class="ui-block-b" data-role="controlgroup" data-type="horizontal" style="padding-left: 75%;margin-top: -17px;">			
-				<a href="${contextPath}" data-role="button" data-ajax="false" data-iconpos="notext" data-icon="home" ></a>
+				<a href="${contextPath}/mobile/verificaKey.html" data-role="button" data-ajax="false" data-iconpos="notext" data-icon="home" ></a>
 				<a href="${contextPath}/mobile/listarHistorico.html" data-role="button" data-iconpos="notext" data-icon="grid" ></a>
 				<a href="${contextPath}/mobile/config/open.html"  data-role="button" data-iconpos="notext" data-icon="gear"></a>
 			</span>

@@ -14,7 +14,7 @@ function acionar(keyDispositivo){
 		  dataType : "json",
 		  type: "GET",	
 		  success: function(data){
-			  	
+			 
 			  habilitaTodosBotoes();
 			  $.mobile.hidePageLoadingMsg();
 			 
@@ -22,7 +22,7 @@ function acionar(keyDispositivo){
 		  },
 		
 		  error: function(){
-		  	
+		  	 
 			  window.location =  $('#contextPath').val() + "/mobile/verificaKey.html"; 
 		 
 		  }

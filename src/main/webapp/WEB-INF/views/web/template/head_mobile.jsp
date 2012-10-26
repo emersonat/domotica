@@ -6,8 +6,13 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 
-<c:set var="contextPath" value="${pageContext.request.contextPath}"/>		
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
+<c:if test="${contextPath == '/'}">
+	<c:set var="contextPath" value=""/>
+</c:if>
+
 <input type="hidden" id="contextPath" value="${contextPath}"><!-- for JS scrips -->	
+	
 	
 <tiles:insertAttribute name="body"/>
 		
