@@ -39,12 +39,12 @@
 	<!-- DATA SOURCE -->
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName" value="org.postgresql.Driver" />
-		<property name="url" value="URL_BANCO"/>
-		<property name="username" value="USER_NAME_BANCO" />
-		<property name="password" value="SENHA_BANCO" />
+		<property name="url" value="jdbc:postgresql://localhost:5432/domoticaDB?autoReconnect=true;charSet=LATIN1" />
+		<property name="username" value="domotica" />
+		<property name="password" value="SISTEMA_UFO856" />
 		<property name="initialSize" value="5" />
 		<property name="maxActive" value="10" />
-	</bean>	
+	</bean>
 
 	
 	

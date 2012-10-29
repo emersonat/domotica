@@ -13,17 +13,9 @@
 
 
 
-
-<html>
-<head>
-
-
-
-</head>
-<body>
-	<input type="hidden" id="contextPath" value="${contextPath}"><!-- for JS scrips -->
 	<div data-role="page" id="main">
-
+		<script type="text/javascript" src="${contextPath}/js/mobile/config.js"></script>
+		
 		<div data-role="header" style="height: 30px;" class="ui-grid-b">
 					
 			<span class="ui-block-a" >Configurações</span>
@@ -39,6 +31,22 @@
 		
 		 
 		 Modelo: ${arduino.modelo}
+		 
+		 <br/>
+		  
+		 <!-- Internacionalização -->
+		 <span style="display: none" id="conectado"><spring:message code="conectado" text="Conectado"/></span>
+		 <span style="display: none" id="desconectado"><spring:message code="desconectado" text="Desconectado"/></span>
+		 <span style="display: none" id="erroConectar"><spring:message code="erro.conectar" text="Erro ao tentar comunicação"/></span>
+		 
+		 
+		 <spring:message code="status" text="Status"/>: 
+		 	<span id="statusArduino"><spring:message code="tentando.conectar" text="Tentando conectar"/>....</span>
+		 	
+		 	
+		 	
+		 <br/>
+		  <br/>
 		 <form:form action="${contextPath}/mobile/config/salvar.html" method="post"  commandName="formConfig">
 					 	
 			 
@@ -70,5 +78,4 @@
 	</div>
 
 
-</body>
-</html>
+

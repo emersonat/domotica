@@ -1,8 +1,5 @@
 package br.com.emersondeandrade.modelo.core.arduino;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
@@ -26,6 +23,12 @@ public class ArduinoTeste extends Arduino {
 	public void ligarDesligarPorta(String numeroPorta) throws NotConectedExeption, ExecultarComandoExeption {
 		System.out.println("Ligando e desligando porta: " + numeroPorta +" do ARDUINO teste");
 		
+	}
+
+
+	@Override
+	public boolean isConected() {
+		return true;
 	}
 
 

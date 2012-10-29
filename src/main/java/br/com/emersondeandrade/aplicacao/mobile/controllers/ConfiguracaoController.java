@@ -4,13 +4,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.View;
 
+import br.com.emersondeandrade.aplicacao.ResponseStatus;
 import br.com.emersondeandrade.aplicacao.mobile.controllers.forms.FormConfig;
 import br.com.emersondeandrade.modelo.core.arduino.Arduino;
 import br.com.emersondeandrade.modelo.core.casa.CasaFacade;
@@ -29,6 +33,11 @@ public class ConfiguracaoController  extends ControllerMobile {
 	
 	@Autowired
 	MobileFacade mobileFacade;
+	
+	
+	@Autowired
+	@Qualifier("jsonview")
+	View jsonview;
 	
 	
 	
@@ -71,6 +80,21 @@ public class ConfiguracaoController  extends ControllerMobile {
 		
 		return "redirect:/mobile/verificaKey.html";
 		
+	}
+	
+	@RequestMapping(value = "/consultarStatus",method = RequestMethod.GET)	
+	public ModelAndView consultarStatus(){
+		ModelAndView mv = new ModelAndView(this.jsonview);// resposta json
+		
+		
+		if( getCasa().getArduino().isConected() ){
+			mv.addObject("status", ResponseStatus.OK);
+		} else {
+			mv.addObject("status", ResponseStatus.ERRO_DISPOSITIVO_NAO_CONECTADO);
+		}
+			
+		
+		return mv;
 	}
 	
 	
