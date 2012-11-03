@@ -28,6 +28,8 @@ function consultaStatusArduino() {
 				  $('#statusArduino').html( $('#desconectado').html() );
 				  $('#statusArduino').css("color","red");
 			  }
+			  
+			 
 			 
 		  },
 		
@@ -35,6 +37,7 @@ function consultaStatusArduino() {
 			  
 			  $('#statusArduino').html( $('#erroConectar').html() );
 			  $('#statusArduino').css("color","red");
+			
 		 
 		  }
 		  

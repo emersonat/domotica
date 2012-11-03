@@ -42,20 +42,25 @@
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 
-	<servlet-mapping>
-		<servlet-name>rest</servlet-name>
-		<url-pattern>/api/*</url-pattern>
-	</servlet-mapping>
 	
 	<servlet-mapping>
 		<servlet-name>rest</servlet-name>
 		<url-pattern>*.html</url-pattern>
 	</servlet-mapping>
 	
+	
 	<servlet-mapping>
 		<servlet-name>rest</servlet-name>
-		<url-pattern>/resources/*</url-pattern>
+		<url-pattern>/controleweb</url-pattern>
 	</servlet-mapping>
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
