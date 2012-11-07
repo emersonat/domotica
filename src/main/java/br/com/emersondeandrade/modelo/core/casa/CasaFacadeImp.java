@@ -109,7 +109,7 @@ public class CasaFacadeImp implements CasaFacade {
 
 
 
-	@Override
+	
 	public void salvarDispositivo(Dispositivo disp) {
 		if(disp.getId() <= 0){
 			String key = criptService.cript(""+ new Date().getTime());

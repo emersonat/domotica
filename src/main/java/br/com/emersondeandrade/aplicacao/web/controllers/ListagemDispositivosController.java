@@ -18,7 +18,7 @@ public class ListagemDispositivosController extends ControllerWeb {
 		
 		
 		mv.addAttribute("dispositivos",  getCasa().getDispositivos() );   
-		
+		mv.addAttribute("size",  10 );  
 		
 		return "web/listagens/dispositivos";
 		
