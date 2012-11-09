@@ -11,27 +11,44 @@
 </c:if>
 <input type="hidden" id="contextPath" value="${contextPath}"><!-- for JS scrips -->
 		
-		
-		
-		
-	<c:forEach items="${dispositivos}" var="d">
-		
-		
-		<c:out value="${d.nome}"></c:out>
-		
 	
-	</c:forEach>
-	
-	
-	<display:table id="dispositivos" name="dispositivos" sort="external" size="size" pagesize="10" partialList="true"  requestURI="teste.html" >
 		
-		<display:column title="Nome" sortName="nome"  sortable="true"> 
-				${dispositivos.nome}
-		</display:column>	
-			
+	<section class="grid_12">
+			<div class="block-border">
 	
-	</display:table>
-	
+			<form class="block-content form" id="table_form" method="post" action="">
+				<h1>Table</h1>
+					<display:table cellspacing="0" id="dispositivos" class="table" style="width:100%" name="dispositivos" sort="external" size="size"  pagesize="10" partialList="true"  requestURI="teste.html" >
+					
+						<div class="no-margin">
+							<display:column title="Nome"  sortName="nome"  sortable="true"> 
+								${dispositivos.nome}
+							</display:column>	
+							
+							<display:column title="Numero Porta" sortName="numeroPorta"  sortable="true"> 
+								${dispositivos.numeroPorta}
+							</display:column>	
+							
+							<display:column title="Tipo Comando" sortName="tipoComando"  sortable="false"> 
+								${dispositivos.tipoComando}
+							</display:column>	
+							
+							<display:column title="Ativo"  sortName="ativo"  sortable="false"> 
+								${dispositivos.ativo}
+							</display:column>	
+							
+							
+							
+						</div>
+						
+						
+						
+					</display:table>	
+						
+					
+			</form>			
+			</div>	
+		</section>
 	
 		
 		
