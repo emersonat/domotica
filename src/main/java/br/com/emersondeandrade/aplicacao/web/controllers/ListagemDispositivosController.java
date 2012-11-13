@@ -15,15 +15,14 @@ public class ListagemDispositivosController extends ControllerWeb {
 		
 	@RequestMapping(value = "/listar")
 	public String open(ModelMap mv){
-		
-		
+				
 		mv.addAttribute("dispositivos",  getCasa().getDispositivos() );   
-		mv.addAttribute("size",  getCasa().getDispositivos().size() );  
-		
-		
+				
 		return "web/listagens/dispositivos";
 		
 	}
+	
+	
 	
 	
 

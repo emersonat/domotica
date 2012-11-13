@@ -17,8 +17,8 @@
 			<div class="block-border">
 	
 			<form class="block-content form" id="table_form" method="post" action="">
-				<h1>Table</h1>
-					<display:table cellspacing="0" id="dispositivos" class="table" style="width:100%" name="dispositivos" sort="external" size="size"  pagesize="10" partialList="true"  requestURI="teste.html" >
+				<h1><spring:message code="dispositivos" text="Dispositivos"/>  </h1>
+					<display:table cellspacing="0" id="dispositivos" class="table" style="width:100%" sort="internal" name="dispositivos"    partialList="false"   >
 					
 						<div class="no-margin">
 							<display:column title="Nome"  sortName="nome"  sortable="true"> 
@@ -30,11 +30,19 @@
 							</display:column>	
 							
 							<display:column title="Tipo Comando" sortName="tipoComando"  sortable="false"> 
-								${dispositivos.tipoComando}
+								<spring:message code="${dispositivos.tipoComando.i18n}" /> 
 							</display:column>	
 							
 							<display:column title="Ativo"  sortName="ativo"  sortable="false"> 
-								${dispositivos.ativo}
+								
+								<c:if test="${dispositivos.ativo}">
+									<spring:message code="sim" text="Sim"/> 
+								 </c:if>
+								 
+								 <c:if test="${dispositivos.ativo == false }">
+									<spring:message code="nao" text="Não"/> 
+								 </c:if>
+								
 							</display:column>	
 							
 							

@@ -1,4 +1,18 @@
 
+/*
+Arduino com shield ethernet com chipset wiznet
+Autor Emerson Andrade
+
+
+Versão: 1.0.2
+
+Codigos das oprações:
+01 - ligaDesligaPorta
+99 - Status dos arduino 
+
+
+*/
+
 #include <SPI.h>
 #include <Ethernet.h>
 #include <stdio.h>
@@ -13,7 +27,7 @@ IPAddress ip(192,168,1, 177);
 EthernetServer server(80);
 
 
-static String keyArduino = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"; // <-- colocar uma chave com 32 caracteres
+static String keyArduino = "xxxxxxxxx"; // <-- colocar uma chave com 32 caracteres
 
 
 
@@ -23,8 +37,12 @@ void setup()
   server.begin();
   Serial.begin(9600);
   
-  pinMode(13, OUTPUT); 
   pinMode(6, OUTPUT); 
+  pinMode(7, OUTPUT); 
+ 
+  
+  digitalWrite(6, HIGH);
+  digitalWrite(7, HIGH);
   
 }
 
@@ -44,8 +62,8 @@ boolean chaveValida(String httpReq){
 int converteInt(String n){
    if(n.equals("06")){
       return 6;
-   } else if( n.equals("13") ){
-      return 13; 
+   } else if( n.equals("07") ){
+      return 7; 
    } else {
       return 0; 
    }
@@ -94,11 +112,12 @@ void loop()
              {
                 ligaDesligaPorta( converteInt(portaParam) ); 
                 client.println("<result>OK</result>"); 
+             } else if( opParam.equals("99") ){
+               client.println("<result>OK</result>"); 
              } 
-    
-                
+                    
           } else {  
-             client.println("<result>ERROR:Chave invalida</result>"); 
+             client.println("<error>ERROR:Chave invalida</error>"); 
           } 
             
              

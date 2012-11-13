@@ -6,11 +6,14 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.Properties;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+
+import org.apache.log4j.Logger;
 
 import br.com.emersondeandrade.modelo.exeption.ExecultarComandoExeption;
 import br.com.emersondeandrade.modelo.exeption.NotConectedExeption;
@@ -21,9 +24,11 @@ import br.com.emersondeandrade.modelo.exeption.NotConectedExeption;
 public class ArduinoWIZNET_W5100 extends Arduino {
 
 		
-
+	private static Logger log = Logger.getLogger(ArduinoWIZNET_W5100.class);
+	
+	
 	private static final long serialVersionUID = 1L;
-
+	
 	
 
 	public ArduinoWIZNET_W5100() {
@@ -74,7 +79,7 @@ public class ArduinoWIZNET_W5100 extends Arduino {
 		return urlString;
 	}
 	
-	
+
 	
 	
 	private  void requestHttp(Properties parameters) throws NotConectedExeption, ExecultarComandoExeption {
@@ -83,8 +88,8 @@ public class ArduinoWIZNET_W5100 extends Arduino {
 									
 			StringBuilder response = new StringBuilder();
 			
-			//TODO colocar log
-			//System.out.println("Arduino fazendo request para: " + this.montaUrl(parameters) );
+			log.info("Fazendo request para Arduino.... Casa: " + this.getCasa().getNome() );
+			long  inicio = new Date().getTime();	
 			
 			try {
 				
@@ -110,16 +115,20 @@ public class ArduinoWIZNET_W5100 extends Arduino {
 		        
 		        
 			} catch (MalformedURLException e) {
+				log.error( e.getMessage() );
 				e.printStackTrace();
 				throw new ExecultarComandoExeption();
+				
 			} catch (IOException e) {
+				log.error( e.getMessage() );
 				e.printStackTrace();
 				throw new NotConectedExeption();
 			}
-			 
 			
-			// TODO colocar log
-			System.out.println("Resposta do arduino.: " + response.toString());
+			
+			long termino = new Date().getTime(); 
+			int seg  = (int) (termino - inicio) / 1000;
+			log.info("Resposta do arduino.: " + response.toString() + " em " + seg + " segundos" );
 			
 			
 	
@@ -135,6 +144,7 @@ public class ArduinoWIZNET_W5100 extends Arduino {
 		
 		parametros.setProperty("key", this.getKey() );
 		parametros.setProperty(PARAM_OPERACAO, PARAM_VALUE_OP_TESTE_CONEXAO);
+		parametros.setProperty(PARAM_PORTA, "00");
 				
 		try {
 			requestHttp(parametros);
