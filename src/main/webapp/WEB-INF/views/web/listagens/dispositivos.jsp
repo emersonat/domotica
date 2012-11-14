@@ -18,7 +18,7 @@
 	
 			<form class="block-content form" id="table_form" method="post" action="">
 				<h1><spring:message code="dispositivos" text="Dispositivos"/>  </h1>
-					<display:table cellspacing="0" id="dispositivos" class="table" style="width:100%" sort="internal" name="dispositivos"    partialList="false"   >
+					<display:table cellspacing="0" id="dispositivos" class="table" style="width:100%" sort="external" name="dispositivos"    partialList="false" requestURI="/web/dispositivo/sort.html"   >
 					
 						<div class="no-margin">
 							<display:column title="Nome"  sortName="nome"  sortable="true"> 
@@ -29,7 +29,7 @@
 								${dispositivos.numeroPorta}
 							</display:column>	
 							
-							<display:column title="Tipo Comando" sortName="tipoComando"  sortable="false"> 
+							<display:column title="Tipo Comando"  sortable="false"> 
 								<spring:message code="${dispositivos.tipoComando.i18n}" /> 
 							</display:column>	
 							
