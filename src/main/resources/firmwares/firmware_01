@@ -4,10 +4,12 @@ Arduino com shield ethernet com chipset wiznet
 Autor Emerson Andrade
 
 
-Versão: 1.0.2
+Versão: 1.0.3
 
-Codigos das oprações:
+Codigos das operações:
 01 - ligaDesligaPorta
+02 - ligarPorta
+03 - desligaPorta
 99 - Status dos arduino 
 
 
@@ -70,12 +72,18 @@ int converteInt(String n){
 }  
 
 void ligaDesligaPorta(int port){
-  
   digitalWrite(port, LOW);
   delay(2000);
-  digitalWrite(port, HIGH);
-  
+  digitalWrite(port, HIGH);  
 }
+
+void ligaPorta(int port){
+  digitalWrite(port, LOW);
+} 
+
+void desligaPorta(int port){
+  digitalWrite(port, HIGH);
+} 
 
 
 void loop()
@@ -100,7 +108,6 @@ void loop()
           if(chaveValida(httpReq)){
             
              // Carregando parametros
-                
              int indexPorta  = httpReq.indexOf("port=");
              String portaParam = httpReq.substring(indexPorta  + 5, indexPorta  + 7);
     
@@ -108,13 +115,19 @@ void loop()
              String opParam = httpReq.substring( indexOp + 3, indexOp + 5);
              
              
-             if(opParam.equals("01"))
-             {
+             if(opParam.equals("01")){
                 ligaDesligaPorta( converteInt(portaParam) ); 
                 client.println("<result>OK</result>"); 
-             } else if( opParam.equals("99") ){
-               client.println("<result>OK</result>"); 
+             } else if( opParam.equals("02") ){
+               	ligaPorta(  converteInt(portaParam) );
+                client.println("<result>OK</result>"); 
+             } else if( opParam.equals("03") ){
+               	desligaPorta( converteInt(portaParam) );
+                client.println("<result>OK</result>");    
+              } else if( opParam.equals("99") ){
+                client.println("<result>OK</result>"); 
              } 
+                
                     
           } else {  
              client.println("<error>ERROR:Chave invalida</error>"); 
