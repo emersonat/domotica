@@ -35,18 +35,14 @@ public class ListagemDispositivosController extends ControllerWeb {
 	@RequestMapping(value = "/sort")
 	public String sort(ModelMap mv,HttpServletRequest request){
 		Casa casa = getCasa();
+				
+		String sortAttribute = getSortAtributeDisplayTag("dispositivos");
 		
-		String sortParameterName = (new ParamEncoder("dispositivos").encodeParameterName(TableTagParameters.PARAMETER_SORT));
-		String sortAttribute = request.getParameter(sortParameterName);
-		
-		String order = (new ParamEncoder("dispositivos").encodeParameterName(TableTagParameters.PARAMETER_ORDER));
-		boolean desc = "1".equals(request.getParameter(order));
-			
 		
 		casa.ordenaDispositivos( getComparator(sortAttribute) );
 		
 		
-		if(desc)
+		if(isOrderDisplayTagReverse("dispositivos"))
 			Collections.reverse(casa.getDispositivos()); 		
 		
 			

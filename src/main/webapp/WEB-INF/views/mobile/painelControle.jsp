@@ -35,7 +35,7 @@
 			
 			
 
-			<c:forEach items="${casa.dispositivos}" var="d">
+			<c:forEach items="${casa.dispositivosAtivos}" var="d">
 						
 							${d.nome}			
 							<input data-icon="check" type="button" value="Acionar"
