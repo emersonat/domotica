@@ -20,7 +20,7 @@ import br.com.emersondeandrade.modelo.core.casa.Casa;
 
 @Entity
 @Table(uniqueConstraints=@UniqueConstraint(columnNames={"nome","id_casa"}))
-public class RegistroMobile {
+public class RegistroMobile implements Comparable<RegistroMobile> {
 	
 	@Id
 	@SequenceGenerator(name = "sequenceGenerator", sequenceName = "registro_mobile_seq", allocationSize = 1)
@@ -51,12 +51,12 @@ public class RegistroMobile {
 	@JoinColumn(name = "id_casa", nullable = false)
 	private Casa casa;
 	
-	
-		
+				
 	
 	public int getId() {
 		return id;
 	}
+			
 	public void setId(int id) {
 		this.id = id;
 	}
@@ -100,6 +100,11 @@ public class RegistroMobile {
 	}
 	public void setHash(String hash) {
 		this.hash = hash;
+	}
+	
+	public int compareTo(RegistroMobile o) {
+		return o.getData().compareTo(getData());
+		
 	}
 	
 	

@@ -50,6 +50,36 @@ public class ArduinoWIZNET_W5100 extends Arduino {
 			
 	}
 		
+	@Override
+	public void ligarPorta(String numeroPorta) throws NotConectedExeption, ExecultarComandoExeption {
+		Properties parametros = new Properties();
+		
+		parametros.setProperty("key", this.getKey() );
+		
+		parametros.setProperty(PARAM_OPERACAO, PARAM_VALUE_OP_LIGA);
+		
+		parametros.setProperty(PARAM_PORTA, numeroPorta );
+				
+		requestHttp(parametros);
+		
+	}
+
+	
+
+	@Override
+	public void desligarPorta(String numeroPorta) throws NotConectedExeption, ExecultarComandoExeption {
+		Properties parametros = new Properties();
+		
+		parametros.setProperty("key", this.getKey() );
+		
+		parametros.setProperty(PARAM_OPERACAO, PARAM_VALUE_OP_DESLIGA);
+		
+		parametros.setProperty(PARAM_PORTA, numeroPorta);
+				
+		requestHttp(parametros);
+		
+	}
+
 		
 	
 	@SuppressWarnings("rawtypes")
@@ -144,7 +174,7 @@ public class ArduinoWIZNET_W5100 extends Arduino {
 		
 		parametros.setProperty("key", this.getKey() );
 		parametros.setProperty(PARAM_OPERACAO, PARAM_VALUE_OP_TESTE_CONEXAO);
-		parametros.setProperty(PARAM_PORTA, "00");
+		parametros.setProperty(PARAM_PORTA, "99");
 				
 		try {
 			requestHttp(parametros);
@@ -160,6 +190,9 @@ public class ArduinoWIZNET_W5100 extends Arduino {
 		return true;
 	}
 
+
+
+	
 
 
 

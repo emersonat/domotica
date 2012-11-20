@@ -18,6 +18,7 @@ import javax.persistence.SequenceGenerator;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.apache.log4j.Logger;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import br.com.emersondeandrade.modelo.core.casa.Casa;
@@ -32,6 +33,7 @@ public class Dispositivo implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
+	private static Logger log = Logger.getLogger(Dispositivo.class);
 	
 
 	private int id;
@@ -79,10 +81,10 @@ public class Dispositivo implements Serializable {
 			
 			getCasa().getArduino().ligarDesligarPorta(getNumeroPorta()); 
 			
-			System.out.println("Acionando dispositivo....: " +  getNome()  +" (LIGA E DESLIGA) ");
-			break;
+			log.info("Acionando dispositivo....: " +  getNome()  +" (LIGA E DESLIGA) ");
 			
-		
+			break;
+				
 		}
 		
 	}

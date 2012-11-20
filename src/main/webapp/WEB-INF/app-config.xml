@@ -36,6 +36,8 @@
 	
 	
 	
+	
+	
 	<!-- DATA SOURCE -->
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName" value="org.postgresql.Driver" />
@@ -48,6 +50,10 @@
 	
 	
 
+
+	
+	
+	
 	
 
 	

@@ -37,6 +37,20 @@ public class ArduinoTeste extends Arduino {
 	}
 
 
+	@Override
+	public void ligarPorta(String numeroPorta) throws NotConectedExeption, ExecultarComandoExeption {
+		log.info("Ligando porta: " +  numeroPorta + " do ARDUINO teste") ;
+		
+	}
+
+
+	@Override
+	public void desligarPorta(String numeroPorta) throws NotConectedExeption, ExecultarComandoExeption {
+		log.info("Desligando porta: " +  numeroPorta + " do ARDUINO teste") ;
+		
+	}
+
+
 
 	
 

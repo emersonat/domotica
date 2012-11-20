@@ -11,8 +11,8 @@ import javax.crypto.spec.SecretKeySpec;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.emersondeandrade.infraEstrutura.propriedadesSistema.PropriedadeSegurancaProducao;
 import br.com.emersondeandrade.infraEstrutura.propriedadesSistema.PropriedadesSeguranca;
-import br.com.emersondeandrade.infraEstrutura.propriedadesSistema.PropriedadesSegurancaProducao;
 
 @Service
 public final class CriptografiaImp implements Criptografia{  
@@ -32,6 +32,9 @@ public final class CriptografiaImp implements Criptografia{
 	// TODO Auto-generated constructor stub
   }
 
+  public String cript(int n) {
+		return cript(String.valueOf(n));
+  }
   
    public String cript(String str){  
       String strCript = str;  
@@ -84,7 +87,7 @@ public final class CriptografiaImp implements Criptografia{
    
    
    public static  void main(String[] args) {  
-      Criptografia s = new CriptografiaImp(new PropriedadesSegurancaProducao() ) ;
+      Criptografia s = new CriptografiaImp(new PropriedadeSegurancaProducao() ) ;
                  
      //String cript = s.cript("teste");  
     // String decript = s.decript(cript);  
@@ -120,6 +123,8 @@ public final class CriptografiaImp implements Criptografia{
 			throw new RuntimeException(e);
 		}
    }
+
+
 
 
    

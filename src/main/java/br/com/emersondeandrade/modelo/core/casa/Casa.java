@@ -74,6 +74,11 @@ public class Casa implements Serializable {
 		return this;
 	}
 	
+	public Casa ordenaRegistrosMobile(Comparator<RegistroMobile> comparator){
+		Collections.sort(getRegistrosMobile() ,comparator );
+		return this;
+	}
+	
 	public void setDispositivos(List<Dispositivo> dispositivos) {
 		this.dispositivos = dispositivos;
 	}
