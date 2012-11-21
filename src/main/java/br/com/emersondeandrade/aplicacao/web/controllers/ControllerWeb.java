@@ -1,7 +1,10 @@
 package br.com.emersondeandrade.aplicacao.web.controllers;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.displaytag.tags.TableTagParameters;
+import org.displaytag.util.ParamEncoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
@@ -20,26 +23,50 @@ public abstract class ControllerWeb {
 	CasaFacade casaFacade;
 	
 	@InitBinder
-	public void initBinder(WebDataBinder binder) {
+	protected void initBinder(WebDataBinder binder) {
 		
 		binder.registerCustomEditor(TipoComando.class, new TipoComandoBinder() );
 		
 	}
 	
 	
-	public  HttpSession session() {
+	protected HttpSession session() {
 	    ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
 	    return attr.getRequest().getSession(true); 
 	}
 	
 	
-	public Casa getCasa(){
+	protected  HttpServletRequest request() {
+	    ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+	    return attr.getRequest();
+	}
+	
+	
+	protected String getSortAtributeDisplayTag(String idTable){
+				
+		String sortParameterName = (new ParamEncoder(idTable).encodeParameterName(TableTagParameters.PARAMETER_SORT));
+		String sortAttribute = request().getParameter(sortParameterName);
+				
+		return sortAttribute;
+	}
+	
+	protected boolean  isOrderDisplayTagReverse(String idTable){
+		
+		String order = (new ParamEncoder(idTable).encodeParameterName(TableTagParameters.PARAMETER_ORDER));
+		return "1".equals(request().getParameter(order));
+			
+	}
+	
+	
+	
+	
+	protected Casa getCasa(){
 		Casa casa = (Casa) session().getAttribute("casa");
 		
 		return casaFacade.getCasaById(casa.getId());
 	}
 	
-	public boolean hasErrors(BindingResult result, String... fields ){
+	protected boolean hasErrors(BindingResult result, String... fields ){
 		
 		for(String f: fields){
 			if(result.hasFieldErrors(f)){

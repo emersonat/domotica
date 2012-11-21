@@ -1,5 +1,6 @@
 package br.com.emersondeandrade.aplicacao.web.controllers;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
@@ -18,7 +19,7 @@ import br.com.emersondeandrade.modelo.core.usuario.UsuarioFacade;
 @RequestMapping(value = "/web")
 public class LoginController extends ControllerWeb {
 	
-	
+	private static Logger log = Logger.getLogger(LoginController.class);
 
 	@Autowired
 	@Qualifier("jsonview")
@@ -40,12 +41,13 @@ public class LoginController extends ControllerWeb {
 			modelAndView.addObject("redirect", "web/principal/open.html"); 
 			session().setAttribute("user", usuario);
 			session().setAttribute("casa", usuario.getCasas().get(0));
+			log.info("Usuario: " + login + " logando..." );
 		} else {
+			log.info("Login invalido..: " + login);
 			modelAndView.addObject("valid", false);
 		}
 		
-		
-		
+				
 		return modelAndView;
 		
 		

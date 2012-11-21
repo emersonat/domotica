@@ -23,8 +23,15 @@
 						
 						<a href="${contextPath}/web/dispositivo/listar.html"> 
 
-							<img src="${contextPath}/tema/images/icons/web-app/48/Bar-Chart.png" width="48" height="48"><spring:message code="dispositivos"  text="Dispositivos"/>
+							<img src="${contextPath}/imagens/House-icon.png" width="48" height="48"><spring:message code="dispositivos"  text="Dispositivos"/>
 						</a>
+						
+						
+						<a href="${contextPath}/web/controleweb/listar.html"> 
+
+							<img src="${contextPath}/imagens/iPhone-4G-shadow-icon.png" width="48" height="48"><spring:message code="controlesweb"  text="Controles Web"/>
+						</a>
+				
 				
 					</li>
 				

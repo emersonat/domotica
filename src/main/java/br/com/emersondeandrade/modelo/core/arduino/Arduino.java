@@ -11,7 +11,6 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -104,13 +103,27 @@ public abstract class Arduino implements Serializable {
 	@Transient	
 	public static final String PARAM_VALUE_OP_LIGA_DESLIGA = "01";
 		
+	@Transient	
+	public static final String PARAM_VALUE_OP_LIGA = "02";
+	
+	@Transient	
+	public static final String PARAM_VALUE_OP_DESLIGA = "03";
+	
+	@Transient
+	public static final String PARAM_VALUE_OP_TESTE_CONEXAO = "99";
 			
 	
 	
 	
 	
 	public abstract void  ligarDesligarPorta(String numeroPorta) throws NotConectedExeption, ExecultarComandoExeption;
+		
+	public abstract boolean isConected();
 
+	public abstract void  ligarPorta(String numeroPorta) throws NotConectedExeption, ExecultarComandoExeption;
+	
+	public abstract void  desligarPorta(String numeroPorta) throws NotConectedExeption, ExecultarComandoExeption;
+	
 	
 	
 	public  List<Integer> getPortasLivres(){

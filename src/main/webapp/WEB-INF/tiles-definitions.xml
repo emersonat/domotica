@@ -34,7 +34,11 @@
  	 <definition name="web/listagens/dispositivos" extends="template-main">
   		<put-attribute name="body" value="/WEB-INF/views/web/listagens/dispositivos.jsp" />
  	</definition>
- 	
+ 	 	
+ 	 <definition name="web/listagens/controlesweb" extends="template-main">
+  		<put-attribute name="body" value="/WEB-INF/views/web/listagens/controlesweb.jsp" />
+ 	</definition>
+ 	 
  	 
  	 
  	

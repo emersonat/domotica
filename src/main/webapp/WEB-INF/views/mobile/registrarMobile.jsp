@@ -26,7 +26,7 @@
 	src="http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.js"></script>
 
 
-<script type="text/javascript" src="${contextPath}/js/functions.js"></script>
+
 
 
 </head>

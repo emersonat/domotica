@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>br.com.emersondeandrade</groupId>
 	<artifactId>domotica</artifactId>
-	<version>1.6</version>
+	<version>1.7</version>
 	<packaging>war</packaging>
 
 	<properties>
@@ -64,13 +64,25 @@
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
 			<version>3.6.9.Final</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>slf4j-api</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator</artifactId>
 			<version>4.2.0.Final</version>
-			
+			<exclusions>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>slf4j-api</artifactId>
+				</exclusion>
+			</exclusions>
+						
 		</dependency>
 
 		
@@ -107,15 +119,84 @@
 		    <groupId>org.apache.tiles</groupId>
 		    <artifactId>tiles-extras</artifactId>
 		    <version>2.2.2</version>
+		   
  		 </dependency>
+ 		 
+		 		 
+		<dependency>
+			<groupId>displaytag</groupId>
+			<artifactId>displaytag</artifactId>
+			<version>1.2</version>
+			
+		</dependency>
 		
-
-
-
+         	
+		
 	</dependencies>
 
 
 
+	<developers>
+		<developer>
+			<id>emersonat</id>
+			<name>Emerson Andrade</name>
+			<email>emersonat@ig.com.br</email>
+			<url>http://emersondeandrade.com.br</url>
+			<organization>Domotica</organization>
+			<organizationUrl>http://domoticaweb.heroku.com</organizationUrl>
+			<timezone>GMT-4</timezone>
+		</developer>
+	</developers>
 
+	<build>
+		<plugins>
+			 <plugin>
+			 	<!-- Commands: 			 				 	
+				 	flyway:clean 		Drops all objects in the schema without dropping the schema itself
+					flyway:init 		Creates and initializes the metadata table in the schema
+					flyway:migrate 		Migrates the schema to the latest version
+					flyway:validate 	Validates the applied migrations against the ones available on the classpath
+					flyway:status 		Prints the current version of the schema
+					flyway:history 		Prints the full migration history of the schema 
+				 -->
+				 <groupId>com.googlecode.flyway</groupId>
+				 <artifactId>flyway-maven-plugin</artifactId>
+				 <version>1.7</version>
+										    					  
+				 <configuration>
+				 	 <driver>org.postgresql.Driver</driver>
+	     			 <url>${database.url}</url>
+	     			 <serverId>${database.server}</serverId>
+	      			 <schemas>public</schemas>
+				 	 <table>schema_history</table>
+				     <initialVersion>1.0</initialVersion>
+				     <initialDescription>Base Migration</initialDescription>
+				</configuration>
+			
+			</plugin>
+		
+		
+		</plugins>
+	</build>
+	
+	 <profiles>
+	   
+	   
+	   <!-- how to use: flyway:<command> -Plocal -->       	
+		<profile>
+     	 	<id>local</id>
+		      	<properties>
+		         <database.name>flyway_local</database.name>
+		       	 <database.server>domotica_local</database.server>
+		         <database.url>
+		           jdbc:postgresql://localhost:5432/domoticaDB?autoReconnect=true;charSet=LATIN1
+		         </database.url>
+		        
+		      </properties>
+  		</profile>
+  	
+  		
+	 
+	 </profiles>
 
 </project>

@@ -42,26 +42,19 @@
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 
-	<servlet-mapping>
-		<servlet-name>rest</servlet-name>
-		<url-pattern>/api/*</url-pattern>
-	</servlet-mapping>
 	
 	<servlet-mapping>
 		<servlet-name>rest</servlet-name>
 		<url-pattern>*.html</url-pattern>
 	</servlet-mapping>
 	
+	
 	<servlet-mapping>
 		<servlet-name>rest</servlet-name>
-		<url-pattern>/resources/*</url-pattern>
+		<url-pattern>/controleweb</url-pattern>
 	</servlet-mapping>
 	
 	
-	
-	
-	
-
 	<!-- Filtro Dao -->
 	<filter>
 		<filter-name>openEntityManagerInViewFilter</filter-name>
@@ -74,6 +67,21 @@
 	</filter-mapping>
 	
 
+ 	<!-- ================================================================== -->
+    <!-- TAGS																-->
+    <!-- ================================================================== -->
+
+    <jsp-config>
+	   
+	    <taglib>
+	        <taglib-uri>http://www.domoticaweb.com.br/mytags</taglib-uri>
+	        <taglib-location>/WEB-INF/myTagLib.tld</taglib-location>
+	    </taglib>
+
+	</jsp-config>
+    <!-- ================================================================== -->
+    <!-- FIM TAGS																-->
+    <!-- ================================================================== -->
 	
 	
 	

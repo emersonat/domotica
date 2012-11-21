@@ -2,6 +2,8 @@ package br.com.emersondeandrade.modelo.core.casa;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -67,7 +69,16 @@ public class Casa implements Serializable {
 		return dispositivos;
 	}
 	
-
+	public Casa ordenaDispositivos(Comparator<Dispositivo> comparator){
+		Collections.sort(getDispositivos(),comparator);
+		return this;
+	}
+	
+	public Casa ordenaRegistrosMobile(Comparator<RegistroMobile> comparator){
+		Collections.sort(getRegistrosMobile() ,comparator );
+		return this;
+	}
+	
 	public void setDispositivos(List<Dispositivo> dispositivos) {
 		this.dispositivos = dispositivos;
 	}
