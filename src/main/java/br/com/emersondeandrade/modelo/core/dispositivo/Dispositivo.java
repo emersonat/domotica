@@ -84,8 +84,31 @@ public class Dispositivo implements Serializable {
 			log.info("Acionando dispositivo....: " +  getNome()  +" (LIGA E DESLIGA) ");
 			
 			break;
+			
+			
+		case MANTER_LIGADO:
+			
+			getCasa().getArduino().ligarPorta(getNumeroPorta()); 
+			
+			log.info("Acionando dispositivo....: " +  getNome()  +" (LIGA) ");
+			
+			break;
+						
+		
+		case MANTER_DESLIGADO:
+		
+			getCasa().getArduino().desligarPorta(getNumeroPorta()); 
+			
+			log.info("Acionando dispositivo....: " +  getNome()  +" (DESLIGA) ");
+			
+			break;
+			
+		}	
+		
+			
+			
 				
-		}
+		
 		
 	}
 	
