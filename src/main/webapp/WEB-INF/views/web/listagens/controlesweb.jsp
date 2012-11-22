@@ -45,7 +45,9 @@
 							
 							<display:column title="Excluir" style="text-align:center" sortable="false"> 
 								
-								<a href="#"><img src="${contextPath}/imagens/delete.png" height="24px" width="24px" ></a>
+								<a href="${contextPath}/web/controleweb/deletar/${mytag:cript(controles.id)}.html"><img src="${contextPath}/imagens/delete.png" height="24px" width="24px" ></a>
+								
+								
 								
 							</display:column>	
 							

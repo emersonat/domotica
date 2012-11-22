@@ -1,5 +1,6 @@
 package br.com.emersondeandrade.modelo.core.usuario;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -15,9 +16,14 @@ import br.com.emersondeandrade.modelo.core.casa.Casa;
 
 
 @Entity
-public class Usuario {
+public class Usuario implements Serializable{
 	
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@SequenceGenerator(name = "sequenceGenerator", sequenceName = "usuario_seq", allocationSize = 1)
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "sequenceGenerator")

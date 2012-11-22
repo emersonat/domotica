@@ -37,10 +37,10 @@
 
 			<c:forEach items="${casa.dispositivosAtivos}" var="d">
 						
-							${d.nome}			
-							<input data-icon="check" type="button" value="Acionar"
-					class="botao_acionar_dispositivo" onclick="acionar('${d.key}')" />
-
+							${d.nome}
+							<c:if test="${d.tipoComando == 'CLICK'}">			
+								<input data-icon="check" type="button" value="Acionar" class="botao_acionar_dispositivo" onclick="acionar('${d.key}')" />
+							</c:if>
 				<br />
 				<br />
 			</c:forEach>

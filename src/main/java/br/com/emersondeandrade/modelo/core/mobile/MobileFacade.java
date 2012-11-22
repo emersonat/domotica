@@ -11,5 +11,7 @@ public interface MobileFacade {
 	
 	public void desconectarMobile(String hash);
 	
+	public void desconectarMobile(int id);
+	
 
 }

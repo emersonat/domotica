@@ -41,5 +41,10 @@ public class MobileFacadeImp implements MobileFacade {
 		registroMobileRepositorio.deletar(hash);
 	}
 	
+	public void desconectarMobile(int id){
+		RegistroMobile mobile = registroMobileRepositorio.getById(id);
+		registroMobileRepositorio.delete(mobile);
+	}
+	
 
 }

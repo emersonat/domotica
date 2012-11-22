@@ -4,7 +4,7 @@ Arduino com shield ethernet com chipset wiznet
 Autor Emerson Andrade
 
 
-Versão: 1.0.3
+Versão: 1.0.4
 
 Codigos das operações:
 01 - ligaDesligaPorta
@@ -71,9 +71,13 @@ int converteInt(String n){
    }
 }  
 
-void ligaDesligaPorta(int port){
+void ligaDesligaPorta(int port, String httpReq){
+ 
+   int indexOp  = httpReq.indexOf("delay=");
+   String opParam = httpReq.substring( indexOp + 6, indexOp + 8);
+    
   digitalWrite(port, LOW);
-  delay(2000);
+  delay( );// implemetar conversao do opParam para int em millisegundos
   digitalWrite(port, HIGH);  
 }
 
@@ -113,10 +117,10 @@ void loop()
     
              int indexOp  = httpReq.indexOf("op=");
              String opParam = httpReq.substring( indexOp + 3, indexOp + 5);
-             
+                                 
              
              if(opParam.equals("01")){
-                ligaDesligaPorta( converteInt(portaParam) ); 
+                ligaDesligaPorta( converteInt(portaParam), httpReq ); 
                 client.println("<result>OK</result>"); 
              } else if( opParam.equals("02") ){
                	ligaPorta(  converteInt(portaParam) );

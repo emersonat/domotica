@@ -6,12 +6,16 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import br.com.emersondeandrade.infraEstrutura.criptografia.Criptografia;
 import br.com.emersondeandrade.modelo.core.casa.Casa;
+import br.com.emersondeandrade.modelo.core.mobile.MobileFacade;
 import br.com.emersondeandrade.modelo.core.mobile.RegistroMobile;
 
 
@@ -21,6 +25,11 @@ import br.com.emersondeandrade.modelo.core.mobile.RegistroMobile;
 @RequestMapping(value = "/web/controleweb")
 public class ListagemControlesWeb extends ControllerWeb {
 
+	@Autowired
+	Criptografia cript;
+	
+	@Autowired
+	MobileFacade mobileFacade;
 	
 	
 	@RequestMapping(value = "/listar")
@@ -35,6 +44,16 @@ public class ListagemControlesWeb extends ControllerWeb {
 		
 		return "web/listagens/controlesweb";
 		
+	}
+	
+	@RequestMapping(value = "/deletar/{idCript}")
+	public String deletar(@PathVariable String idCript , ModelMap mv){
+		
+		int id = cript.decriptToInt(idCript);
+		
+		mobileFacade.desconectarMobile(id);
+		
+		return "web/listagens/controlesweb";
 	}
 	
 	

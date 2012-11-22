@@ -96,6 +96,13 @@ public abstract class Arduino implements Serializable {
 	@Transient
 	public static final String PARAM_KEY = "key";
 	
+	/**
+	 * Comandos de liga e desliga (CLICK) 
+	 * Duração do click
+	 */
+	@Transient
+	public static final String PARAM_TEMPO_CLIQUE = "delay";
+	
 	
 	/**
 	 * valor para parametro de operação
@@ -116,7 +123,7 @@ public abstract class Arduino implements Serializable {
 	
 	
 	
-	public abstract void  ligarDesligarPorta(String numeroPorta) throws NotConectedExeption, ExecultarComandoExeption;
+	public abstract void  ligarDesligarPorta(String numeroPorta, int segundosDuracao) throws NotConectedExeption, ExecultarComandoExeption;
 		
 	public abstract boolean isConected();
 

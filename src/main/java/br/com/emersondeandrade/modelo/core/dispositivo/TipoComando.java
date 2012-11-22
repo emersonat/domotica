@@ -12,7 +12,8 @@ public enum TipoComando {
 	
 	LIGAR_DESLIGAR(1,"comando.ligarDesligar"), 
 	MANTER_LIGADO(2,"comando.manterLigado"),
-	MANTER_DESLIGADO(3,"comando.manterDesligado");
+	MANTER_DESLIGADO(3,"comando.manterDesligado"),
+	CLICK(4,"comando.click");
 	
 	private int id;
 	private String i18n;
@@ -28,6 +29,9 @@ public enum TipoComando {
 			
 		case 3:
 			return TipoComando.MANTER_DESLIGADO;
+			
+		case 4:
+			return TipoComando.CLICK;	
 			
 		}
 		

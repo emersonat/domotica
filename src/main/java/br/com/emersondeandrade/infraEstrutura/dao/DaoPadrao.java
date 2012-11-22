@@ -48,7 +48,10 @@ public abstract class DaoPadrao<T>  implements RepositorioPadrao<T>   {
 		
 	}
 
-	
+	@Transactional
+	public void delete(T entity) {
+		entityManager.remove(entity);
+	}
 	
 	
 

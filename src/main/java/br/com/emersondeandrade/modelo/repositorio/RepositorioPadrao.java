@@ -11,6 +11,8 @@ public interface RepositorioPadrao<T> {
 	
 	public void salvar(T entity);
 	
+	public void delete(T entity);
+	
 	
 	
 	

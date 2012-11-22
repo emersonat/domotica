@@ -8,16 +8,19 @@ import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.emersondeandrade.infraEstrutura.propriedadesSistema.PropriedadesSeguranca;
+import br.com.emersondeandrade.modelo.core.arduino.ArduinoWIZNET_W5100;
 
 @Service
 public final class CriptografiaImp implements Criptografia{  
 
      
-   
+	private static Logger log = Logger.getLogger(CriptografiaImp.class);
+	
    @Autowired
    private PropriedadesSeguranca propSeg;
    
@@ -57,7 +60,21 @@ public final class CriptografiaImp implements Criptografia{
               
       return strCript;  
    }  
+   
+   public int decriptToInt(String number) {
+		String n = decript(number);
+		
+		try{
+			return Integer.parseInt(n);
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+			log.warn("Erro ao tentar converter " + n + " para numero");
+		}
+			
+		return 0;
+	}
      
+   
    public String decript(String str)  
    {  
       String strDecript = str;  
@@ -122,6 +139,8 @@ public final class CriptografiaImp implements Criptografia{
 			throw new RuntimeException(e);
 		}
    }
+
+
 
 
 
