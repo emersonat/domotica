@@ -20,6 +20,11 @@ public class RegistroMobileDao extends DaoPadrao<RegistroMobile> implements Regi
 	@Autowired
 	Criptografia cript;
 	
+	
+	public RegistroMobileDao() {
+		super(RegistroMobile.class);
+	}
+	
 
 	public boolean existe(String nome, Casa casa) {
 		

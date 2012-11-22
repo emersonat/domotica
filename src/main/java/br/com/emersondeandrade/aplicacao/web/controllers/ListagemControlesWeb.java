@@ -53,7 +53,7 @@ public class ListagemControlesWeb extends ControllerWeb {
 		
 		mobileFacade.desconectarMobile(id);
 		
-		return "web/listagens/controlesweb";
+		return  open(mv);
 	}
 	
 	

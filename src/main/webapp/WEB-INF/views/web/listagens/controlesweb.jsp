@@ -34,7 +34,7 @@
 							<display:column title="Ativar/Desativar" style="text-align:center" sortName="ativo"  sortable="false"> 
 								
 								<c:if test="${controles.ativo}">
-									<a href="#"><img src="${contextPath}/imagens/button_on.png" height="24px" width="24px" title="<spring:message code="clique.inativar" text="Clique para inativar"/>" ></a> 
+									<a href="#" onclick="javascript:alert('teste');"><img src="${contextPath}/imagens/button_on.png" height="24px" width="24px" title="<spring:message code="clique.inativar" text="Clique para inativar"/>" ></a> 
 								 </c:if>
 								 
 								 <c:if test="${controles.ativo == false }">
@@ -45,7 +45,7 @@
 							
 							<display:column title="Excluir" style="text-align:center" sortable="false"> 
 								
-								<a href="${contextPath}/web/controleweb/deletar/${mytag:cript(controles.id)}.html"><img src="${contextPath}/imagens/delete.png" height="24px" width="24px" ></a>
+								<a href="${contextPath}/web/controleweb/deletar/${mytag:cript(controles.id)}.html" onclick="return confirm('<spring:message code="confirm.excuir.controle" text="Confirma excluir esse controle"/>?')"><img src="${contextPath}/imagens/delete.png" height="24px" width="24px" ></a>
 								
 								
 								
