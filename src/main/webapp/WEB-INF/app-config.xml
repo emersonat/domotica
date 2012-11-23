@@ -32,8 +32,16 @@
 	<!-- Ativa o JTA do spring por annotation -->
 	<tx:annotation-driven transaction-manager="transactionManager" />
 
-		
-<!-- DATA SOURCE -->
+
+	<!-- DATA SOURCE -->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="org.postgresql.Driver" />
+		<property name="url" value="URL_BANCO"/>
+		<property name="username" value="USER_NAME_BANCO" />
+		<property name="password" value="SENHA_BANCO" />
+		<property name="initialSize" value="5" />
+		<property name="maxActive" value="10" />
+	</bean>	
 
 	
 	
