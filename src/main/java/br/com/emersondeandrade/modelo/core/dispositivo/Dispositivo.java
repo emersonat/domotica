@@ -35,7 +35,7 @@ public class Dispositivo implements Serializable {
 	
 	private static Logger log = Logger.getLogger(Dispositivo.class);
 	
-
+	
 	private int id;
 	
 	
@@ -68,7 +68,7 @@ public class Dispositivo implements Serializable {
 	
 	private boolean ativo = true;
 	
-	
+	private int duracaoClique;
 
 		
 	
@@ -77,15 +77,14 @@ public class Dispositivo implements Serializable {
 		
 		switch (getTipoComando()) {
 	
-		case LIGAR_DESLIGAR:
+		case CLICK:
 			
-			getCasa().getArduino().ligarDesligarPorta(getNumeroPorta()); 
+			getCasa().getArduino().click(getNumeroPorta(),getDuracaoClique()); 
 			
-			log.info("Acionando dispositivo....: " +  getNome()  +" (LIGA E DESLIGA) ");
+			log.info("Acionando dispositivo....: " +  getNome()  +" (CLICK) ");
 			
 			break;
-			
-			
+					
 		case MANTER_LIGADO:
 			
 			getCasa().getArduino().ligarPorta(getNumeroPorta()); 
@@ -93,8 +92,7 @@ public class Dispositivo implements Serializable {
 			log.info("Acionando dispositivo....: " +  getNome()  +" (LIGA) ");
 			
 			break;
-						
-		
+				
 		case MANTER_DESLIGADO:
 		
 			getCasa().getArduino().desligarPorta(getNumeroPorta()); 
@@ -102,6 +100,16 @@ public class Dispositivo implements Serializable {
 			log.info("Acionando dispositivo....: " +  getNome()  +" (DESLIGA) ");
 			
 			break;
+			
+			
+		case LIGAR_DESLIGAR:
+			
+			// TODO implementar
+			
+			
+			break;	
+			
+			
 			
 		}	
 		
@@ -237,6 +245,34 @@ public class Dispositivo implements Serializable {
 
 	public void setAtivo(boolean ativo) {
 		this.ativo = ativo;
+	}
+
+
+
+
+
+
+
+
+
+
+	@Column(nullable = true)
+	public int getDuracaoClique() {
+		return duracaoClique;
+	}
+
+
+
+
+
+
+
+
+
+
+
+	public void setDuracaoClique(int duracaoClique) {
+		this.duracaoClique = duracaoClique;
 	}
 
 

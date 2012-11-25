@@ -20,12 +20,17 @@ public class RegistroMobileDao extends DaoPadrao<RegistroMobile> implements Regi
 	@Autowired
 	Criptografia cript;
 	
+	
+	public RegistroMobileDao() {
+		super(RegistroMobile.class);
+	}
+	
 
 	public boolean existe(String nome, Casa casa) {
 		
 		TypedQuery<RegistroMobile> query = entityManager.createQuery("from RegistroMobile r where r.nome = :nome and r.casa.id = :idCasa", RegistroMobile.class);
 		
-		query.setParameter("nome", nome);
+		query.setParameter("nome", nome.toUpperCase());
 		query.setParameter("idCasa", casa.getId());
 		
 		

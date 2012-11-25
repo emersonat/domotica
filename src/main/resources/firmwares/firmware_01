@@ -3,35 +3,23 @@
 Arduino com shield ethernet com chipset wiznet
 Autor Emerson Andrade
 
-
-Versão: 1.0.3
+Versão: 1.0.4
 
 Codigos das operações:
-01 - ligaDesligaPorta
+01 - click
 02 - ligarPorta
 03 - desligaPorta
 99 - Status dos arduino 
-
-
 */
-
 #include <SPI.h>
 #include <Ethernet.h>
 #include <stdio.h>
 #include <stdlib.h>
 
-
-
 byte mac[] = { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED };
-
 IPAddress ip(192,168,1, 177);
-
 EthernetServer server(80);
-
-
 static String keyArduino = "xxxxxxxxx"; // <-- colocar uma chave com 32 caracteres
-
-
 
 void setup()
 {
@@ -41,8 +29,7 @@ void setup()
   
   pinMode(6, OUTPUT); 
   pinMode(7, OUTPUT); 
- 
-  
+   
   digitalWrite(6, HIGH);
   digitalWrite(7, HIGH);
   
@@ -52,8 +39,6 @@ boolean chaveValida(String httpReq){
   int indexKey = httpReq.indexOf("key=");
   String  keyParam = httpReq.substring(indexKey + 4, indexKey + 36);  
  
-  Serial.println(keyParam);
-  
   if( keyArduino.equals(keyParam) ){
     return true;
   }else {
@@ -61,19 +46,19 @@ boolean chaveValida(String httpReq){
   }  
 }
 
-int converteInt(String n){
-   if(n.equals("06")){
-      return 6;
-   } else if( n.equals("07") ){
-      return 7; 
-   } else {
-      return 0; 
-   }
-}  
+int getInt(String texto){
+  int temp = texto.length() + 1;
+  char buffer[temp];
+  texto.toCharArray(buffer, temp);
+  int num = atoi(buffer);
+  return num;
+} 
 
-void ligaDesligaPorta(int port){
+void click(int port, String httpReq){
+  int indexOp  = httpReq.indexOf("delay=");
+  String delayParam = httpReq.substring( indexOp + 6, indexOp + 8);
   digitalWrite(port, LOW);
-  delay(2000);
+  delay(getInt(delayParam) * 1000);//em millisengundos
   digitalWrite(port, HIGH);  
 }
 
@@ -106,34 +91,45 @@ void loop()
           client.println();
           
           if(chaveValida(httpReq)){
-            
-             // Carregando parametros
-             int indexPorta  = httpReq.indexOf("port=");
-             String portaParam = httpReq.substring(indexPorta  + 5, indexPorta  + 7);
-    
+              
+             // Carregando numero da operacao
              int indexOp  = httpReq.indexOf("op=");
              String opParam = httpReq.substring( indexOp + 3, indexOp + 5);
+            
+             // Carregando numero porta
+             int indexPorta  = httpReq.indexOf("port=");
+             String portaParam = httpReq.substring(indexPorta  + 5, indexPorta  + 7);
+              
+              boolean ok = false;
+              switch (getInt(opParam)) {
+                  case 1:
+                    click( getInt(portaParam), httpReq ); 
+                    ok = true;
+                    break;
+                  case 2:
+                    ligaPorta(getInt(portaParam));
+                    ok = true;
+                    break;
+                  case 3:
+                    desligaPorta(getInt(portaParam) );  
+                    ok = true;
+                    break;
+                 case 99:
+                    ok = true;
+                    break;
+               }
+   
+               if(ok){
+                 client.println("<result>OK</result>"); 
+               } else{
+                 client.println("<result>ERROR</result>"); 
+               }  
              
-             
-             if(opParam.equals("01")){
-                ligaDesligaPorta( converteInt(portaParam) ); 
-                client.println("<result>OK</result>"); 
-             } else if( opParam.equals("02") ){
-               	ligaPorta(  converteInt(portaParam) );
-                client.println("<result>OK</result>"); 
-             } else if( opParam.equals("03") ){
-               	desligaPorta( converteInt(portaParam) );
-                client.println("<result>OK</result>");    
-              } else if( opParam.equals("99") ){
-                client.println("<result>OK</result>"); 
-             } 
-                
                     
           } else {  
              client.println("<error>ERROR:Chave invalida</error>"); 
           } 
-            
-             
+                         
           break;
         }
            

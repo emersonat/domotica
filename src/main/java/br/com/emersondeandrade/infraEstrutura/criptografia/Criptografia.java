@@ -8,6 +8,8 @@ public interface Criptografia {
 	  String cript(String str);
 	  
 	  String cript(int n);
+	  
+	  int decriptToInt(String number);
 	  	  
 	  String decript(String str);
 	  
