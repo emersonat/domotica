@@ -38,11 +38,11 @@ public class ArduinoWIZNET_W5100 extends Arduino {
 	
 		
 	
-	public void ligarDesligarPorta(String numeroPorta, int segundosDuracao) throws NotConectedExeption, ExecultarComandoExeption {
+	public void click(String numeroPorta, int segundosDuracao) throws NotConectedExeption, ExecultarComandoExeption {
 		Properties parametros = new Properties();
 		
 		parametros.setProperty("key", this.getKey() );
-		parametros.setProperty(PARAM_OPERACAO, PARAM_VALUE_OP_LIGA_DESLIGA);
+		parametros.setProperty(PARAM_OPERACAO, PARAM_VALUE_OP_CLICK);
 		
 		String duracao =  String.valueOf(segundosDuracao);
 		duracao = duracao.length() == 1 ? "0".concat(duracao) : duracao;

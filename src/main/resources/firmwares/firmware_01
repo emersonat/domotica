@@ -6,7 +6,7 @@ Autor Emerson Andrade
 Versão: 1.0.4
 
 Codigos das operações:
-01 - ligaDesligaPorta
+01 - click
 02 - ligarPorta
 03 - desligaPorta
 99 - Status dos arduino 
@@ -54,7 +54,7 @@ int getInt(String texto){
   return num;
 } 
 
-void ligaDesligaPorta(int port, String httpReq){
+void click(int port, String httpReq){
   int indexOp  = httpReq.indexOf("delay=");
   String delayParam = httpReq.substring( indexOp + 6, indexOp + 8);
   digitalWrite(port, LOW);
@@ -103,7 +103,7 @@ void loop()
               boolean ok = false;
               switch (getInt(opParam)) {
                   case 1:
-                    ligaDesligaPorta( getInt(portaParam), httpReq ); 
+                    click( getInt(portaParam), httpReq ); 
                     ok = true;
                     break;
                   case 2:

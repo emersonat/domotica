@@ -79,7 +79,7 @@ public class Dispositivo implements Serializable {
 	
 		case CLICK:
 			
-			getCasa().getArduino().ligarDesligarPorta(getNumeroPorta(),getDuracaoClique()); 
+			getCasa().getArduino().click(getNumeroPorta(),getDuracaoClique()); 
 			
 			log.info("Acionando dispositivo....: " +  getNome()  +" (CLICK) ");
 			

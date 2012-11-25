@@ -10,6 +10,8 @@ public class CookiesService {
 		
 		
 	public  String getValue(String cookieName, Cookie[] cookies){
+		if(cookies == null)
+			return null;
 		
 		for(Cookie cookie : cookies){
 			if (cookie.getName().equals(cookieName) ){

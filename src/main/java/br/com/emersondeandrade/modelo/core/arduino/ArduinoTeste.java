@@ -24,7 +24,7 @@ public class ArduinoTeste extends Arduino {
 	
 
 	@Override
-	public void ligarDesligarPorta(String numeroPorta, int segundosDuracao) throws NotConectedExeption, ExecultarComandoExeption {
+	public void click(String numeroPorta, int segundosDuracao) throws NotConectedExeption, ExecultarComandoExeption {
 		log.info("Ligando e desligando porta: " + numeroPorta +" do ARDUINO teste com duracao de " + segundosDuracao);
 		
 	}
