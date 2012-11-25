@@ -46,7 +46,7 @@ public class FiltroAutenticacaoMobile   extends HandlerInterceptorAdapter   {
 			
 		Casa casa = null;
 		try {
-			casa = casaFacade.getCasaByHashMobile(hashMobile);
+			casa = casaFacade.getCasaByHashMobileAtivo(hashMobile);
 			
 			ControllerMobile controller = (ControllerMobile) handler;
 			

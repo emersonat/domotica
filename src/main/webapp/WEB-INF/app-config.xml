@@ -33,8 +33,9 @@
 	<tx:annotation-driven transaction-manager="transactionManager" />
 
 
-	<!-- DATA SOURCE -->
+
 	
+<!-- DATA SOURCE -->
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName" value="org.postgresql.Driver" />
 		<property name="url" value="URL_BANCO"/>
@@ -43,6 +44,7 @@
 		<property name="initialSize" value="5" />
 		<property name="maxActive" value="10" />
 	</bean>	
+	
 	
 	<!-- Gerenciador de transacoes baseado em JPA -->
 	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">

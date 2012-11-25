@@ -5,15 +5,17 @@ import java.util.Comparator;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.displaytag.tags.TableTagParameters;
-import org.displaytag.util.ParamEncoder;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import br.com.emersondeandrade.infraEstrutura.criptografia.Criptografia;
 import br.com.emersondeandrade.modelo.core.casa.Casa;
 import br.com.emersondeandrade.modelo.core.dispositivo.Dispositivo;
+import br.com.emersondeandrade.modelo.core.dispositivo.DispositivoFacade;
 
 
 @Controller
@@ -21,6 +23,11 @@ import br.com.emersondeandrade.modelo.core.dispositivo.Dispositivo;
 @RequestMapping(value = "/web/dispositivo")
 public class ListagemDispositivosController extends ControllerWeb {
 	
+	@Autowired
+	Criptografia cript;
+	
+	@Autowired
+	DispositivoFacade dispositivoFacade;
 	
 		
 	@RequestMapping(value = "/listar")
@@ -31,6 +38,29 @@ public class ListagemDispositivosController extends ControllerWeb {
 		return "web/listagens/dispositivos";
 		
 	}
+	
+	
+	@RequestMapping(value = "/desativar/{idCript}")
+	public String desativar(@PathVariable String idCript , ModelMap mv){
+		
+		int id = cript.decriptToInt(idCript);
+		
+		dispositivoFacade.desativarDispositivo(id);
+						
+		return  open(mv);
+	}
+	
+	@RequestMapping(value = "/ativar/{idCript}")
+	public String ativar(@PathVariable String idCript , ModelMap mv){
+		
+		int id = cript.decriptToInt(idCript);
+		
+		dispositivoFacade.ativarDispositivo(id);
+						
+		return  open(mv);
+	}
+	
+	
 	
 	@RequestMapping(value = "/sort")
 	public String sort(ModelMap mv,HttpServletRequest request){

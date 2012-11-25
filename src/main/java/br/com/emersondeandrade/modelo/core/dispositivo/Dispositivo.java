@@ -40,7 +40,7 @@ public class Dispositivo implements Serializable {
 	
 	
 	@NotEmpty(message = "*")
-	@Size(max=2,min=2,message = "*")
+	@Size(max=2,min=1,message = "*")
 	private String numeroPorta;
 	
 	

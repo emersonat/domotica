@@ -20,7 +20,7 @@ public interface CasaFacade {
 		
 	public Casa getCasaByKeyArduino(String keyArduino) throws EntityNotFoundException;
 	
-	public Casa getCasaByHashMobile(String hashMobile) throws EntityNotFoundException;
+	public Casa getCasaByHashMobileAtivo(String hashMobile) throws EntityNotFoundException;
 	
 	public List<Historico> buscaTodosHistoricos(Casa casa,int initresult,int maxResult,String atributo, int ordem);
 		

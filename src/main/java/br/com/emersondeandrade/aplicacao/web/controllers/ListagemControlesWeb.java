@@ -57,6 +57,29 @@ public class ListagemControlesWeb extends ControllerWeb {
 	}
 	
 	
+	@RequestMapping(value = "/desativar/{idCript}")
+	public String desativar(@PathVariable String idCript , ModelMap mv){
+		
+		int id = cript.decriptToInt(idCript);
+		
+		mobileFacade.desativarMobile(id);
+		
+		return  open(mv);
+	}
+	
+	@RequestMapping(value = "/ativar/{idCript}")
+	public String ativar(@PathVariable String idCript , ModelMap mv){
+		
+		int id = cript.decriptToInt(idCript);
+		
+		mobileFacade.ativarMobile(id);
+		
+		return  open(mv);
+	}
+	
+	
+	
+	
 	@RequestMapping(value = "/sort")
 	public String sort(ModelMap mv,HttpServletRequest request){
 		Casa casa = getCasa();

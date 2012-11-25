@@ -4,6 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
  <%@ taglib uri="http://displaytag.sf.net" prefix="display" %>
+ <%@taglib uri="/WEB-INF/myTagLib.tld" prefix="mytag"%>
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <c:if test="${contextPath == '/'}">
@@ -36,11 +37,11 @@
 							<display:column title="Ativar/Desativar" style="text-align:center" sortName="ativo"  sortable="false"> 
 								
 								<c:if test="${dispositivos.ativo}">
-									<a href="#"><img src="${contextPath}/imagens/button_on.png" height="24px" width="24px" title="<spring:message code="clique.inativar" text="Clique para inativar"/>" ></a> 
+									<a href="${contextPath}/web/dispositivo/desativar/${mytag:cript(dispositivos.id)}.html"><img src="${contextPath}/imagens/button_on.png" height="24px" width="24px" title="<spring:message code="clique.inativar" text="Clique para inativar"/>" ></a> 
 								 </c:if>
 								 
 								 <c:if test="${dispositivos.ativo == false }">
-									<a href="#"><img src="${contextPath}/imagens/button_off.png" height="24px" width="24px" title="<spring:message code="clique.ativar" text="Clique para ativar"/>" ></a> 
+									<a href="${contextPath}/web/dispositivo/ativar/${mytag:cript(dispositivos.id)}.html"><img src="${contextPath}/imagens/button_off.png" height="24px" width="24px" title="<spring:message code="clique.ativar" text="Clique para ativar"/>" ></a> 
 								 </c:if>
 								
 							</display:column>	

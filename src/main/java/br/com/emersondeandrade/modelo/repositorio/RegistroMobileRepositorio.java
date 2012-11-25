@@ -1,5 +1,7 @@
 package br.com.emersondeandrade.modelo.repositorio;
 
+import javax.persistence.EntityNotFoundException;
+
 import br.com.emersondeandrade.modelo.core.casa.Casa;
 import br.com.emersondeandrade.modelo.core.mobile.RegistroMobile;
 
@@ -11,6 +13,6 @@ public interface RegistroMobileRepositorio extends RepositorioPadrao<RegistroMob
 	
 	void deletar(String hash);
 	
-	
+	RegistroMobile getByHash(String hash) ;
 
 }
