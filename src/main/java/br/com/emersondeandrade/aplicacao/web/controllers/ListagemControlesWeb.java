@@ -34,6 +34,7 @@ public class ListagemControlesWeb extends ControllerWeb {
 	
 	@RequestMapping(value = "/listar")
 	public String open(ModelMap mv){
+	
 		
 		List<RegistroMobile> registrosMobile = getCasa().getRegistrosMobile();
 		

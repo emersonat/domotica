@@ -2,6 +2,7 @@ package br.com.emersondeandrade.aplicacao.web.controllers;
 
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.TreeSet;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -33,7 +34,9 @@ public class ListagemDispositivosController extends ControllerWeb {
 	@RequestMapping(value = "/listar")
 	public String open(ModelMap mv){
 				
-		mv.addAttribute("dispositivos",  getCasa().getDispositivos() );   
+		
+		
+		mv.addAttribute("dispositivos", new TreeSet<Dispositivo>(getCasa().getDispositivos() )  );   
 				
 		return "web/listagens/dispositivos";
 		

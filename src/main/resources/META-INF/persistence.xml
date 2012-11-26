@@ -21,13 +21,14 @@
 		<class>br.com.emersondeandrade.modelo.core.historico.Historico</class>
 		<class>br.com.emersondeandrade.modelo.core.mobile.RegistroMobile</class>
 		<class>br.com.emersondeandrade.modelo.core.usuario.Usuario</class>
+		<class>br.com.emersondeandrade.modelo.core.usuario.Role</class>
 				
 		<properties>
 											
 			<!-- CONFIGURACAO HIBERNATE -->
 			<property name="hibernate.show_sql" value="false" />
 			<property name="hibernate.format_sql" value="true" />
-			<!-- <property name="hibernate.hbm2ddl.auto" value="update" /> -->
+			<property name="hibernate.hbm2ddl.auto" value="update" /> 
 					
 			<!-- CONFIGURACOES  DO BANCO  -->
 			<property name="hibernate.connection.lc_ctype" value="LATIN1"/>

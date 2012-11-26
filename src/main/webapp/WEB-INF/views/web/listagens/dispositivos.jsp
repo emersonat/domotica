@@ -34,7 +34,7 @@
 								<spring:message code="${dispositivos.tipoComando.i18n}" /> 
 							</display:column>	
 							
-							<display:column title="Ativar/Desativar" style="text-align:center" sortName="ativo"  sortable="false"> 
+							<display:column title="Ativar/Desativar" style="text-align:center"  sortable="false"> 
 								
 								<c:if test="${dispositivos.ativo}">
 									<a href="${contextPath}/web/dispositivo/desativar/${mytag:cript(dispositivos.id)}.html"><img src="${contextPath}/imagens/button_on.png" height="24px" width="24px" title="<spring:message code="clique.inativar" text="Clique para inativar"/>" ></a> 

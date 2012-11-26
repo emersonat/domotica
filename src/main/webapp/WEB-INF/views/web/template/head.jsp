@@ -77,7 +77,7 @@
 	
 	
 	<body> 
-	<input type="text" id="contextPath" value="${contextPath}" /><!-- for JS scrips -->	
+	<input type="hidden" id="contextPath" value="${contextPath}" /><!-- for JS scrips -->	
 	
 	<!-- Main nav -->
 	<nav id="main-nav">

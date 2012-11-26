@@ -28,7 +28,7 @@ import br.com.emersondeandrade.modelo.exeption.NotConectedExeption;
 
 
 @Entity
-public class Dispositivo implements Serializable {
+public class Dispositivo implements Serializable, Comparable<Dispositivo> {
 
 	
 	private static final long serialVersionUID = 1L;
@@ -273,6 +273,20 @@ public class Dispositivo implements Serializable {
 
 	public void setDuracaoClique(int duracaoClique) {
 		this.duracaoClique = duracaoClique;
+	}
+
+
+
+
+
+
+
+
+
+
+
+	public int compareTo(Dispositivo o) {
+		return this.getNome().compareTo(o.getNome()) ;
 	}
 
 
