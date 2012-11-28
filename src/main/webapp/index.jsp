@@ -40,7 +40,7 @@
 		<!--[if lte IE 8]><script type="text/javascript" src="js/standard.ie.js"></script><![endif]-->
 		<script type="text/javascript" src="<c:url value="/tema/js/jquery.tip.js"/>"></script>
 		
-		<script type="text/javascript" src="login.js"></script>
+		<script type="text/javascript" src="/js/login.js"></script>
 		
 	
 	</head>
@@ -79,15 +79,15 @@
 			<p class="message error no-margin">Error message</p>
 			-->
 			
-			<form class="form with-margin" name="login-form" id="login-form" method="post" action="${contextPath}/web/login.html">
+			<form class="form with-margin" name="login-form" id="login-form" method="post" action="${contextPath}/login.html">
 				<input type="hidden" name="a" id="a" value="send">
 				<p class="inline-small-label">
 					<label for="login"><span class="big"><spring:message code="email" text="Email" /></span></label>
-					<input type="text" name="login" id="login" class="full-width" value="">
+					<input type="text" name="j_username" id="j_username" class="full-width" value="">
 				</p>
 				<p class="inline-small-label">
 					<label for="pass"><span class="big"><spring:message code="senha" text="Senha" /></span></label>
-					<input type="password" name="pass" id="pass" class="full-width" value="">
+					<input type="password" name="j_password" id="j_password" class="full-width" value="">
 				</p>
 				
 				<button type="submit" class="float-right"><spring:message code="entrar" text="Entrar" /></button>

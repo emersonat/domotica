@@ -18,11 +18,6 @@
 	<context:annotation-config />
 	
 	
-	<sec:authentication-manager>
-	    <sec:authentication-provider user-service-ref="usuarioDao"/>
-	</sec:authentication-manager>
-	    
-	
 	
 		
 	<mvc:interceptors>
@@ -48,7 +43,7 @@
 		<property name="driverClassName" value="org.postgresql.Driver" />
 		<property name="url" value="jdbc:postgresql://localhost:5432/domoticaDB?autoReconnect=true;charSet=LATIN1" />
 		<property name="username" value="domotica" />
-		<property name="password" value="SENHA BANCO" />
+		<property name="password" value="SENHA" />
 		<property name="initialSize" value="5" />
 		<property name="maxActive" value="10" />
 	</bean>
