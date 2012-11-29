@@ -10,10 +10,11 @@ import javax.crypto.spec.SecretKeySpec;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.encoding.MessageDigestPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import br.com.emersondeandrade.infraEstrutura.propriedadesSistema.PropriedadesSeguranca;
-import br.com.emersondeandrade.modelo.core.arduino.ArduinoWIZNET_W5100;
+import br.com.emersondeandrade.infraEstrutura.propriedadesSistema.PropriedadesSegurancaProducao;
 
 @Service
 public final class CriptografiaImp implements Criptografia{  
@@ -111,33 +112,27 @@ public final class CriptografiaImp implements Criptografia{
       //System.out.println("Cripto: " + ">"+cript+"<");  
       //System.out.println("Decripto: " + decript);  
       
-      
+	   
+	   
+	   
+	  
+	   
       // MD5
-      //String key = "teste";
-	  //System.out.println(new CriptografiaImp(new PropriedadesSegurancaProducao() ).encodeMD5(key));
+      String key = "teste";
+	  System.out.println(new CriptografiaImp(new PropriedadesSegurancaProducao() ).encodeMD5(key));
       
         
    }
 
    
-
+   
+   
    
   
    public String encodeMD5(String str) {
-		str += propSeg.getSaltMD5();
-		
-		MessageDigest md;
-		try {
-			md = MessageDigest.getInstance("MD5");
-			BigInteger hash = new BigInteger(1, md.digest(str.getBytes()));
-			String s = hash.toString(16);
-			if (s.length() % 2 != 0)
-				s = "0" + s;
-			return s;
-		} catch (NoSuchAlgorithmException e) {
-			e.printStackTrace();
-			throw new RuntimeException(e);
-		}
+	   MessageDigestPasswordEncoder encoder = new MessageDigestPasswordEncoder("MD5");
+	   String encodePassword = encoder.encodePassword(str, propSeg.getSaltMD5());
+	   return encodePassword;
    }
 
 

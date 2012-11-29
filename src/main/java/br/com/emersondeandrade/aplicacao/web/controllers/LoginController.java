@@ -1,5 +1,7 @@
 package br.com.emersondeandrade.aplicacao.web.controllers;
 
+import java.util.List;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.View;
 
+import br.com.emersondeandrade.modelo.core.casa.Casa;
 import br.com.emersondeandrade.modelo.core.usuario.Usuario;
 import br.com.emersondeandrade.modelo.core.usuario.UsuarioFacade;
 
@@ -33,12 +36,15 @@ public class LoginController extends ControllerWeb {
 	@RequestMapping(value = "/login")
 	public String  login(){
 			
-		Usuario userLogged = getUsuarioLogado();
+		Usuario userLogged = usuarioFacade.loadById( getUsuarioLogado().getId() );
 		
-		if( userLogged.getCasas()!= null && ! userLogged.getCasas().isEmpty()){
+		
+		
+		if( userLogged.getCasas() != null && !userLogged.getCasas().isEmpty()){
 			session().setAttribute("casa",   userLogged.getCasas().get(0));
+									
+			session().setAttribute("casas",  userLogged.getCasas() );
 			
-			//TODO colocar as casas na session
 		}
 				
 		log.info("Usuario: " + userLogged.getUsername()  + " logando..." );

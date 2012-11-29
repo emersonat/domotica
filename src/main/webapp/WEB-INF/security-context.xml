@@ -7,9 +7,21 @@
 
 		
 	<sec:authentication-manager>
-	    <sec:authentication-provider user-service-ref="usuarioDao"/>
-	</sec:authentication-manager>
+	    <sec:authentication-provider user-service-ref="usuarioDao">
+	   		
+	   		<sec:password-encoder  hash="md5">
+	   		  <sec:salt-source system-wide="salt"/>
+	   		</sec:password-encoder>    
+       
+	    </sec:authentication-provider>
 	    
+	</sec:authentication-manager>
+	
+	
+	
+	
+	
+	
 	<sec:http auto-config="true">
 	    
 		 <sec:form-login login-page="/index.jsp" login-processing-url="/login.html" 

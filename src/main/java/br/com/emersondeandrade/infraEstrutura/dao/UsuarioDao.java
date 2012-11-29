@@ -15,6 +15,12 @@ import br.com.emersondeandrade.modelo.repositorio.UsuarioRepositorio;
 public class UsuarioDao  extends DaoPadrao<Usuario> implements UsuarioRepositorio{
 
 	
+	public UsuarioDao() {
+		super(Usuario.class);
+	}
+	
+	
+	
 	public Usuario loadbyEmailSenha(String email, String senha) {
 		
 		TypedQuery<Usuario> query = entityManager.createQuery("from Usuario u where u.email = :email and u.senha = :senha", Usuario.class);

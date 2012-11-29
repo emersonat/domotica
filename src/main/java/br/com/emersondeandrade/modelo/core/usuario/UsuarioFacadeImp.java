@@ -23,6 +23,12 @@ public class UsuarioFacadeImp implements UsuarioFacade {
 		return repositorioUsuarios.loadbyEmailSenha(email, cript.encodeMD5(senha));
 	}
 
+
+	public Usuario loadById(int id) {
+		return repositorioUsuarios.getById(id);
+		
+	}
+
 	
 	
 	

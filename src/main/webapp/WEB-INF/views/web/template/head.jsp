@@ -92,7 +92,7 @@
 							<ul>
 											
 														
-							<c:forEach items="${user.casas}" var="casa">								
+							<c:forEach items="${casas}" var="casa">								
 								<li class="icon_refresh"><a href="#">${casa.nome}</a></li>
 							</c:forEach>	
 								

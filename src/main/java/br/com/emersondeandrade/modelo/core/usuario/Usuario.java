@@ -16,6 +16,8 @@ import javax.persistence.SequenceGenerator;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import br.com.emersondeandrade.aplicacao.SpringUtils;
+import br.com.emersondeandrade.infraEstrutura.criptografia.Criptografia;
 import br.com.emersondeandrade.modelo.core.casa.Casa;
 
 
@@ -45,7 +47,7 @@ public class Usuario implements Serializable,UserDetails{
 	private String nome;
 	
 	
-	@OneToMany(mappedBy="usuario",fetch = FetchType.EAGER)
+	@OneToMany(mappedBy="usuario",fetch = FetchType.LAZY)
 	private List<Casa> casas;
 	
 	@OneToMany(fetch = FetchType.LAZY)
