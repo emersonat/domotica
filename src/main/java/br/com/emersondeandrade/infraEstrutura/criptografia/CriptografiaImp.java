@@ -1,9 +1,5 @@
 package br.com.emersondeandrade.infraEstrutura.criptografia;
 
-import java.math.BigInteger;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-
 import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
@@ -14,7 +10,6 @@ import org.springframework.security.authentication.encoding.MessageDigestPasswor
 import org.springframework.stereotype.Service;
 
 import br.com.emersondeandrade.infraEstrutura.propriedadesSistema.PropriedadesSeguranca;
-import br.com.emersondeandrade.infraEstrutura.propriedadesSistema.PropriedadesSegurancaProducao;
 
 @Service
 public final class CriptografiaImp implements Criptografia{  
@@ -119,7 +114,7 @@ public final class CriptografiaImp implements Criptografia{
 	   
       // MD5
       String key = "teste";
-	  System.out.println(new CriptografiaImp(new PropriedadesSegurancaProducao() ).encodeMD5(key));
+	  //System.out.println(new CriptografiaImp(new PropriedadesSegurancaProducao() ).encodeMD5(key));
       
         
    }
