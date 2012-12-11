@@ -43,7 +43,7 @@
 								 <c:if test="${dispositivos.ativo == false }">
 									<a href="${contextPath}/web/dispositivo/ativar/${mytag:cript(dispositivos.id)}.html"><img src="${contextPath}/imagens/button_off.png" height="24px" width="24px" title="<spring:message code="clique.ativar" text="Clique para ativar"/>" ></a> 
 								 </c:if>
-								
+							
 							</display:column>	
 							
 							

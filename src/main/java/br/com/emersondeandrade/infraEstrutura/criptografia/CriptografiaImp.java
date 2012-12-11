@@ -1,5 +1,7 @@
 package br.com.emersondeandrade.infraEstrutura.criptografia;
 
+import javassist.expr.NewArray;
+
 import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
@@ -7,8 +9,10 @@ import javax.crypto.spec.SecretKeySpec;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.encoding.MessageDigestPasswordEncoder;
+import org.springframework.security.crypto.codec.Base64;
 import org.springframework.stereotype.Service;
 
+import br.com.emersondeandrade.infraEstrutura.propriedadesSistema.PropriedadeSegurancaProducao;
 import br.com.emersondeandrade.infraEstrutura.propriedadesSistema.PropriedadesSeguranca;
 
 @Service
@@ -53,9 +57,12 @@ public final class CriptografiaImp implements Criptografia{
          System.out.println(e.getMessage());  
          e.printStackTrace();  
       }  
-              
-      return strCript;  
+               
+      return  new String(new Base64().encode(strCript.getBytes()));
    }  
+
+   
+   
    
    public int decriptToInt(String number) {
 		String n = decript(number);
@@ -73,8 +80,8 @@ public final class CriptografiaImp implements Criptografia{
    
    public String decript(String str)  
    {  
-      String strDecript = str;  
-        
+      String strDecript =  new String(new Base64().decode(str.getBytes()));  
+              
       try  
       {  
          Cipher ch = Cipher.getInstance("Blowfish");  
@@ -99,22 +106,7 @@ public final class CriptografiaImp implements Criptografia{
    
    
    public static  void main(String[] args) {  
-      //Criptografia s = new CriptografiaImp(new PropriedadeSegurancaProducao() ) ;
-                 
-     //String cript = s.cript("teste");  
-    // String decript = s.decript(cript);  
-        
-      //System.out.println("Cripto: " + ">"+cript+"<");  
-      //System.out.println("Decripto: " + decript);  
-      
-	   
-	   
-	   
-	  
-	   
-      // MD5
-      String key = "teste";
-	  //System.out.println(new CriptografiaImp(new PropriedadesSegurancaProducao() ).encodeMD5(key));
+     
       
         
    }
