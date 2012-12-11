@@ -3,6 +3,8 @@ package br.com.emersondeandrade.infraEstrutura.dao;
 import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Repository;
 
 import br.com.emersondeandrade.modelo.core.usuario.Usuario;
@@ -12,6 +14,12 @@ import br.com.emersondeandrade.modelo.repositorio.UsuarioRepositorio;
 @Repository
 public class UsuarioDao  extends DaoPadrao<Usuario> implements UsuarioRepositorio{
 
+	
+	public UsuarioDao() {
+		super(Usuario.class);
+	}
+	
+	
 	
 	public Usuario loadbyEmailSenha(String email, String senha) {
 		
@@ -28,6 +36,21 @@ public class UsuarioDao  extends DaoPadrao<Usuario> implements UsuarioRepositori
 		}
 		
 		
+	}
+
+	public UserDetails loadUserByUsername(String emailUsuario) throws UsernameNotFoundException {
+		
+		TypedQuery<Usuario> query = entityManager.createQuery("from Usuario u where u.email = :email", Usuario.class);
+		query.setParameter("email", emailUsuario);
+		
+		try{
+			return query.getSingleResult();
+		} catch (NoResultException e) {
+			throw new UsernameNotFoundException("USuario: " + emailUsuario +" não encontrado");
+		}
+		
+		
+	
 	}
 
 }

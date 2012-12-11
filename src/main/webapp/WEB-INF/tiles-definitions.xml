@@ -59,6 +59,10 @@
   		<put-attribute name="body" value="/WEB-INF/views/mobile/config.jsp" />
  	</definition>
  	
+ 	<definition name="mobile/controleInativo" extends="template-mobile">
+  		<put-attribute name="body" value="/WEB-INF/views/mobile/controleInativo.jsp" />
+ 	</definition>
+ 	
  	
  	
  	

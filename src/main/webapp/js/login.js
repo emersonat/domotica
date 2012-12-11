@@ -7,8 +7,8 @@ $(document).ready(function()
 					event.preventDefault();
 					
 					// Check fields
-					var login = $('#login').val();
-					var pass = $('#pass').val();
+					var login = $('#j_username').val();
+					var pass = $('#j_password').val();
 					
 					if (!login || login.length == 0)
 					{

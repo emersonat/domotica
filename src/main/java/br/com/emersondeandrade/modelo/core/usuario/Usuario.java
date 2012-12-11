@@ -1,6 +1,7 @@
 package br.com.emersondeandrade.modelo.core.usuario;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -12,11 +13,16 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import br.com.emersondeandrade.aplicacao.SpringUtils;
+import br.com.emersondeandrade.infraEstrutura.criptografia.Criptografia;
 import br.com.emersondeandrade.modelo.core.casa.Casa;
 
 
 @Entity
-public class Usuario implements Serializable{
+public class Usuario implements Serializable,UserDetails{
 	
 	
 	/**
@@ -41,11 +47,11 @@ public class Usuario implements Serializable{
 	private String nome;
 	
 	
-	@OneToMany(mappedBy="usuario",fetch = FetchType.EAGER)
+	@OneToMany(mappedBy="usuario",fetch = FetchType.LAZY)
 	private List<Casa> casas;
 	
-		
-	
+	@OneToMany(fetch = FetchType.LAZY)
+	private List<Role> roles;
 	
 	
 
@@ -88,6 +94,44 @@ public class Usuario implements Serializable{
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+
+	public List<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<Role> roles) {
+		this.roles = roles;
+	}
+
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String getPassword() {
+		return getSenha();
+	}
+
+	public String getUsername() {
+		return getEmail();
+	}
+
+	public boolean isAccountNonExpired() {
+		return true;
+	}
+
+	public boolean isAccountNonLocked() {
+		return true;
+	}
+
+	public boolean isCredentialsNonExpired() {
+		return true;
+	}
+
+	public boolean isEnabled() {
+		return true;
+	}
+
 	
 
 }

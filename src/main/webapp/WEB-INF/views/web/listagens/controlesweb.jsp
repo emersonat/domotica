@@ -34,11 +34,12 @@
 							<display:column title="Ativar/Desativar" style="text-align:center" sortName="ativo"  sortable="false"> 
 								
 								<c:if test="${controles.ativo}">
-									<a href="#" onclick="javascript:alert('teste');"><img src="${contextPath}/imagens/button_on.png" height="24px" width="24px" title="<spring:message code="clique.inativar" text="Clique para inativar"/>" ></a> 
+									<a href="${contextPath}/web/controleweb/desativar/${mytag:cript(controles.id)}.html"  >
+										<img src="${contextPath}/imagens/button_on.png"  height="24px" width="24px" title="<spring:message code="clique.inativar" text="Clique para inativar"/>" ></a> 
 								 </c:if>
 								 
 								 <c:if test="${controles.ativo == false }">
-									<a href="#"><img src="${contextPath}/imagens/button_off.png" height="24px" width="24px" title="<spring:message code="clique.ativar" text="Clique para ativar"/>" ></a> 
+									<a href="${contextPath}/web/controleweb/ativar/${mytag:cript(controles.id)}.html"><img src="${contextPath}/imagens/button_off.png" height="24px" width="24px" title="<spring:message code="clique.ativar" text="Clique para ativar"/>" ></a> 
 								 </c:if>
 								
 							</display:column>	

@@ -1,11 +1,14 @@
 package br.com.emersondeandrade.aplicacao.web.controllers;
 
+import java.util.Enumeration;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.displaytag.tags.TableTagParameters;
 import org.displaytag.util.ParamEncoder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -16,6 +19,7 @@ import br.com.emersondeandrade.aplicacao.web.binders.TipoComandoBinder;
 import br.com.emersondeandrade.modelo.core.casa.Casa;
 import br.com.emersondeandrade.modelo.core.casa.CasaFacade;
 import br.com.emersondeandrade.modelo.core.dispositivo.TipoComando;
+import br.com.emersondeandrade.modelo.core.usuario.Usuario;
 
 public abstract class ControllerWeb {
 	
@@ -57,7 +61,14 @@ public abstract class ControllerWeb {
 			
 	}
 	
+	protected Usuario getUsuarioLogado() {
 	
+		Object usuarioLogado = SecurityContextHolder.getContext().getAuthentication().getPrincipal(); 
+		
+				
+		return (Usuario) usuarioLogado;
+		
+	}
 	
 	
 	protected Casa getCasa(){

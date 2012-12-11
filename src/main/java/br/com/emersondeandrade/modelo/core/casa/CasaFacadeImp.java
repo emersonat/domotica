@@ -75,7 +75,7 @@ public class CasaFacadeImp implements CasaFacade {
 	}
 	
 	
-	public Casa getCasaByHashMobile(String hashMobile) throws EntityNotFoundException   {
+	public Casa getCasaByHashMobileAtivo(String hashMobile) throws EntityNotFoundException   {
 					
 		return casaRepositorio.getCasaByHashMobileAtivo(hashMobile);
 	}

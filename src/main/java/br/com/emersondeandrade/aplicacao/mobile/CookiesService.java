@@ -11,7 +11,7 @@ public class CookiesService {
 		
 	public  String getValue(String cookieName, Cookie[] cookies){
 		if(cookies == null)
-			return null;
+			return "";
 		
 		for(Cookie cookie : cookies){
 			if (cookie.getName().equals(cookieName) ){
@@ -19,7 +19,7 @@ public class CookiesService {
 			}
 		}
 		
-		return null;
+		return "";
 	}	
 		
 	

@@ -45,6 +45,24 @@ public class MobileFacadeImp implements MobileFacade {
 		RegistroMobile mobile = registroMobileRepositorio.getById(id);
 		registroMobileRepositorio.delete(mobile);
 	}
+
+	public void desativarMobile(int id) {
+		RegistroMobile mobile = registroMobileRepositorio.getById(id);
+		mobile.setAtivo(false);
+		registroMobileRepositorio.salvar(mobile);
+	}
+
+	public void ativarMobile(int id) {
+		RegistroMobile mobile = registroMobileRepositorio.getById(id);
+		mobile.setAtivo(true);
+		registroMobileRepositorio.salvar(mobile);
+		
+	}
+	
+	public RegistroMobile getByHash(String hash)  {
+		return registroMobileRepositorio.getByHash(hash);
+		
+	}
 	
 
 }

@@ -1,6 +1,7 @@
 
 package br.com.emersondeandrade.infraEstrutura.dao;
 
+import javax.persistence.EntityNotFoundException;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
@@ -72,6 +73,24 @@ public class RegistroMobileDao extends DaoPadrao<RegistroMobile> implements Regi
 		query.setParameter("hash", hash);
 		 
 		query.executeUpdate();
+		
+	}
+
+
+	public RegistroMobile getByHash(String hash)  {
+		
+		TypedQuery<RegistroMobile> query = entityManager.createQuery("from RegistroMobile r where r.hash = :hash", RegistroMobile.class);
+		
+		query.setParameter("hash", hash);
+		
+		
+		try{
+			return query.getSingleResult();
+		} catch (NoResultException e) {
+			return null;
+		}
+		
+		
 		
 	}
 

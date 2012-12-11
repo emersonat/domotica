@@ -34,6 +34,7 @@ public class ListagemControlesWeb extends ControllerWeb {
 	
 	@RequestMapping(value = "/listar")
 	public String open(ModelMap mv){
+	
 		
 		List<RegistroMobile> registrosMobile = getCasa().getRegistrosMobile();
 		
@@ -55,6 +56,29 @@ public class ListagemControlesWeb extends ControllerWeb {
 		
 		return  open(mv);
 	}
+	
+	
+	@RequestMapping(value = "/desativar/{idCript}")
+	public String desativar(@PathVariable String idCript , ModelMap mv){
+		
+		int id = cript.decriptToInt(idCript);
+		
+		mobileFacade.desativarMobile(id);
+		
+		return  open(mv);
+	}
+	
+	@RequestMapping(value = "/ativar/{idCript}")
+	public String ativar(@PathVariable String idCript , ModelMap mv){
+		
+		int id = cript.decriptToInt(idCript);
+		
+		mobileFacade.ativarMobile(id);
+		
+		return  open(mv);
+	}
+	
+	
 	
 	
 	@RequestMapping(value = "/sort")

@@ -4,6 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
@@ -77,7 +78,7 @@
 	
 	
 	<body> 
-	<input type="text" id="contextPath" value="${contextPath}" /><!-- for JS scrips -->	
+	<input type="hidden" id="contextPath" value="${contextPath}" /><!-- for JS scrips -->	
 	
 	<!-- Main nav -->
 	<nav id="main-nav">
@@ -89,8 +90,9 @@
 						<div class="menu">
 							<img src="${contextPath}/tema/images/menu-open-arrow.png" width="16" height="16">
 							<ul>
-							
-							<c:forEach items="${user.casas}" var="casa">								
+											
+														
+							<c:forEach items="${casas}" var="casa">								
 								<li class="icon_refresh"><a href="#">${casa.nome}</a></li>
 							</c:forEach>	
 								

@@ -82,21 +82,33 @@ public class RegistrarMobileController  extends ControllerMobile {
 	
 	@RequestMapping(value = "/verificaKey",method = RequestMethod.GET)
 	public String verificaKey(HttpServletRequest r,Model model){
-	
-		Casa casa = null;
-				
+		
 		String hashMobile = cookieService.getValue(propSeg.getCookieName(), r.getCookies());
-		 				
-		try {
-			 casa = casaFacade.getCasaByHashMobile(hashMobile);
-		} catch (EntityNotFoundException e) {
+			
+		RegistroMobile controleMobile = mobileFacade.getByHash(hashMobile);
+		
+		
+		if(controleMobile == null){
+			
 			model.addAttribute(new FormRegistro());
 			return "mobile/registrarMobile";
-		}
+	
+		} else if (!controleMobile.isAtivo()) {
+			return "mobile/controleInativo";
 			
-		model.addAttribute("casa",casa);
+		} else {
+			
+			model.addAttribute("casa", controleMobile.getCasa());
+			return "mobile/painelControle";
+			
+		}
+				
 		
-		return "mobile/painelControle";
+		
+		
+		
+			
+		
 		
 		
 	}
