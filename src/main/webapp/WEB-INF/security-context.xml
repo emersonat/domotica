@@ -33,7 +33,8 @@
 		<sec:intercept-url pattern="/js/**" access="IS_AUTHENTICATED_ANONYMOUSLY" />
 		<sec:intercept-url pattern="/tema/**" access="IS_AUTHENTICATED_ANONYMOUSLY" />
 		<sec:intercept-url pattern="/resources/**" access="IS_AUTHENTICATED_ANONYMOUSLY" />
-		
+		<sec:intercept-url pattern="/controleweb/**" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+		<sec:intercept-url pattern="/mobile/**" access="IS_AUTHENTICATED_ANONYMOUSLY" />
 		
 	    <!-- Restrict access to ALL other pages -->
 		<sec:intercept-url pattern="/**" access="IS_AUTHENTICATED_REMEMBERED" /> 
