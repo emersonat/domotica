@@ -122,7 +122,7 @@
 			<div class="container_12">
 				<ul id="status-infos">
 					<li class="spaced"><spring:message code="usuario" text="Usuario"/>: <strong>${user.nome}</strong></li>
-					<li><a href="login.html" class="button red" title="Logout"><span class="smaller">LOGOUT</span></a></li>
+					<li><a href="${contextPath}/logout.html" class="button red" title="Logout"><span class="smaller">LOGOUT</span></a></li>
 				</ul>
 			</div>
 		</div>

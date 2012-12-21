@@ -1,11 +1,7 @@
 package br.com.emersondeandrade.modelo.core.arduino;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.Properties;
@@ -13,7 +9,14 @@ import java.util.Properties;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
 import org.apache.log4j.Logger;
+import org.hibernate.validator.util.privilegedactions.GetMethod;
 
 import br.com.emersondeandrade.modelo.exeption.ExecultarComandoExeption;
 import br.com.emersondeandrade.modelo.exeption.NotConectedExeption;
@@ -112,44 +115,32 @@ public class ArduinoWIZNET_W5100 extends Arduino {
 		        + value;  
 		}
 		
+		log.info("Preparando URL do arduino: " + urlString);
 		return urlString;
 	}
 	
-
+	
+	
 	
 	
 	private  void requestHttp(Properties parameters) throws NotConectedExeption, ExecultarComandoExeption {
+		
+		DefaultHttpClient httpclient = new DefaultHttpClient();
+		String response = null;
+		
+		log.info("Fazendo request para Arduino.... Casa: " + this.getCasa().getNome() );
+		long  inicio = new Date().getTime();	
 			
-			URL url = null;
-									
-			StringBuilder response = new StringBuilder();
-			
-			log.info("Fazendo request para Arduino.... Casa: " + this.getCasa().getNome() );
-			long  inicio = new Date().getTime();	
-			
-			try {
-				
-				url = new URL(this.montaUrl(parameters));
-				
-				HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-				
-				urlConnection.setRequestProperty("Request-Method", "PUT"); 
-				
-		        BufferedReader in = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
-		 				        		        
-		        String s = "";
-		        while (null != ((s = in.readLine()))) {
-		        	response.append(s);
-		        } 
-		 
-		        in.close();
-		        urlConnection.disconnect();
+		try {
+			HttpGet httpget = new HttpGet(this.montaUrl(parameters));	
+			HttpResponse httpResponse = httpclient.execute(httpget);
+			HttpEntity entity = httpResponse.getEntity();
+			response = EntityUtils.toString(entity);
 		        
-		        if(response.toString().contains("<error>")){
-		        	throw new ExecultarComandoExeption(response.toString());
-		        }
-		        
-		        
+		    if(response.toString().contains("<error>")){
+		       	throw new ExecultarComandoExeption(response.toString());
+		    }
+		   		        
 			} catch (MalformedURLException e) {
 				log.error( e.getMessage() );
 				e.printStackTrace();
@@ -164,11 +155,13 @@ public class ArduinoWIZNET_W5100 extends Arduino {
 			
 			long termino = new Date().getTime(); 
 			int seg  = (int) (termino - inicio) / 1000;
-			log.info("Resposta do arduino.: " + response.toString() + " em " + seg + " segundos" );
+			
+			log.info("Resposta do arduino.: " + response + " em " + seg + " segundos" );
+			
 			
 			
 	
-			
+		
 		
 	}
 

@@ -25,7 +25,10 @@
 	<sec:http auto-config="true">
 	    
 		 <sec:form-login login-page="/index.jsp" login-processing-url="/login.html" 
-	        default-target-url="/web/login.html" always-use-default-target="true"/>
+	        default-target-url="/web/login.html" always-use-default-target="true" />
+	     
+	     <sec:logout logout-url="/logout.html"  />   
+	        
 	        
 	     <!-- Don't set any role >-->
 		<sec:intercept-url pattern="/index.jsp" access="IS_AUTHENTICATED_ANONYMOUSLY" />
