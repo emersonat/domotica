@@ -73,6 +73,7 @@ public class ArduinoWIZNET_W5100 extends Arduino {
 		
 	}
 
+
 	
 
 	@Override
@@ -95,7 +96,7 @@ public class ArduinoWIZNET_W5100 extends Arduino {
 	private String montaUrl(Properties parameters){
 		
 		String urlString = "http://" + this.getIp() + ":" + this.getPorta();
-			
+				
 		Iterator i = parameters.keySet().iterator();  
 				 
 		int counter = 0;  
@@ -130,7 +131,7 @@ public class ArduinoWIZNET_W5100 extends Arduino {
 		
 		log.info("Fazendo request para Arduino.... Casa: " + this.getCasa().getNome() );
 		long  inicio = new Date().getTime();	
-			
+						
 		try {
 			HttpGet httpget = new HttpGet(this.montaUrl(parameters));	
 			HttpResponse httpResponse = httpclient.execute(httpget);

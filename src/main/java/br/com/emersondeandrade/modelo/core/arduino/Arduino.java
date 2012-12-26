@@ -49,7 +49,7 @@ public abstract class Arduino implements Serializable {
 	private String ip;
 	
 	
-	@Column(length = 2, nullable = false )
+	@Column(length = 5, nullable = false )
 	private String porta;
 	
 	
