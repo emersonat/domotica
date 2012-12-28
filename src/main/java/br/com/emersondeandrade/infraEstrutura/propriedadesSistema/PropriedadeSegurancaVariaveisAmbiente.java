@@ -1,8 +1,7 @@
 package br.com.emersondeandrade.infraEstrutura.propriedadesSistema;
 
-import org.springframework.stereotype.Component;
 
-@Component
+
 public class PropriedadeSegurancaVariaveisAmbiente implements PropriedadesSeguranca {
 
 	
@@ -18,6 +17,23 @@ public class PropriedadeSegurancaVariaveisAmbiente implements PropriedadesSegura
 
 	public String getSaltMD5() {
 		return System.getenv("DOMOTICA_SALT_MD5");
+		
+	}
+
+	@Override
+	public String getURLBanco() {
+		return System.getenv("DOMOTICA_URL_BANCO");
+	}
+
+	@Override
+	public String getUsernameBanco() {
+		return System.getenv("DOMOTICA_USER_BANCO");
+		
+	}
+
+	@Override
+	public String getSenhaBanco() {
+		return System.getenv("DOMOTICA_SENHA_BANCO");
 		
 	}
 

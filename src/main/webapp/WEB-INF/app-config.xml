@@ -34,24 +34,19 @@
 	<tx:annotation-driven transaction-manager="transactionManager" />
 
 
-
-
-	
-	
-	
-
-<!-- DATA SOURCE -->
-<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+	<!-- DATA SOURCE -->
+	<bean id="dataSource" class="br.com.emersondeandrade.infraEstrutura.dao.DataSource">
 		<property name="driverClassName" value="org.postgresql.Driver" />
-		<property name="url" value="jdbc:postgresql://localhost:5432/domoticaDB?autoReconnect=true;charSet=LATIN1" />
-		<property name="username" value="domotica" />
-		<property name="password" value="SISTEMA_UFO856" />
 		<property name="initialSize" value="5" />
 		<property name="maxActive" value="10" />
+		<constructor-arg ref="propsSeguranca"></constructor-arg>
 	</bean>
 
-
-	
+	<!-- Propriedades de seguranca -->
+	<bean 
+		id="propsSeguranca" 
+		class="br.com.emersondeandrade.infraEstrutura.propriedadesSistema.PropriedadeSegurancaVariaveisAmbiente" >
+	</bean>
 
 
 	

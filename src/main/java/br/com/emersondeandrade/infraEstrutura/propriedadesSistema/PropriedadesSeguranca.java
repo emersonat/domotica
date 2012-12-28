@@ -8,8 +8,7 @@ package br.com.emersondeandrade.infraEstrutura.propriedadesSistema;
  *
  */
 public interface PropriedadesSeguranca {
-	
-		
+			
 	/**
 	 * Nome do cookie que o sistema gravara 
 	 * @return
@@ -28,6 +27,17 @@ public interface PropriedadesSeguranca {
 	 * @return
 	 */
 	public String getSaltMD5();
+	
+	
+	public String getURLBanco();
+	
+	
+	public String getUsernameBanco();
+	
+	
+	public String getSenhaBanco();
+	
+	
 	
 
 }
