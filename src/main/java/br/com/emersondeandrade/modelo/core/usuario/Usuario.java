@@ -12,12 +12,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Transient;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import br.com.emersondeandrade.aplicacao.SpringUtils;
-import br.com.emersondeandrade.infraEstrutura.criptografia.Criptografia;
 import br.com.emersondeandrade.modelo.core.casa.Casa;
 
 
@@ -54,7 +53,6 @@ public class Usuario implements Serializable,UserDetails{
 	private List<Role> roles;
 	
 	
-
 	public int getId() {
 		return id;
 	}
@@ -131,6 +129,15 @@ public class Usuario implements Serializable,UserDetails{
 	public boolean isEnabled() {
 		return true;
 	}
+	
+	/**
+	 * Usado pelo Spring Security para obter o Salt usado na criptografia da senha
+	 * @return
+	 */
+	public String getSaltMD5() {
+		return System.getenv("DOMOTICA_SALT_MD5");
+	}
+
 
 	
 
