@@ -8,62 +8,74 @@
 	<c:set var="contextPath" value=""/>
 </c:if>
 
-
-
-
-
-<html>
+<html lang="en">
 <head>
-<title>Registrar dispositivo</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
 
-<link rel="stylesheet"
-	href="http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.css" />
-
-<script type="text/javascript"
-	src="http://code.jquery.com/jquery-1.6.4.min.js"></script>
-<script type="text/javascript"
-	src="http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.js"></script>
-
-
-
-
-
-</head>
-<body>
-	<input type="hidden" id="contextPath" value="${contextPath}"><!-- for JS scrips -->
-	<div data-role="page">
-
-		<div data-role="header">
-			Registrar dispositivo
-		</div>
-		<!-- /header -->
-
-		<div data-role="content">
-		
-		<span style="color: red;">${erro}</span><br/>	
-		<form:form action="${contextPath}/mobile/registra.html" method="post" commandName="formRegistro" >
-		
-			  					
-			 <label for="key"><form:errors cssStyle="color:red;" path="key"/> Codigo Arduino:</label>
-			 <form:input path="key" type="password" id="key"  maxlength="32" size="32"  data-mini="true"  />
-			
-			
-			 <label for="nomeDispositivo"><form:errors cssStyle="color:red;" path="nomeDispositivo"/> Nome Dispositivo:</label>
-			 <form:input path="nomeDispositivo" type="text" id="nomeDispositivo"  maxlength="50" size="50"  data-mini="true"  />
-			
-					
-			<input type="submit" value="Registrar" />
-			
-		</form:form>
+	<title>Constellation Admin Skin</title>
+	<meta charset="utf-8">
 	
-			
+	<!-- Mobile metas -->
+	<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+	
+	<!-- Those meta will turn your website into an app on the iPhone -->
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<link rel="apple-touch-startup-image" href="${contextPath}/tema/images/iphone_startup.png">
+	
+	<!-- Global stylesheets -->
+	<link href="${contextPath}/tema/css/reset.css" rel="stylesheet" type="text/css">
+	<link href="${contextPath}/tema/css/common.css" rel="stylesheet" type="text/css">
+	<link href="${contextPath}/tema/css/form.css" rel="stylesheet" type="text/css">
+	<link href="${contextPath}/tema/css/mobile.css" rel="stylesheet" type="text/css">
+	
+	<!-- Favicon -->
+	<link rel="shortcut icon" type="image/x-icon" href="${contextPath}/tema/favicon.ico">
+	<link rel="icon" type="image/png" href="${contextPath}/tema/favicon-large.png">
+	<link rel="apple-touch-icon" href="${contextPath}/tema/apple-touch-icon.png"/>
+	
+	<!-- Generic libs -->
+	<script type="text/javascript" src="${contextPath}/tema/js/jquery-1.4.2.min.js"></script>
+	
+	<!-- Template core functions -->
+	<script type="text/javascript" src="${contextPath}/tema/js/common.js"></script>
+	<script type="text/javascript" src="${contextPath}/tema/js/mobile.js"></script>
+	<script type="text/javascript" src="${contextPath}/tema/js/jquery.tip.js"></script>
+	
+</head>
+
+<body class="dark">
+	
+	<header>
+		<h1><spring:message code="domotica" text="Domotica"/></h1>
+	</header>
 		
-		</div>
-		<!-- /content -->
+	<div id="header-shadow"></div>
+	
+	<article>
+		
+	  <section id="login-block">
+		<div class="block-border">
+			
+			<form:form action="${contextPath}/mobile/registra.html" method="post" commandName="formRegistro" cssClass="form block-content">
+							
+				<h1><spring:message code="registrar.controle" text="Registrar controle"/></h1>
+				<span style="color: red;">${erro}</span><br/><br/> 
+				 <p>
+					<label for="key"><form:errors cssStyle="color:red;" path="key"/> <spring:message code="codigo.arduino" text="Codigo central"/>:</label>
+					<form:input path="key" type="password" id="key"  maxlength="32" size="32"  cssClass="full-width" />
+				</p>
+				<p>
+					<label for="nomeDispositivo"><form:errors cssStyle="color:red;" path="nomeDispositivo"/> <spring:message code="nome.controle" text="Nome do controle"/>:</label>
+					<form:input path="nomeDispositivo" type="text" id="nomeDispositivo"  maxlength="50" size="50"  cssClass="full-width"  />
+				</p>
+							
+				<p><button type="submit" class="full-width"><spring:message code="registrar" text="Registrar"/></button></p>
+				
+			</form:form>
+			</div>
+		</section>
+		
+	</article>
+	
 
-	</div>
-	<!-- /page -->
-
-</body>
 </html>
+

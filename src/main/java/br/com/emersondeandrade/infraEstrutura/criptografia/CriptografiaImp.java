@@ -10,6 +10,7 @@ import org.springframework.security.authentication.encoding.MessageDigestPasswor
 import org.springframework.security.crypto.codec.Base64;
 import org.springframework.stereotype.Service;
 
+import br.com.emersondeandrade.infraEstrutura.propriedadesSistema.PropriedadeSegurancaVariaveisAmbiente;
 import br.com.emersondeandrade.infraEstrutura.propriedadesSistema.PropriedadesSeguranca;
 
 @Service
@@ -103,7 +104,7 @@ public final class CriptografiaImp implements Criptografia{
    
    
    public static  void main(String[] args) {  
-     
+    
    }
 
    
