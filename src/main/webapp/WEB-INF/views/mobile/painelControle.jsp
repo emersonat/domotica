@@ -23,7 +23,7 @@
 			<ul class="favorites no-margin">
 				<c:forEach items="${casa.dispositivosAtivos}" var="d">
 					<li>
-						<img style="cursor: pointer;" src="${contextPath}/tema/images/icons/web-app/48/Info.png" width="48" height="48" onclick="acionar('${d.key}')" >
+						<img style="cursor: pointer;" src="${contextPath}/imagens/button_on.png" width="48" height="48" onclick="acionar('${d.key}')" >
 						<a href="#" style="cursor: default;">${d.nome}<br>
 						<small></small></a>
 					</li>
