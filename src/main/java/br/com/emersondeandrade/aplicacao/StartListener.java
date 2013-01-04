@@ -16,6 +16,8 @@ public class StartListener implements ServletContextListener{
 	PropriedadesSeguranca ps;
 	
 	
+	
+	
 	@Override
 	public void contextDestroyed(ServletContextEvent arg0) {
 		// TODO Auto-generated method stub
@@ -26,21 +28,41 @@ public class StartListener implements ServletContextListener{
 		
 		SpringUtils.autowiredThisBean(this, servletContextEvent);
 		
-		System.out.println("******************************** Iniciando Domotica ******************************** ");
+		System.out.println("\n=============================================== Iniciando Domotica =============================================== ");
 		System.out.println("Versão: XX\n");
-		System.out.println("Propriedades de seguranca:");
+		
+		imprimirVariaveisAmbiente();
+		imprimirPropriedadesSegurancaUsadas();				
+		
+		
+		System.out.println("======================================================================================================================\n ");
+		
+		
+	}
+	
+	
+	private void imprimirVariaveisAmbiente(){
+		System.out.println("\nVariaveis de ambiente:");
+		System.out.println("-------------------------------");
+		String[] var = {"DOMOTICA_COOKIE_NAME","DOMOTICA_SALT_CRIPTOGRAFIA","DOMOTICA_SALT_MD5","DOMOTICA_URL_BANCO","DOMOTICA_USER_BANCO","DOMOTICA_SENHA_BANCO"};
+		
+		for(String v : var){
+			System.out.println(v + " --> "  + System.getenv(v) );
+		}
+	}
+	
+	private void imprimirPropriedadesSegurancaUsadas(){
+		
+		System.out.println("\nPropriedades de seguranca que estao sendo usadas:");
+		System.out.println("-----------------------------------------------------------");
 		System.out.println("Implementação: " + ps.getClass().getName());
 		System.out.println("Nome cookie = " + ps.getCookieName()  );
 		System.out.println("Salt criptografia = " + ps.getSaltCriptografia() );
-		System.out.println("Salt MD5= " + ps.getSaltMD5() +"\n" );
+		System.out.println("Salt MD5= " + ps.getSaltMD5() );
 				
 		System.out.println("URL banco dados= " + ps.getURLBanco() );
 		System.out.println("Usuario banco dados= " + ps.getUsernameBanco() );
 		System.out.println("Senha banco= " +  ps.getSenhaBanco() );
-		
-		System.out.println("************************************************************************************** ");
-		
-		
 	}
 	
 
