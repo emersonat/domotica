@@ -61,6 +61,7 @@
  	
  	<definition name="mobile/controleInativo" extends="template-mobile">
   		<put-attribute name="body" value="/WEB-INF/views/mobile/controleInativo.jsp" />
+  		<put-attribute name="showControls" type="string" value="false" />
  	</definition>
  	
  	

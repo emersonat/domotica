@@ -74,7 +74,7 @@ public class ConfiguracaoController  extends ControllerMobile {
 	}
 
 	@RequestMapping(value = "/desconectar")	
-	public String salvar(){
+	public String desconectar(){
 		
 		mobileFacade.desconectarMobile(getHashMobile());
 		

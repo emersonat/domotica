@@ -57,7 +57,7 @@
 		 
 		 
 		 
-		<a href="${contextPath}/mobile/config/desconectar.html" data-inline="true" data-theme="e" data-role="button" data-icon="delete">Desconectar</a>
+		<a href="${contextPath}/mobile/config/desconectar.html"><img alt="" src="${contextPath}/imagens/desconectar.png"></a>
 			 
 		</div> 	
 	</section>	
