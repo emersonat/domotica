@@ -22,7 +22,7 @@
 		
 	<mvc:interceptors>
 		<mvc:interceptor>
-			<mvc:mapping path="/mobile/*" />
+			<mvc:mapping path="/mobile/**" />
 			<mvc:mapping path="/mobile/config/*" />
 			<bean class="br.com.emersondeandrade.aplicacao.mobile.FiltroAutenticacaoMobile" />
 		</mvc:interceptor>

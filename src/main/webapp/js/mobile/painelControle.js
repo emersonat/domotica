@@ -1,13 +1,12 @@
 
 
 function acionar(keyDispositivo){
-		
+	
 	showLoading();
 		
 	$.ajax({
-		  url: $('#contextPath').val() +  "/mobile/acionar.html",
+		  url: $('#contextPath').val() +  "/mobile/acionar/" + keyDispositivo +".html",
 		  context: document.body,
-		  data: ( {keyDispositivo: keyDispositivo}   ),
 		  dataType : "json",
 		  type: "GET",	
 		  success: function(data){

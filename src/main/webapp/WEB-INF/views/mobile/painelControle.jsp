@@ -12,13 +12,14 @@
 	<c:set var="contextPath" value=""/>
 </c:if>
 
+<link href="${contextPath}/tema/css/block-lists.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="${contextPath}/js/mobile/painelControle.js"></script>
 
 
 
 	<article class="white-bg" >
-				
-			<input type="hidden" id="contextPath" value="${contextPath}"><!-- for JS scrips -->	
+				<spring:url value=""></spring:url>
+			
 					
 			<ul class="favorites no-margin">
 				<c:forEach items="${casa.dispositivosAtivos}" var="d">

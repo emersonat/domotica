@@ -31,7 +31,7 @@
 	<link href="${contextPath}/tema/css/mobile.css" rel="stylesheet" type="text/css">
 	
 	<!-- Custom styles -->
-	<link href="${contextPath}/tema/css/block-lists.css" rel="stylesheet" type="text/css">
+	
 	
 	
 	<!-- Favicon -->
@@ -87,6 +87,7 @@
 	
 	 
 	<div id="loading" >	</div>	
+	<input type="hidden" id="contextPath" value="${contextPath}"><!-- for JS scrips -->	
 	<tiles:insertAttribute name="body"/>
 	
 	
