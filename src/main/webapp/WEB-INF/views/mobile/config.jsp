@@ -36,12 +36,12 @@
 		 <form:form action="${contextPath}/mobile/config/salvar.html" method="post"  commandName="formConfig" cssClass="form block-content">
 					 	
 			<p>
-				 <label for="inputIp"><form:errors cssStyle="color:red;" path="ip"/><spring:message code="ip" text="IP"/>:</label>
+				 <label for="inputIp"><form:errors cssStyle="color:red;" path="ip"/> <spring:message code="ip" text="IP"/>:</label>
 				 <form:input path="ip" type="text" id="inputIp" />
 			</p>
 			 
 			<p>			
-				 <label for="inputPorta"><form:errors cssStyle="color:red;" path="porta"/><spring:message code="porta" text="Porta"/>:</label>
+				 <label for="inputPorta"><form:errors cssStyle="color:red;" path="porta"/> <spring:message code="porta" text="Porta"/>:</label>
 				 <form:input  type="text" path="porta" id="inputPorta"  />
 			</p>
 			

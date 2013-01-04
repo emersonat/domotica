@@ -3,6 +3,7 @@ package br.com.emersondeandrade.modelo.core.arduino;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
@@ -130,7 +131,12 @@ public abstract class Arduino implements Serializable {
 	public abstract void  ligarPorta(String numeroPorta) throws NotConectedExeption, ExecultarComandoExeption;
 	
 	public abstract void  desligarPorta(String numeroPorta) throws NotConectedExeption, ExecultarComandoExeption;
+		
+	public abstract Map<String,Boolean> getStatusPortas();
 	
+	public  boolean isLigada(String porta){
+		return getStatusPortas().get(porta);
+	}
 	
 	
 	public  List<Integer> getPortasLivres(){
@@ -168,8 +174,8 @@ public abstract class Arduino implements Serializable {
 	    List<TipoComando> list = new ArrayList<TipoComando>();
 		if(porta == 6 || porta == 13){
 			list.add(TipoComando.LIGAR_DESLIGAR);
-			list.add(TipoComando.MANTER_DESLIGADO);
-			list.add(TipoComando.MANTER_LIGADO);
+			list.add(TipoComando.CLICK);
+			
 		}
 		
 		return list;

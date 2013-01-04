@@ -24,7 +24,21 @@
 			<ul class="favorites no-margin">
 				<c:forEach items="${casa.dispositivosAtivos}" var="d">
 					<li>
-						<img style="cursor: pointer;" src="${contextPath}/imagens/button_on.png" width="48" height="48" onclick="acionar('${d.key}')" >
+						<c:if test="${d.tipoComando != 'CLICK'}">
+							<c:if test="${d.ligado}">
+								<img style="cursor: pointer;" src="${contextPath}/imagens/button_on.png" width="48" height="48" onclick="acionar('${d.key}')" >
+							</c:if>
+													
+							<c:if test="${!d.ligado}">
+								<img style="cursor: pointer;" src="${contextPath}/imagens/button_off.png" width="48" height="48" onclick="acionar('${d.key}')" >
+							</c:if>
+						</c:if>
+						
+						<c:if test="${d.tipoComando == 'CLICK'}">
+							<img style="cursor: pointer;" src="${contextPath}/imagens/button_click2.jpg" width="48" height="48" onclick="acionar('${d.key}')" >
+						</c:if>
+						
+						
 						<a href="#" style="cursor: default;">${d.nome}<br>
 						<small></small></a>
 					</li>

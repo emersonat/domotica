@@ -13,7 +13,14 @@ function acionar(keyDispositivo){
 			 		 
 			  hideLoading();
 			 
+			  
 			  alert(data.msg );
+		  	 
+			  
+			  
+			  
+			  
+			  window.location =  $('#contextPath').val() + "/mobile/verificaKey.html"; 
 		  },
 		
 		  error: function(){

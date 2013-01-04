@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Properties;
 
 import javax.persistence.DiscriminatorValue;
@@ -189,6 +190,18 @@ public class ArduinoWIZNET_W5100 extends Arduino {
 				
 		return true;
 	}
+
+
+
+	@Override
+	public Map<String, Boolean> getStatusPortas() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+
 
 
 

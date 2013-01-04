@@ -59,7 +59,7 @@ public class ConfiguracaoController  extends ControllerMobile {
 				
 		if(result.hasErrors()){
 			model.addAttribute("arduino", getCasa().getArduino());
-			return "config";
+			return "mobile/config";
 		} 
 			
 		Arduino arduino = getCasa().getArduino();	

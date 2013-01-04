@@ -10,10 +10,9 @@ package br.com.emersondeandrade.modelo.core.dispositivo;
  */
 public enum TipoComando {
 	
-	LIGAR_DESLIGAR(1,"comando.ligarDesligar"), 
-	MANTER_LIGADO(2,"comando.manterLigado"),
-	MANTER_DESLIGADO(3,"comando.manterDesligado"),
-	CLICK(4,"comando.click");
+	CLICK(0,"comando.click"),
+	LIGAR_DESLIGAR(1,"comando.ligarDesligar");
+	
 	
 	private int id;
 	private String i18n;
@@ -23,13 +22,7 @@ public enum TipoComando {
 		switch (id) {
 		case 1:
 			return TipoComando.LIGAR_DESLIGAR;
-			
-		case 2:
-			return TipoComando.MANTER_LIGADO;
-			
-		case 3:
-			return TipoComando.MANTER_DESLIGADO;
-			
+					
 		case 4:
 			return TipoComando.CLICK;	
 			

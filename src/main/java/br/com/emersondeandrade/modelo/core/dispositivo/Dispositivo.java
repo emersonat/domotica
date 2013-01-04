@@ -15,12 +15,14 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.apache.log4j.Logger;
 import org.hibernate.validator.constraints.NotEmpty;
 
+import br.com.emersondeandrade.modelo.core.arduino.Arduino;
 import br.com.emersondeandrade.modelo.core.casa.Casa;
 import br.com.emersondeandrade.modelo.core.eventos.TiposEvento;
 import br.com.emersondeandrade.modelo.exeption.ExecultarComandoExeption;
@@ -63,9 +65,7 @@ public class Dispositivo implements Serializable, Comparable<Dispositivo> {
 	
 
 	private List<TiposEvento> tiposEventos;
-	
-	
-	
+		
 	private boolean ativo = true;
 	
 	private int duracaoClique;
@@ -74,37 +74,28 @@ public class Dispositivo implements Serializable, Comparable<Dispositivo> {
 	
 
 	public void acionar() throws NotConectedExeption, ExecultarComandoExeption {
+		Arduino arduino = getCasa().getArduino();
 		
 		switch (getTipoComando()) {
 	
 		case CLICK:
 			
-			getCasa().getArduino().click(getNumeroPorta(),getDuracaoClique()); 
+			arduino.click(getNumeroPorta(),getDuracaoClique()); 
 			
 			log.info("Acionando dispositivo....: " +  getNome()  +" (CLICK) ");
-			
-			break;
-					
-		case MANTER_LIGADO:
-			
-			getCasa().getArduino().ligarPorta(getNumeroPorta()); 
-			
-			log.info("Acionando dispositivo....: " +  getNome()  +" (LIGA) ");
-			
-			break;
-				
-		case MANTER_DESLIGADO:
-		
-			getCasa().getArduino().desligarPorta(getNumeroPorta()); 
-			
-			log.info("Acionando dispositivo....: " +  getNome()  +" (DESLIGA) ");
 			
 			break;
 			
 			
 		case LIGAR_DESLIGAR:
 			
-			// TODO implementar
+			if(arduino.isLigada(getNumeroPorta())){
+				arduino.desligarPorta(getNumeroPorta());
+				log.info("Desligando....: " +  getNome()  +" (LIGAR_DESLIGAR) ");
+			} else {
+				arduino.ligarPorta(getNumeroPorta());
+				log.info("Ligando....: " +  getNome()  +" (LIGAR_DESLIGAR) ");
+			}
 			
 			
 			break;	
@@ -112,21 +103,14 @@ public class Dispositivo implements Serializable, Comparable<Dispositivo> {
 			
 			
 		}	
-		
-			
-			
-				
-		
-		
+	
 	}
 	
 	
-	
-
-
-
-
-
+	@Transient
+	public boolean isLigado(){
+		return getCasa().getArduino().isLigada(getNumeroPorta());
+	}
 
 
 
