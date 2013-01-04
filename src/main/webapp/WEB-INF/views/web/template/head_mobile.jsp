@@ -24,10 +24,15 @@
 	<link rel="apple-touch-startup-image" href="${contextPath}/tema/images/iphone_startup.png">
 	
 	<!-- Global stylesheets -->
+	<link href="${contextPath}/css/principal.css" rel="stylesheet" type="text/css">
 	<link href="${contextPath}/tema/css/reset.css" rel="stylesheet" type="text/css">
 	<link href="${contextPath}/tema/css/common.css" rel="stylesheet" type="text/css">
 	<link href="${contextPath}/tema/css/form.css" rel="stylesheet" type="text/css">
 	<link href="${contextPath}/tema/css/mobile.css" rel="stylesheet" type="text/css">
+	
+	<!-- Custom styles -->
+	<link href="${contextPath}/tema/css/block-lists.css" rel="stylesheet" type="text/css">
+	
 	
 	<!-- Favicon -->
 	<link rel="shortcut icon" type="image/x-icon" href="${contextPath}/tema/favicon.ico">
@@ -41,6 +46,8 @@
 	<script type="text/javascript" src="${contextPath}/tema/js/common.js"></script>
 	<script type="text/javascript" src="${contextPath}/tema/js/mobile.js"></script>
 	<script type="text/javascript" src="${contextPath}/tema/js/jquery.tip.js"></script>
+	 
+	<script type="text/javascript" src="${contextPath}/js/principal.js"></script>
 	
 	
 </head>	
@@ -79,7 +86,7 @@
 	
 	
 	 
-		
+	<div id="loading" >	</div>	
 	<tiles:insertAttribute name="body"/>
 	
 	

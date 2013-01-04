@@ -12,11 +12,23 @@
 	<c:set var="contextPath" value=""/>
 </c:if>
 
+<script type="text/javascript" src="${contextPath}/js/mobile/painelControle.js"></script>
 
-	
-	<article>
-		
-		
+
+
+	<article class="white-bg" >
+				
+			<input type="hidden" id="contextPath" value="${contextPath}"><!-- for JS scrips -->	
+					
+			<ul class="favorites no-margin">
+				<c:forEach items="${casa.dispositivosAtivos}" var="d">
+					<li>
+						<img style="cursor: pointer;" src="${contextPath}/tema/images/icons/web-app/48/Info.png" width="48" height="48" onclick="acionar('${d.key}')" >
+						<a href="#" style="cursor: default;">${d.nome}<br>
+						<small></small></a>
+					</li>
+				</c:forEach>
+			</ul>
 		
 	</article>
 	

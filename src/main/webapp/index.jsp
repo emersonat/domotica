@@ -40,7 +40,7 @@
 		<!--[if lte IE 8]><script type="text/javascript" src="js/standard.ie.js"></script><![endif]-->
 		<script type="text/javascript" src="<c:url value="/tema/js/jquery.tip.js"/>"></script>
 		
-		<!-- <script type="text/javascript" src="/js/login.js"></script> -->
+		
 		
 	
 	</head>

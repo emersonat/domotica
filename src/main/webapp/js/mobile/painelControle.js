@@ -1,12 +1,9 @@
 
 
-
 function acionar(keyDispositivo){
 		
-	 desabilitaTodosBotoes();	
-	 $.mobile.showPageLoadingMsg();
-	
-	
+	showLoading();
+		
 	$.ajax({
 		  url: $('#contextPath').val() +  "/mobile/acionar.html",
 		  context: document.body,
@@ -14,9 +11,8 @@ function acionar(keyDispositivo){
 		  dataType : "json",
 		  type: "GET",	
 		  success: function(data){
-			 
-			  habilitaTodosBotoes();
-			  $.mobile.hidePageLoadingMsg();
+			 		 
+			  hideLoading();
 			 
 			  alert(data.msg );
 		  },
@@ -36,19 +32,10 @@ function acionar(keyDispositivo){
 
 
 
-function habilitaTodosBotoes(){
-	$(".botao_acionar_dispositivo").each(function(){
-		 this.disabled="";
- });
-}
 
 
 
-function desabilitaTodosBotoes(){
-	 $(".botao_acionar_dispositivo").each(function(){
-		 this.disabled="disabled";
-	 });
-}
+
 
 
 
