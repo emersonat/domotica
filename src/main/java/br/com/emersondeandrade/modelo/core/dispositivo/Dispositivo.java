@@ -60,6 +60,49 @@ public class Dispositivo implements Serializable, Comparable<Dispositivo> {
 	private String nome;
 	
 	
+	@NotNull(message = "*")
+	@NotEmpty(message = "*")
+	@Size(max=150 , message = "*")
+	private String imagenOn;
+		
+	
+	@NotNull(message = "*")
+	@NotEmpty(message = "*")
+	@Size(max=150 , message = "*")
+	private String imagenOff;
+	
+	
+	@Column(name="imagen_on",length = 150,nullable = false)
+	public String getImagenOn() {
+		return imagenOn;
+	}
+
+
+	public void setImagenOn(String imagenON) {
+		this.imagenOn = imagenON;
+	}
+
+	
+	@Column(name="imagen_off", length = 150,nullable = false)
+	public String getImagenOff() {
+		return imagenOff;
+	}
+
+
+	public void setImagenOff(String imagenOFF) {
+		this.imagenOff = imagenOFF;
+	}
+
+
+
+
+
+
+
+
+
+
+
 	private String key;
 	
 	
@@ -112,6 +155,7 @@ public class Dispositivo implements Serializable, Comparable<Dispositivo> {
 		return getCasa().getArduino().isLigada(getNumeroPorta());
 	}
 
+	
 
 
 	@Column(length =2, nullable = false)
