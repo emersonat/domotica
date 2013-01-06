@@ -13,26 +13,90 @@
 <html>
 
 <head>
-	<title>DOMOTICA - Controle</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-
-	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.css" />
+	<title>DOMOTICA | <spring:message code="automacao.residencial" text="Automação Residencial" /></title>
+	<meta charset="utf-8">
 	
-	<script type="text/javascript"	src="http://code.jquery.com/jquery-1.6.4.min.js"></script>
-	<script type="text/javascript"	src="http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.js"></script>
-		
-		
-	<script type="text/javascript" src="http://cloud.github.com/downloads/digitalBush/jquery.maskedinput/jquery.maskedinput-1.3.min.js"></script>	
-		
+	<!-- Mobile metas -->
+	<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+	
+	<!-- Those meta will turn your website into an app on the iPhone -->
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<link rel="apple-touch-startup-image" href="${contextPath}/tema/images/iphone_startup.png">
+	
+	<!-- Global stylesheets -->
+	<link href="${contextPath}/css/principal.css" rel="stylesheet" type="text/css">
+	<link href="${contextPath}/tema/css/reset.css" rel="stylesheet" type="text/css">
+	<link href="${contextPath}/tema/css/common.css" rel="stylesheet" type="text/css">
+	<link href="${contextPath}/tema/css/form.css" rel="stylesheet" type="text/css">
+	<link href="${contextPath}/tema/css/mobile.css" rel="stylesheet" type="text/css">
+	
+	<!-- Custom styles -->
+	
+	
+	
+	<!-- Favicon -->
+	<link rel="shortcut icon" type="image/x-icon" href="${contextPath}/tema/favicon.ico">
+	<link rel="icon" type="image/png" href="${contextPath}/tema/favicon-large.png">
+	<link rel="apple-touch-icon" href="${contextPath}/tema/apple-touch-icon.png"/>
+	
+	<!-- Generic libs -->
+	<script type="text/javascript" src="${contextPath}/tema/js/jquery-1.4.2.min.js"></script>
+	
+	<!-- Template core functions -->
+	<script type="text/javascript" src="${contextPath}/tema/js/common.js"></script>
+	<script type="text/javascript" src="${contextPath}/tema/js/mobile.js"></script>
+	<script type="text/javascript" src="${contextPath}/tema/js/jquery.tip.js"></script>
+	 
+	<script type="text/javascript" src="${contextPath}/js/principal.js"></script>
+	
 	
 </head>	
 
-<body>
+
+<c:set var="showControls"><tiles:getAsString  name="showControls"/></c:set>  
+		
+
+
+<body class="dark">
 	
+	<header>
+		<h1><spring:message code="domotica" text="Domotica"/></h1>
+	</header>
+	
+	<c:if test="${showControls}">
+		<a href="${contextPath}/mobile/verificaKey.html" id="back">Home</a>
+			
+		<div id="menu">
+			<a href="#">Menu</a>
+			
+			<ul>
+				<li>
+					<a href="${contextPath}/mobile/listarHistorico.html"><spring:message code="historico" text="Histórico"/></a>
+				</li>
+				
+				<li>
+					<a href="${contextPath}/mobile/config/open.html"><spring:message code="configuracao" text="Configuração"/></a>
+				</li>
+				
+			</ul>
+		</div>
+	</c:if>
+	
+	<div id="header-shadow"></div>
+	
+	
+	 
+	<div id="loading" >	</div>	
 	<input type="hidden" id="contextPath" value="${contextPath}"><!-- for JS scrips -->	
 	<tiles:insertAttribute name="body"/>
+	
+	
 		
-</body>	
+	
+	
+</body>
+
+
 	
 </html>		
 

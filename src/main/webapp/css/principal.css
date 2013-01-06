@@ -1,0 +1,18 @@
+
+#loading{
+	    background-image: url('/domotica/imagens/ajax-loader.gif');
+		background-repeat:no-repeat;
+		background-position:center;
+        filter:alpha(opacity=65);
+        -moz-opacity:.65;
+        opacity:.65;
+		top: 7%;
+		left: 0%;
+		position: fixed;
+		width: 100%;
+		height: 100%;
+		background-color: #CADCBF;
+		z-index: 10000;
+        display: none;
+		
+	}

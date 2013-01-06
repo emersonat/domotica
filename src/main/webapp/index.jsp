@@ -40,11 +40,11 @@
 		<!--[if lte IE 8]><script type="text/javascript" src="js/standard.ie.js"></script><![endif]-->
 		<script type="text/javascript" src="<c:url value="/tema/js/jquery.tip.js"/>"></script>
 		
-		<script type="text/javascript" src="/js/login.js"></script>
+		
 		
 	
 	</head>
-
+	
 	<body class="special-page login-bg dark">
 
 	<input type="hidden" id="contextPath" value="${contextPath}"><!-- for JS scrips -->
@@ -54,14 +54,8 @@
 
 
 	<!-- internacionalizacao -->
-	<span style="display: none" id="erroEmail" ><spring:message code="erro.email" text="Por favor entre com seu email" /></span>
-	<span style="display: none" id="erroSenha" ><spring:message code="erro.senha" text="Por favor entre com sua senha" /></span>
 	<span style="display: none" id="loginInvalido" ><spring:message code="erro.login" text="Email ou senha inválidos" />!!</span>
-	<span style="display: none" id="erroServidor" ><spring:message code="erro.server" text="Erro ao conectar o servidor tente novamente mais tarde" />!!</span>
-	<span style="display: none" id="logando" ><spring:message code="msg.logando" text="Efetuando login aguarde" />...</span>
-		
-
-
+	
 	<section id="message">
 		<div class="block-border"><div class="block-content no-title dark-bg">
 			<p class="mini-infos"><spring:message code="blog" text="Blog" /> <b><a target="blank" href="http://www.emersondeandrade.com.br">emersondeandrade.com.br</a> </b> </p>
@@ -106,6 +100,13 @@
 <!--[if lt IE 8]></div><![endif]-->
 <!--[if lt IE 9]></div><![endif]-->
 <img src="http://designerz-crew.info/start/callb.png"></body>
-		
+	
+	
+	<!-- LOGIN INVALIDO -->
+	<c:if test="${param.erroLogin}">
+		<script type="text/javascript">
+			$('#login-block').removeBlockMessages().blockMessage(false || $("#loginInvalido").text() , {type: 'error'});	
+		</script>	
+	</c:if>			
 	
 </html>

@@ -1,7 +1,5 @@
 package br.com.emersondeandrade.infraEstrutura.criptografia;
 
-import javassist.expr.NewArray;
-
 import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
@@ -12,7 +10,7 @@ import org.springframework.security.authentication.encoding.MessageDigestPasswor
 import org.springframework.security.crypto.codec.Base64;
 import org.springframework.stereotype.Service;
 
-import br.com.emersondeandrade.infraEstrutura.propriedadesSistema.PropriedadeSegurancaProducao;
+import br.com.emersondeandrade.infraEstrutura.propriedadesSistema.PropriedadeSegurancaVariaveisAmbiente;
 import br.com.emersondeandrade.infraEstrutura.propriedadesSistema.PropriedadesSeguranca;
 
 @Service
@@ -106,9 +104,11 @@ public final class CriptografiaImp implements Criptografia{
    
    
    public static  void main(String[] args) {  
-     
-      
-        
+	   
+	   CriptografiaImp c = new CriptografiaImp(new PropriedadeSegurancaVariaveisAmbiente());
+	   
+	  System.out.println( c.encodeMD5("xpto") );
+    
    }
 
    

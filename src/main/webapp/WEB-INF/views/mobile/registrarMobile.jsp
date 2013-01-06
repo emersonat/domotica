@@ -9,61 +9,32 @@
 </c:if>
 
 
-
-
-
-<html>
-<head>
-<title>Registrar dispositivo</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-<link rel="stylesheet"
-	href="http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.css" />
-
-<script type="text/javascript"
-	src="http://code.jquery.com/jquery-1.6.4.min.js"></script>
-<script type="text/javascript"
-	src="http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.js"></script>
-
-
-
-
-
-</head>
-<body>
-	<input type="hidden" id="contextPath" value="${contextPath}"><!-- for JS scrips -->
-	<div data-role="page">
-
-		<div data-role="header">
-			Registrar dispositivo
-		</div>
-		<!-- /header -->
-
-		<div data-role="content">
+<article>
 		
-		<span style="color: red;">${erro}</span><br/>	
-		<form:form action="${contextPath}/mobile/registra.html" method="post" commandName="formRegistro" >
+	  <section id="login-block">
+		<div class="block-border">
+			
+			<form:form action="${contextPath}/mobile/registra.html" method="post" commandName="formRegistro" cssClass="form block-content">
+							
+				<h1><spring:message code="registrar.controle" text="Registrar controle"/></h1>
+				<span style="color: red;">${erro}</span><br/><br/> 
+				 <p>
+					<label for="key"><form:errors cssStyle="color:red;" path="key"/> <spring:message code="codigo.arduino" text="Codigo central"/>:</label>
+					<form:input path="key" type="password" id="key"  maxlength="32" size="32"  cssClass="full-width" />
+				</p>
+				<p>
+					<label for="nomeDispositivo"><form:errors cssStyle="color:red;" path="nomeDispositivo"/> <spring:message code="nome.controle" text="Nome do controle"/>:</label>
+					<form:input path="nomeDispositivo" type="text" id="nomeDispositivo"  maxlength="50" size="50"  cssClass="full-width"  />
+				</p>
+							
+				<p><button type="submit" class="full-width"><spring:message code="registrar" text="Registrar"/></button></p>
+				
+			</form:form>
+			</div>
+		</section>
 		
-			  					
-			 <label for="key"><form:errors cssStyle="color:red;" path="key"/> Codigo Arduino:</label>
-			 <form:input path="key" type="password" id="key"  maxlength="32" size="32"  data-mini="true"  />
-			
-			
-			 <label for="nomeDispositivo"><form:errors cssStyle="color:red;" path="nomeDispositivo"/> Nome Dispositivo:</label>
-			 <form:input path="nomeDispositivo" type="text" id="nomeDispositivo"  maxlength="50" size="50"  data-mini="true"  />
-			
-					
-			<input type="submit" value="Registrar" />
-			
-		</form:form>
+</article>
 	
-			
-		
-		</div>
-		<!-- /content -->
 
-	</div>
-	<!-- /page -->
 
-</body>
-</html>
+

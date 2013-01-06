@@ -3,6 +3,7 @@ package br.com.emersondeandrade.modelo.core.arduino;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
@@ -49,7 +50,7 @@ public abstract class Arduino implements Serializable {
 	private String ip;
 	
 	
-	@Column(length = 2, nullable = false )
+	@Column(length = 5, nullable = false )
 	private String porta;
 	
 	
@@ -71,7 +72,13 @@ public abstract class Arduino implements Serializable {
 	@Transient
 	private List<Integer> listaPortas = new ArrayList<Integer>();
 	
+	@Transient
+	Map<String,Boolean> statusPortas;
 	
+	
+	public Arduino() {
+		
+	}
 	
 	
 
@@ -117,6 +124,9 @@ public abstract class Arduino implements Serializable {
 	public static final String PARAM_VALUE_OP_DESLIGA = "03";
 	
 	@Transient
+	public static final String PARAM_VALUE_OP_STATUS_PORTAS = "04";
+	
+	@Transient
 	public static final String PARAM_VALUE_OP_TESTE_CONEXAO = "99";
 			
 	
@@ -130,7 +140,16 @@ public abstract class Arduino implements Serializable {
 	public abstract void  ligarPorta(String numeroPorta) throws NotConectedExeption, ExecultarComandoExeption;
 	
 	public abstract void  desligarPorta(String numeroPorta) throws NotConectedExeption, ExecultarComandoExeption;
+		
+	public abstract Map<String,Boolean> getStatusPortas() throws NotConectedExeption, ExecultarComandoExeption;
 	
+	public  boolean isLigada(String porta) throws NotConectedExeption, ExecultarComandoExeption {
+		
+		if(statusPortas == null){
+			statusPortas = getStatusPortas();
+		}
+		return statusPortas.get(porta);
+	}
 	
 	
 	public  List<Integer> getPortasLivres(){
@@ -168,8 +187,8 @@ public abstract class Arduino implements Serializable {
 	    List<TipoComando> list = new ArrayList<TipoComando>();
 		if(porta == 6 || porta == 13){
 			list.add(TipoComando.LIGAR_DESLIGAR);
-			list.add(TipoComando.MANTER_DESLIGADO);
-			list.add(TipoComando.MANTER_LIGADO);
+			list.add(TipoComando.CLICK);
+			
 		}
 		
 		return list;

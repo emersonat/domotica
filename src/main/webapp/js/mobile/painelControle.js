@@ -1,24 +1,26 @@
 
 
-
 function acionar(keyDispositivo){
+	
+	showLoading();
 		
-	 desabilitaTodosBotoes();	
-	 $.mobile.showPageLoadingMsg();
-	
-	
 	$.ajax({
-		  url: $('#contextPath').val() +  "/mobile/acionar.html",
+		  url: $('#contextPath').val() +  "/mobile/acionar/" + keyDispositivo +".html",
 		  context: document.body,
-		  data: ( {keyDispositivo: keyDispositivo}   ),
 		  dataType : "json",
 		  type: "GET",	
 		  success: function(data){
+			 		 
+			  hideLoading();
 			 
-			  habilitaTodosBotoes();
-			  $.mobile.hidePageLoadingMsg();
-			 
+			  
 			  alert(data.msg );
+		  	 
+			  
+			  
+			  
+			  
+			  window.location =  $('#contextPath').val() + "/mobile/verificaKey.html"; 
 		  },
 		
 		  error: function(){
@@ -36,19 +38,10 @@ function acionar(keyDispositivo){
 
 
 
-function habilitaTodosBotoes(){
-	$(".botao_acionar_dispositivo").each(function(){
-		 this.disabled="";
- });
-}
 
 
 
-function desabilitaTodosBotoes(){
-	 $(".botao_acionar_dispositivo").each(function(){
-		 this.disabled="disabled";
-	 });
-}
+
 
 
 

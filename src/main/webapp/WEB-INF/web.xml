@@ -9,7 +9,7 @@
 		<welcome-file>index.jsp</welcome-file>
 	</welcome-file-list>
 	
-
+		
 	
 	<!--************************************************************************ 
 	 								SPRING 3										   
@@ -99,7 +99,12 @@
     <!-- ================================================================== -->
 	
 	
-	
+	<listener>
+        <listener-class>
+           br.com.emersondeandrade.aplicacao.StartListener
+        </listener-class>
+        
+    </listener> 
 
 
 </web-app>

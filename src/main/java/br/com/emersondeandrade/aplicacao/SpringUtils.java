@@ -1,10 +1,13 @@
 package br.com.emersondeandrade.aplicacao;
 
+import javax.servlet.ServletContextEvent;
+
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 
 
 @Scope("singleton")
@@ -29,6 +32,16 @@ public class SpringUtils implements ApplicationContextAware{
 	public static <T> T getBean(Class<T> Bean) throws BeansException {
 	  return (T) context.getBean(Bean);
 	}
+	
+	public static void autowiredThisBean(Object bean, ServletContextEvent serveletContextEvent){
+		
+		WebApplicationContextUtils
+        	.getRequiredWebApplicationContext(serveletContextEvent.getServletContext())
+        	.getAutowireCapableBeanFactory()
+        	.autowireBean(bean);
+		
+	}
+	
 	   
 
 }

@@ -10,7 +10,7 @@
 	    <sec:authentication-provider user-service-ref="usuarioDao">
 	   		
 	   		<sec:password-encoder  hash="md5">
-	   		  <sec:salt-source system-wide="salt"/>
+	   		  <sec:salt-source  user-property="saltMD5" />
 	   		</sec:password-encoder>    
        
 	    </sec:authentication-provider>
@@ -25,15 +25,20 @@
 	<sec:http auto-config="true">
 	    
 		 <sec:form-login login-page="/index.jsp" login-processing-url="/login.html" 
-	        default-target-url="/web/login.html" always-use-default-target="true"/>
+	        default-target-url="/web/login.html" always-use-default-target="true" authentication-failure-url="/index.jsp?erroLogin=true" />
+	     
+	     <sec:logout logout-url="/logout.html"  />   
+	        
 	        
 	     <!-- Don't set any role >-->
 		<sec:intercept-url pattern="/index.jsp" access="IS_AUTHENTICATED_ANONYMOUSLY" />
 	    <sec:intercept-url pattern="/imagens/**" access="IS_AUTHENTICATED_ANONYMOUSLY" />
 		<sec:intercept-url pattern="/js/**" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+		<sec:intercept-url pattern="/css/**" access="IS_AUTHENTICATED_ANONYMOUSLY" />
 		<sec:intercept-url pattern="/tema/**" access="IS_AUTHENTICATED_ANONYMOUSLY" />
 		<sec:intercept-url pattern="/resources/**" access="IS_AUTHENTICATED_ANONYMOUSLY" />
-		
+		<sec:intercept-url pattern="/controleweb/**" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+		<sec:intercept-url pattern="/mobile/**" access="IS_AUTHENTICATED_ANONYMOUSLY" />
 		
 	    <!-- Restrict access to ALL other pages -->
 		<sec:intercept-url pattern="/**" access="IS_AUTHENTICATED_REMEMBERED" /> 

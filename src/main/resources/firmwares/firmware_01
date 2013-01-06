@@ -3,12 +3,13 @@
 Arduino com shield ethernet com chipset wiznet
 Autor Emerson Andrade
 
-Versão: 1.0.5
+Versão: 1.0.6
 
 Codigos das operações:
 01 - click
 02 - ligarPorta
 03 - desligaPorta
+04 - lerPortas
 99 - Status dos arduino 
 */
 #include <SPI.h>
@@ -19,7 +20,9 @@ Codigos das operações:
 byte mac[] = { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED };
 IPAddress ip(192,168,1, 177);
 EthernetServer server(80);
-static String keyArduino = "xxxxxxxxx"; // <-- colocar uma chave com 32 caracteres
+static String keyArduino = "xxxxxxxxxxxxx"; // <-- colocar uma chave com 32 caracteres
+static boolean debugMode = false;
+                            
 
 void setup()
 {
@@ -35,24 +38,14 @@ void setup()
   
 }
 
-boolean chaveValida(String httpReq){
-  int indexKey = httpReq.indexOf("key=");
-  String  keyParam = httpReq.substring(indexKey + 4, indexKey + 36);  
- 
-  if( keyArduino.equals(keyParam) ){
-    return true;
-  }else {
-    return false;
-  }  
-}
+void debug(String text){
+   if(debugMode){
+      Serial.println(text); 
+   } 
+  
+}  
 
-int getInt(String texto){
-  int temp = texto.length() + 1;
-  char buffer[temp];
-  texto.toCharArray(buffer, temp);
-  int num = atoi(buffer);
-  return num;
-} 
+
 
 void click(int port, String httpReq){
   int indexOp  = httpReq.indexOf("delay=");
@@ -77,15 +70,18 @@ void loop()
   EthernetClient client = server.available();
   if (client) {
     
+    
     boolean currentLineIsBlank = true;
     String httpReq = ""; 
    
     while (client.connected()) {
+     
       if (client.available()) {
         char c = client.read();
         httpReq += c ;
         
         if (c == '\n' && currentLineIsBlank) {
+          debug("Recebendo request...\n" + httpReq);
           client.println("HTTP/1.1 200 OK");
           client.println("Content-Type: text/html");
           client.println();
@@ -114,6 +110,10 @@ void loop()
                     desligaPorta(getInt(portaParam) );  
                     ok = true;
                     break;
+                  case 4:
+                    client.println( lerPortas()  );
+                    ok = true;
+                    break; 
                  case 99:
                     ok = true;
                     break;
@@ -140,9 +140,43 @@ void loop()
         }
       }
     }
-   
-    
+        
     delay(1);
     client.stop();
+   
   }
 }
+
+
+
+boolean chaveValida(String httpReq){
+  int indexKey = httpReq.indexOf("key=");
+  
+  String  keyParam = httpReq.substring(indexKey + 4, indexKey + 36);  
+   
+ //Serial.println("key--> " +  keyParam); 
+ 
+  if( keyArduino.equals(keyParam) ){
+    return true;
+  }else {
+    return false;
+  }  
+}
+
+int getInt(String texto){
+  int temp = texto.length() + 1;
+  char buffer[temp];
+  texto.toCharArray(buffer, temp);
+  int num = atoi(buffer);
+  return num;
+} 
+
+String lerPortas(){
+    String porta6 = String("06="); 
+    porta6 = porta6 +  digitalRead(6) + ";";
+   
+    String porta7 = String("07=");
+    porta7 += digitalRead(7); 
+    
+    return "<portas>" + porta6 + porta7 +"</portas>";
+} 

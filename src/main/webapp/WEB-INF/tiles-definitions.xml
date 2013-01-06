@@ -12,6 +12,7 @@
     
     <definition name="template-mobile" template="/WEB-INF/views/web/template/head_mobile.jsp">
 	 	 <put-attribute name="primary-content" value="" />
+	 	 <put-attribute name="showControls" type="string" value="true" />
 	</definition>
 	
 	
@@ -38,18 +39,17 @@
  	 <definition name="web/listagens/controlesweb" extends="template-main">
   		<put-attribute name="body" value="/WEB-INF/views/web/listagens/controlesweb.jsp" />
  	</definition>
- 	 
- 	 
- 	 
+ 	 	 
  	
  	<!-- MOBILE -->
  	 <definition name="mobile/registrarMobile" extends="template-mobile">
   		<put-attribute name="body" value="/WEB-INF/views/mobile/registrarMobile.jsp" />
- 	</definition>
+  		<put-attribute name="showControls" type="string" value="false" />
+   	</definition>
  	
  	<definition name="mobile/painelControle" extends="template-mobile">
   		<put-attribute name="body" value="/WEB-INF/views/mobile/painelControle.jsp" />
- 	</definition>
+  	</definition>
  	
  	<definition name="mobile/historico" extends="template-mobile">
   		<put-attribute name="body" value="/WEB-INF/views/mobile/historico.jsp" />
@@ -61,6 +61,7 @@
  	
  	<definition name="mobile/controleInativo" extends="template-mobile">
   		<put-attribute name="body" value="/WEB-INF/views/mobile/controleInativo.jsp" />
+  		<put-attribute name="showControls" type="string" value="false" />
  	</definition>
  	
  	

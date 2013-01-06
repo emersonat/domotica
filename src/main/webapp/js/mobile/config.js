@@ -10,7 +10,7 @@ $(document).ready(function(){
 
 function consultaStatusArduino() {
 	
-	
+		
 	$.ajax({
 	
 		  url: $('#contextPath').val() +  "/mobile/config/consultarStatus.html",

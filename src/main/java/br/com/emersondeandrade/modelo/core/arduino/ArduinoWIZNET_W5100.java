@@ -1,18 +1,21 @@
 package br.com.emersondeandrade.modelo.core.arduino;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Properties;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
 import org.apache.log4j.Logger;
 
 import br.com.emersondeandrade.modelo.exeption.ExecultarComandoExeption;
@@ -70,6 +73,7 @@ public class ArduinoWIZNET_W5100 extends Arduino {
 		
 	}
 
+
 	
 
 	@Override
@@ -92,7 +96,7 @@ public class ArduinoWIZNET_W5100 extends Arduino {
 	private String montaUrl(Properties parameters){
 		
 		String urlString = "http://" + this.getIp() + ":" + this.getPorta();
-			
+				
 		Iterator i = parameters.keySet().iterator();  
 				 
 		int counter = 0;  
@@ -112,44 +116,32 @@ public class ArduinoWIZNET_W5100 extends Arduino {
 		        + value;  
 		}
 		
+		log.info("Preparando URL do arduino: " + urlString);
 		return urlString;
 	}
 	
-
 	
 	
-	private  void requestHttp(Properties parameters) throws NotConectedExeption, ExecultarComandoExeption {
-			
-			URL url = null;
-									
-			StringBuilder response = new StringBuilder();
-			
-			log.info("Fazendo request para Arduino.... Casa: " + this.getCasa().getNome() );
-			long  inicio = new Date().getTime();	
-			
-			try {
-				
-				url = new URL(this.montaUrl(parameters));
-				
-				HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-				
-				urlConnection.setRequestProperty("Request-Method", "PUT"); 
-				
-		        BufferedReader in = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
-		 				        		        
-		        String s = "";
-		        while (null != ((s = in.readLine()))) {
-		        	response.append(s);
-		        } 
-		 
-		        in.close();
-		        urlConnection.disconnect();
+	
+	
+	private  String requestHttp(Properties parameters) throws NotConectedExeption, ExecultarComandoExeption {
+		
+		DefaultHttpClient httpclient = new DefaultHttpClient();
+		String response = null;
+		
+		log.info("Fazendo request para Arduino.... Casa: " + this.getCasa().getNome() );
+		long  inicio = new Date().getTime();	
+						
+		try {
+			HttpGet httpget = new HttpGet(this.montaUrl(parameters));	
+			HttpResponse httpResponse = httpclient.execute(httpget);
+			HttpEntity entity = httpResponse.getEntity();
+			response = EntityUtils.toString(entity);
 		        
-		        if(response.toString().contains("<error>")){
-		        	throw new ExecultarComandoExeption(response.toString());
-		        }
-		        
-		        
+		    if(response.toString().contains("<error>")){
+		       	throw new ExecultarComandoExeption(response.toString());
+		    }
+		   		        
 			} catch (MalformedURLException e) {
 				log.error( e.getMessage() );
 				e.printStackTrace();
@@ -164,11 +156,12 @@ public class ArduinoWIZNET_W5100 extends Arduino {
 			
 			long termino = new Date().getTime(); 
 			int seg  = (int) (termino - inicio) / 1000;
-			log.info("Resposta do arduino.: " + response.toString() + " em " + seg + " segundos" );
 			
+			log.info("Resposta do arduino.: " + response + " em " + seg + " segundos" );
+				
 			
-	
-			
+			return response;
+		
 		
 	}
 
@@ -180,8 +173,7 @@ public class ArduinoWIZNET_W5100 extends Arduino {
 		
 		parametros.setProperty("key", this.getKey() );
 		parametros.setProperty(PARAM_OPERACAO, PARAM_VALUE_OP_TESTE_CONEXAO);
-		parametros.setProperty(PARAM_PORTA, "99");
-				
+					
 		try {
 			requestHttp(parametros);
 		} catch (NotConectedExeption e) {
@@ -195,6 +187,40 @@ public class ArduinoWIZNET_W5100 extends Arduino {
 				
 		return true;
 	}
+
+
+
+	@Override
+	public Map<String, Boolean> getStatusPortas() throws NotConectedExeption, ExecultarComandoExeption {
+		
+		Properties parametros = new Properties();
+		
+		parametros.setProperty("key", this.getKey() );
+		parametros.setProperty(PARAM_OPERACAO, PARAM_VALUE_OP_STATUS_PORTAS);
+		
+		String response = requestHttp(parametros);
+		int init = response.indexOf("<portas>") + 8;
+		int end = response.indexOf("</portas>");
+		
+		response = response.substring(init, end);
+				
+		Map<String, Boolean> status = new HashMap<String,Boolean>();
+		for(String portaStatus : response.split(";")){
+			String[] s = portaStatus.split("=");
+			status.put(s[0], s[1].equals("0") ); // Invertendo status pois a interface de rele trabalha invertida
+			
+		}
+				
+		return status;
+	}
+	
+	
+	
+	
+
+
+
+
 
 
 

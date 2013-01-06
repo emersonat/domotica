@@ -59,7 +59,7 @@ public class ConfiguracaoController  extends ControllerMobile {
 				
 		if(result.hasErrors()){
 			model.addAttribute("arduino", getCasa().getArduino());
-			return "config";
+			return "mobile/config";
 		} 
 			
 		Arduino arduino = getCasa().getArduino();	
@@ -74,7 +74,7 @@ public class ConfiguracaoController  extends ControllerMobile {
 	}
 
 	@RequestMapping(value = "/desconectar")	
-	public String salvar(){
+	public String desconectar(){
 		
 		mobileFacade.desconectarMobile(getHashMobile());
 		

@@ -11,40 +11,64 @@
 	<c:set var="contextPath" value=""/>
 </c:if>
 
+<link href="${contextPath}/tema/css/table.css" rel="stylesheet" type="text/css">
 
-<html>
-<head>
 
-</head>
-<body>
-	<input type="hidden" id="contextPath" value="${contextPath}"><!-- for JS scrips -->
-	<div data-role="page" id="main">
-
-		<div data-role="header" style="height: 30px;" class="ui-grid-b">
+	<article>
+		
+		<section id="login-block">
+			<div class="block-border"><div class="block-content">
+				
+				<h1><spring:message code="historico" text="Histórico"/></h1>
+				
+				
+				
+				<div class="no-margin"><table class="table" cellspacing="0" width="100%">
+				
+					<thead>
+						<tr>
+							<th scope="col">
+								<spring:message code="dispositivo" text="Dispositivo"/>
+							</th>
+							<th scope="col"><spring:message code="acionado" text="Acionado"/></th>
+							
+						</tr>
+					</thead>
 					
-			<span class="ui-block-a" >Historico</span>
-			
-			<span class="ui-block-b" data-role="controlgroup" data-type="horizontal" style="padding-left: 75%;margin-top: -17px;">			
-				<a href="${contextPath}/mobile/verificaKey.html" data-role="button" data-ajax="false" data-iconpos="notext" data-icon="home" ></a>
-				<a href="${contextPath}/mobile/listarHistorico.html" data-role="button" data-iconpos="notext" data-icon="grid" ></a>
-				<a href="${contextPath}/mobile/config/open.html"  data-role="button" data-iconpos="notext" data-icon="gear"></a>
-			</span>
-		</div>	
+					<tfoot>
+						
+					</tfoot>
+					
+					<tbody>
+						
+						<c:forEach items="${historicos}" var="h">
+							
+							<tr>
+								<td>${h.dispositivo.nome}</td>
+								<td>
+									<strong><fmt:formatDate value='${h.data }' type="both"	pattern="dd/MM-hh:mm" /></strong>
+									<fmt:formatDate value='${h.data }' type="both" pattern="a"/>
+								</td>
+							</tr>
+							
+						</c:forEach>
+					</tbody>
+				
 
-		<div data-role="content">
+				</table></div>
+				
+			</div></div>
+		</section>
+		
+	</article>
+			
+			
+			
+			
+			
 		
 
-			<ul data-role="listview" data-theme="c">
-				<c:forEach items="${historicos}" var="h">
-					<li>${h.dispositivo.nome}
-						<p class="ui-li-aside">
-							<strong><fmt:formatDate value='${h.data }' type="both"	pattern="dd/MM-hh:mm" /></strong>
-							<fmt:formatDate value='${h.data }' type="both" pattern="a"/>
-						</p> 
-						
-					</li>
-				</c:forEach>
-			</ul>
+			
 
 
 
@@ -55,11 +79,7 @@
 
 
 
-
-		</div>
-		<!-- /content -->
-	</div>
+	
 
 
-</body>
-</html>
+

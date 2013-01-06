@@ -1,5 +1,8 @@
 package br.com.emersondeandrade.modelo.core.arduino;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
@@ -16,6 +19,13 @@ public class ArduinoTeste extends Arduino {
 	private static final long serialVersionUID = 1L;
 	
 	private static Logger log = Logger.getLogger(ArduinoTeste.class);
+	
+	private static HashMap<String, Boolean> status = new HashMap<String, Boolean>();
+	static{
+		status.put("06",false);
+		status.put("07",false);
+	}
+	
 	
 
 	public ArduinoTeste() {
@@ -39,6 +49,7 @@ public class ArduinoTeste extends Arduino {
 
 	@Override
 	public void ligarPorta(String numeroPorta) throws NotConectedExeption, ExecultarComandoExeption {
+		status.put(numeroPorta, true);
 		log.info("Ligando porta: " +  numeroPorta + " do ARDUINO teste") ;
 		
 	}
@@ -46,11 +57,21 @@ public class ArduinoTeste extends Arduino {
 
 	@Override
 	public void desligarPorta(String numeroPorta) throws NotConectedExeption, ExecultarComandoExeption {
+		status.put(numeroPorta, false);
 		log.info("Desligando porta: " +  numeroPorta + " do ARDUINO teste") ;
 		
 	}
 
+	
 
+	@Override
+	public Map<String, Boolean> getStatusPortas() {
+			
+		return status;
+	}
+	
+	
+	
 
 	
 
