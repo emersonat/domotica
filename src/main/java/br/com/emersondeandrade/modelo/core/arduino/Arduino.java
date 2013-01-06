@@ -72,7 +72,13 @@ public abstract class Arduino implements Serializable {
 	@Transient
 	private List<Integer> listaPortas = new ArrayList<Integer>();
 	
+	@Transient
+	Map<String,Boolean> statusPortas;
 	
+	
+	public Arduino() {
+		
+	}
 	
 	
 
@@ -118,6 +124,9 @@ public abstract class Arduino implements Serializable {
 	public static final String PARAM_VALUE_OP_DESLIGA = "03";
 	
 	@Transient
+	public static final String PARAM_VALUE_OP_STATUS_PORTAS = "04";
+	
+	@Transient
 	public static final String PARAM_VALUE_OP_TESTE_CONEXAO = "99";
 			
 	
@@ -132,10 +141,14 @@ public abstract class Arduino implements Serializable {
 	
 	public abstract void  desligarPorta(String numeroPorta) throws NotConectedExeption, ExecultarComandoExeption;
 		
-	public abstract Map<String,Boolean> getStatusPortas();
+	public abstract Map<String,Boolean> getStatusPortas() throws NotConectedExeption, ExecultarComandoExeption;
 	
-	public  boolean isLigada(String porta){
-		return getStatusPortas().get(porta);
+	public  boolean isLigada(String porta) throws NotConectedExeption, ExecultarComandoExeption {
+		
+		if(statusPortas == null){
+			statusPortas = getStatusPortas();
+		}
+		return statusPortas.get(porta);
 	}
 	
 	

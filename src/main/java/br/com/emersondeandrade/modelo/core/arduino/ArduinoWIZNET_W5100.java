@@ -3,6 +3,7 @@ package br.com.emersondeandrade.modelo.core.arduino;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Properties;
@@ -12,12 +13,10 @@ import javax.persistence.Entity;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 import org.apache.log4j.Logger;
-import org.hibernate.validator.util.privilegedactions.GetMethod;
 
 import br.com.emersondeandrade.modelo.exeption.ExecultarComandoExeption;
 import br.com.emersondeandrade.modelo.exeption.NotConectedExeption;
@@ -125,7 +124,7 @@ public class ArduinoWIZNET_W5100 extends Arduino {
 	
 	
 	
-	private  void requestHttp(Properties parameters) throws NotConectedExeption, ExecultarComandoExeption {
+	private  String requestHttp(Properties parameters) throws NotConectedExeption, ExecultarComandoExeption {
 		
 		DefaultHttpClient httpclient = new DefaultHttpClient();
 		String response = null;
@@ -159,10 +158,9 @@ public class ArduinoWIZNET_W5100 extends Arduino {
 			int seg  = (int) (termino - inicio) / 1000;
 			
 			log.info("Resposta do arduino.: " + response + " em " + seg + " segundos" );
+				
 			
-			
-			
-	
+			return response;
 		
 		
 	}
@@ -175,8 +173,7 @@ public class ArduinoWIZNET_W5100 extends Arduino {
 		
 		parametros.setProperty("key", this.getKey() );
 		parametros.setProperty(PARAM_OPERACAO, PARAM_VALUE_OP_TESTE_CONEXAO);
-		parametros.setProperty(PARAM_PORTA, "99");
-				
+					
 		try {
 			requestHttp(parametros);
 		} catch (NotConectedExeption e) {
@@ -194,10 +191,32 @@ public class ArduinoWIZNET_W5100 extends Arduino {
 
 
 	@Override
-	public Map<String, Boolean> getStatusPortas() {
-		// TODO Auto-generated method stub
-		return null;
+	public Map<String, Boolean> getStatusPortas() throws NotConectedExeption, ExecultarComandoExeption {
+		
+		Properties parametros = new Properties();
+		
+		parametros.setProperty("key", this.getKey() );
+		parametros.setProperty(PARAM_OPERACAO, PARAM_VALUE_OP_STATUS_PORTAS);
+		
+		String response = requestHttp(parametros);
+		int init = response.indexOf("<portas>") + 8;
+		int end = response.indexOf("</portas>");
+		
+		response = response.substring(init, end);
+				
+		Map<String, Boolean> status = new HashMap<String,Boolean>();
+		for(String portaStatus : response.split(";")){
+			String[] s = portaStatus.split("=");
+			status.put(s[0], s[1].equals("0") ); // Invertendo status pois a interface de rele trabalha invertida
+			
+		}
+				
+		return status;
 	}
+	
+	
+	
+	
 
 
 

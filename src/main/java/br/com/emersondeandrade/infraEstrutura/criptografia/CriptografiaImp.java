@@ -104,6 +104,10 @@ public final class CriptografiaImp implements Criptografia{
    
    
    public static  void main(String[] args) {  
+	   
+	   CriptografiaImp c = new CriptografiaImp(new PropriedadeSegurancaVariaveisAmbiente());
+	   
+	  System.out.println( c.encodeMD5("xpto") );
     
    }
 

@@ -151,7 +151,7 @@ public class Dispositivo implements Serializable, Comparable<Dispositivo> {
 	
 	
 	@Transient
-	public boolean isLigado(){
+	public boolean isLigado() throws NotConectedExeption, ExecultarComandoExeption {
 		return getCasa().getArduino().isLigada(getNumeroPorta());
 	}
 
