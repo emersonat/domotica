@@ -12,20 +12,15 @@ function acionar(keyDispositivo){
 		  success: function(data){
 			 		 
 			  hideLoading();
-			 
-			  
+			 			  
 			  alert(data.msg );
-		  	 
-			  
-			  
-			  
-			  
+		  	 		  
 			  window.location =  $('#contextPath').val() + "/mobile/verificaKey.html"; 
 		  },
 		
 		  error: function(){
-		  	 
-			  window.location =  $('#contextPath').val() + "/mobile/verificaKey.html"; 
+		  	 alert($('#erroAcionarDispositivo').val());
+			 window.location =  $('#contextPath').val() + "/mobile/verificaKey.html"; 
 		 
 		  }
 		  

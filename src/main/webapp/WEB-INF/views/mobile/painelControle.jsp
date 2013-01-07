@@ -15,7 +15,8 @@
 <link href="${contextPath}/tema/css/block-lists.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="${contextPath}/js/mobile/painelControle.js"></script>
 
-
+<!-- Internacionalizacao -->
+<input type="hidden" id="erroAcionarDispositivo" value="<spring:message code="erro.acionar.disp" text="Erro ao acionar dispositivo" />"/>
 
 	<article class="white-bg" >
 				<spring:url value=""></spring:url>
