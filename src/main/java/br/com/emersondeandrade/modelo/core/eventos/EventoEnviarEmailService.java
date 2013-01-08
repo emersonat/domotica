@@ -23,7 +23,9 @@ public class EventoEnviarEmailService implements Evento {
 	
 	public void execultar(Dispositivo dispositivo) {
 		
-		SimpleMailMessage email = emailFactory.geraEmailAcionamentoDispositivo("emersonat@ig.com.br", dispositivo);
+		String emailTo = dispositivo.getCasa().getUsuario().getEmail();
+		
+		SimpleMailMessage email = emailFactory.geraEmailAcionamentoDispositivo(emailTo, dispositivo);
 			
 		enviadorEmail.addEmailFilaParaEnvio(email);
 		

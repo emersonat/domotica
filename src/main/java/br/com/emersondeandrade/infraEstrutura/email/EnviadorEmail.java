@@ -88,28 +88,21 @@ public class EnviadorEmail {
 		
 	
 	private void atualizaMailSender() {
-		String hostAtualizado = propsService.getValue(KeyPropriedade.EMAIL_HOST); 
-		host = hostAtualizado.equals(host) ? host : hostAtualizado;
 		
-		String usernameAtualizado = propsService.getValue(KeyPropriedade.EMAIL_USENAME);
-		userName = usernameAtualizado.equals(userName) ? userName : usernameAtualizado;
+		host = propsService.getValue(KeyPropriedade.EMAIL_HOST); 
 		
-		String passwordAtualizado = propsService.getValue(KeyPropriedade.EMAIL_PASSWORD);
-		password = passwordAtualizado.equals(password) ? password : passwordAtualizado;
+		userName = propsService.getValue(KeyPropriedade.EMAIL_USENAME);
 		
-		String protocoloAtualizado = propsService.getValue(KeyPropriedade.EMAIL_PROTOCOLO);
-		protocoloEmail = protocoloAtualizado.equals(protocoloEmail) ? protocoloEmail : protocoloAtualizado;
-		
-		String portaEmailAtualizada = propsService.getValue(KeyPropriedade.EMAIL_PORTA);
-		portEmail = portaEmailAtualizada.equals(portEmail) ? portEmail : portaEmailAtualizada;
-		
-		String authAtualizada = propsService.getValue(KeyPropriedade.EMAIL_AUTH);
-		auth = authAtualizada.equals(auth) ? auth : authAtualizada;
-		
-		String ttlsAtualizada = propsService.getValue(KeyPropriedade.EMAIL_TTLS);
-		ttls = ttlsAtualizada.equals(ttls) ? ttls : ttlsAtualizada;
-		
-		
+		password = propsService.getValue(KeyPropriedade.EMAIL_PASSWORD);
+					
+		protocoloEmail = propsService.getValue(KeyPropriedade.EMAIL_PROTOCOLO);
+				
+		portEmail = propsService.getValue(KeyPropriedade.EMAIL_PORTA);
+			
+		auth = propsService.getValue(KeyPropriedade.EMAIL_AUTH);
+				
+		ttls = propsService.getValue(KeyPropriedade.EMAIL_TTLS);
+			
 		Properties p = new Properties();
 		p.put("mail.smtps.auth", Boolean.parseBoolean(auth));
 		p.put("mail.smtps.starttls.enable", Boolean.parseBoolean(ttls));
@@ -120,6 +113,8 @@ public class EnviadorEmail {
 		mailSender.setPassword(password);
 		mailSender.setUsername(userName);
 		mailSender.setHost(host);
+		
+		
 		
 	}
 	

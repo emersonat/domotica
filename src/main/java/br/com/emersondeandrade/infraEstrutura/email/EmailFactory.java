@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Service;
 
+import br.com.emersondeandrade.infraEstrutura.propriedadesSistema.KeyPropriedade;
 import br.com.emersondeandrade.infraEstrutura.propriedadesSistema.PropriedadesSistemaService;
 import br.com.emersondeandrade.modelo.core.dispositivo.Dispositivo;
 
@@ -21,12 +22,17 @@ public class EmailFactory {
 		SimpleMailMessage email = new SimpleMailMessage();
 		email.setTo(emailTo);
 		email.setSubject(dispositivo.getNome() + " acionado!!");
+		
+		String emailFrom = props.getValue(KeyPropriedade.EMAIL_USENAME);
+		email.setFrom(emailFrom);
+		
 		SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 		
 		email.setText(
 		"\n" +		
 		"* Sistema Domotica * \n" + 
-		dispositivo.getNome() + " acionado as: " + df.format(new Date()));
+		dispositivo.getNome() + " acionado as: " + df.format(new Date()) + "\n" +
+		"Casa: " + dispositivo.getCasa().getNome());
 		
 		return email;
 	}
