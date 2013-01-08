@@ -3,6 +3,7 @@ package br.com.emersondeandrade.infraEstrutura.email;
 import java.util.LinkedList;
 import java.util.Properties;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.mail.SimpleMailMessage;
@@ -17,6 +18,7 @@ import br.com.emersondeandrade.infraEstrutura.propriedadesSistema.PropriedadesSi
 @Scope("singleton")
 public class EnviadorEmail {
 
+	private static Logger log = Logger.getLogger(EnviadorEmail.class);
 	
 	@Autowired
 	private JavaMailSenderImpl mailSender;
@@ -66,7 +68,7 @@ public class EnviadorEmail {
 							mailSender.send(listaEmails.removeFirst());
 						} else {
 							listaEmails.removeFirst();
-							System.out.println("Email não enviado propiedade ENVIAR_EMAILS = false");
+							log.info("Email não enviado propiedade ENVIAR_EMAILS = false");
 						}
 						
 					} else {
@@ -74,6 +76,7 @@ public class EnviadorEmail {
 						try {
 							listaEmails.wait();
 						} catch (InterruptedException e) {
+							log.error(e.getMessage());  
 							e.printStackTrace();
 						}
 						
