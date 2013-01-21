@@ -16,6 +16,7 @@ public class ControleWebController extends ControllerMobile {
 	
 	@RequestMapping(method = RequestMethod.GET)	
 	public String init(){
+			
 		return "redirect:/mobile/verificaKey.html";
 	}
 	

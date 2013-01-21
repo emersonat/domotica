@@ -3,7 +3,7 @@
 Arduino com shield ethernet com chipset wiznet
 Autor Emerson Andrade
 
-Versão: 1.0.6
+Versão: 1.0.7
 
 Codigos das operações:
 01 - click
@@ -20,7 +20,7 @@ Codigos das operações:
 byte mac[] = { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED };
 IPAddress ip(192,168,1, 177);
 EthernetServer server(80);
-static String keyArduino = "xxxxxxxxxxxxx"; // <-- colocar uma chave com 32 caracteres
+static String keyArduino = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"; // <-- colocar uma chave com 32 caracteres
 static boolean debugMode = false;
                             
 
@@ -45,8 +45,6 @@ void debug(String text){
   
 }  
 
-
-
 void click(int port, String httpReq){
   int indexOp  = httpReq.indexOf("delay=");
   String delayParam = httpReq.substring( indexOp + 6, indexOp + 8);
@@ -63,88 +61,99 @@ void desligaPorta(int port){
   digitalWrite(port, HIGH);
 } 
 
+String lerRequest(EthernetClient client){
+    String httpReq = ""; 
+    boolean currentLineIsBlank = true;
+    while (client.connected()) {
+       
+       if (client.available()) {
+          char c = client.read();
+          httpReq += c ;
+          
+           if (c == '\n') {
+            currentLineIsBlank = true;
+          } else if (c != '\r') {
+              currentLineIsBlank = false;
+          }
+          
+           if (c == '\n' && currentLineIsBlank) {
+             return httpReq;
+           }  
+          
+       }  
+          
+     } 
+}  
+
 
 void loop()
 {
   // listen for incoming clients
   EthernetClient client = server.available();
   if (client) {
-    
-    
-    boolean currentLineIsBlank = true;
-    String httpReq = ""; 
    
-    while (client.connected()) {
-     
-      if (client.available()) {
-        char c = client.read();
-        httpReq += c ;
-        
-        if (c == '\n' && currentLineIsBlank) {
-          debug("Recebendo request...\n" + httpReq);
-          client.println("HTTP/1.1 200 OK");
-          client.println("Content-Type: text/html");
-          client.println();
-          
-          if(chaveValida(httpReq)){
-              
-             // Carregando numero da operacao
-             int indexOp  = httpReq.indexOf("op=");
-             String opParam = httpReq.substring( indexOp + 3, indexOp + 5);
-            
-             // Carregando numero porta
-             int indexPorta  = httpReq.indexOf("port=");
-             String portaParam = httpReq.substring(indexPorta  + 5, indexPorta  + 7);
-              
-              boolean ok = false;
-              switch (getInt(opParam)) {
-                  case 1:
-                    click( getInt(portaParam), httpReq ); 
-                    ok = true;
-                    break;
-                  case 2:
-                    ligaPorta(getInt(portaParam));
-                    ok = true;
-                    break;
-                  case 3:
-                    desligaPorta(getInt(portaParam) );  
-                    ok = true;
-                    break;
-                  case 4:
-                    client.println( lerPortas()  );
-                    ok = true;
-                    break; 
-                 case 99:
-                    ok = true;
-                    break;
-               }
+    String httpReq = lerRequest(client); 
+    
+    client.println("HTTP/1.1 200 OK");
+    client.println("Content-Type: text/html");
+    client.println();
    
-               if(ok){
-                 client.println("<result>OK</result>"); 
-               } else{
-                 client.println("<result>ERROR</result>"); 
-               }  
-             
-                    
+    if(chaveValida(httpReq)){
+              
+       // Carregando numero da operacao
+       int indexOp  = httpReq.indexOf("op=");
+       String opParam = httpReq.substring( indexOp + 3, indexOp + 5);
+              
+        // Carregando numero porta
+        int indexPorta  = httpReq.indexOf("port=");
+        String portaParam = httpReq.substring(indexPorta  + 5, indexPorta  + 7);
+                
+        boolean ok = false;
+        debug("operacao.: " + opParam);
+        switch (getInt(opParam)) {
+            case 1:
+               debug("Click na porta " + portaParam);
+               click( getInt(portaParam), httpReq ); 
+                ok = true;
+                break;
+             case 2:
+               debug("Ligando porta " + portaParam);
+               ligaPorta(getInt(portaParam));
+               ok = true;
+                break;
+             case 3:
+               debug("desligando porta " + portaParam);
+                desligaPorta(getInt(portaParam) );  
+                ok = true;
+                break;
+              case 4:
+                debug("lendo portas");
+                client.println( lerPortas()  );
+                ok = true;
+                 break; 
+               case 99:
+                 ok = true;
+                 break;
+            }
+   
+            if(ok){
+              client.println("<result>OK</result>"); 
+            } else{
+               client.println("<result>ERROR</result>"); 
+            }  
+                   
           } else {  
              client.println("<error>ERROR:Chave invalida</error>"); 
           } 
-                         
-          break;
-        }
-           
-        if (c == '\n') {
-            currentLineIsBlank = true;
-        } else if (c != '\r') {
-            currentLineIsBlank = false;
-        }
+          
+           delay(1);
+           client.stop();
+               
       }
-    }
-        
-    delay(1);
-    client.stop();
-   
-  }
+      
+      
+      
+  
 }
 
 
@@ -154,8 +163,8 @@ boolean chaveValida(String httpReq){
   
   String  keyParam = httpReq.substring(indexKey + 4, indexKey + 36);  
    
- //Serial.println("key--> " +  keyParam); 
- 
+  debug("key--> " +  keyParam);
+  
   if( keyArduino.equals(keyParam) ){
     return true;
   }else {

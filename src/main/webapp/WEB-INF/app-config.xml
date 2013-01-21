@@ -23,7 +23,6 @@
 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/mobile/**" />
-			<mvc:mapping path="/mobile/config/*" />
 			<bean class="br.com.emersondeandrade.aplicacao.mobile.FiltroAutenticacaoMobile" />
 		</mvc:interceptor>
 	</mvc:interceptors>
@@ -68,13 +67,24 @@
 
 
 	<!-- Views resolvers -->
-	<bean id="jsonview" class="org.springframework.web.servlet.view.json.MappingJacksonJsonView">
-	    
-	</bean>
-		
+	<bean id="jsonview" class="org.springframework.web.servlet.view.json.MappingJacksonJsonView"/>
+			
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
 	    <property name="viewClass" value="org.springframework.web.servlet.view.tiles2.TilesView"/>
+	    <property name="order" value="0" />
 	</bean>
+	
+	<bean id="viewResolverDefault" class="org.springframework.web.servlet.view.InternalResourceViewResolver" >
+          <property name="prefix">
+             <value>/WEB-INF/views/</value>
+          </property>
+          <property name="suffix">
+            <value>.jsp</value>
+          </property>
+         <property name="order" value="1" />
+     </bean>
+	
+	
 	
 		
 	<!-- Email -->
@@ -104,6 +114,21 @@
   <!-- Creates the JSR-303 Validator -->
   <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
   </bean>    
+  
+  
+  <!-- Mapeamento para Exceptions -->
+  <bean	class="br.com.emersondeandrade.aplicacao.ExceptionFilter">
+  
+  	    <property name="exceptionMappings">
+	        <props>
+	            <prop key="java.lang.Exception">exception</prop>
+	        </props>
+		</property>		   
+	</bean>
+  
+  
+
+		
 	
 	
 </beans>

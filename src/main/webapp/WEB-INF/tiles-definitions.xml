@@ -16,9 +16,9 @@
 	</definition>
 	
 	
+	
     
-	
-	
+    
 	<!-- Pages -->
  	<definition name="web/principal" extends="template-main">
   		<put-attribute name="body" value="/WEB-INF/views/web/principal.jsp" />
