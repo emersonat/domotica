@@ -18,10 +18,11 @@
 <!-- Internacionalizacao -->
 <input type="hidden" id="erroAcionarDispositivo" value="<spring:message code="erro.acionar.disp" text="Erro ao acionar dispositivo" />"/>
 
+
+
 	<article class="white-bg" >
-				<spring:url value=""></spring:url>
-			
-					
+		
+		<c:if test="${arduinoOn}">						
 			<ul class="favorites no-margin">
 				<c:forEach items="${casa.dispositivosAtivos}" var="d">
 					<li>
@@ -40,6 +41,16 @@
 					</li>
 				</c:forEach>
 			</ul>
+		</c:if>
+		
+		<c:if test="${!arduinoOn}">	
+			<div align="center">
+				<img src="${contextPath}/imagens/arduino_off.png"  title="<spring:message code="arduino.off" text="Modulo não esta respondendo"/>" >
+				<br/>
+				<br/>
+				<h1><spring:message code="arduino.off" text="Módulo não esta respondendo"/></h1>
+			</div>	
+		</c:if>
 		
 	</article>
 	

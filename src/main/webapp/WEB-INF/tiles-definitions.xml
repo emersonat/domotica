@@ -16,8 +16,7 @@
 	</definition>
 	
 	
-	
-    
+	   
     
 	<!-- Pages -->
  	<definition name="web/principal" extends="template-main">

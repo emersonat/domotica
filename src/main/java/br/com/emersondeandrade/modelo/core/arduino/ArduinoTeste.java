@@ -43,7 +43,7 @@ public class ArduinoTeste extends Arduino {
 	@Override
 	public boolean isConected() {
 		log.info("Verificando status ARDUINO teste") ;
-		return true;
+		return false;
 	}
 
 
