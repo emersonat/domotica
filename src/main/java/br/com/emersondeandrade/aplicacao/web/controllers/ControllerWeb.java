@@ -71,6 +71,7 @@ public abstract class ControllerWeb {
 	}
 	
 	
+	
 	protected Casa getCasa(){
 		Casa casa = (Casa) session().getAttribute("casa");
 		

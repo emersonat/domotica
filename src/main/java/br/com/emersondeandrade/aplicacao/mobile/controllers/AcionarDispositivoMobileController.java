@@ -15,7 +15,8 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.View;
 
 import br.com.emersondeandrade.aplicacao.ResponseStatus;
-import br.com.emersondeandrade.modelo.core.casa.CasaFacade;
+import br.com.emersondeandrade.infraEstrutura.criptografia.Criptografia;
+import br.com.emersondeandrade.modelo.core.dispositivo.DispositivoFacade;
 import br.com.emersondeandrade.modelo.exeption.ExecultarComandoExeption;
 import br.com.emersondeandrade.modelo.exeption.NotConectedExeption;
 
@@ -28,7 +29,10 @@ public class AcionarDispositivoMobileController extends ControllerMobile {
 	private static Logger log = Logger.getLogger(AcionarDispositivoMobileController.class);
 	
 	@Autowired
-	CasaFacade casaFacade;
+	DispositivoFacade dispFacade;
+	
+	@Autowired
+	Criptografia cript;
 	
 	
 	@Autowired
@@ -38,13 +42,14 @@ public class AcionarDispositivoMobileController extends ControllerMobile {
 	
 	
 	
-	@RequestMapping(value = "/acionar/{keyDispositivo}",method = RequestMethod.GET)	
-	public ModelAndView acionar(@PathVariable String keyDispositivo,HttpServletRequest r){
+	@RequestMapping(value = "/acionar/{idDispositivoCript}",method = RequestMethod.GET)	
+	public ModelAndView acionar(@PathVariable String idDispositivoCript,HttpServletRequest r){
 		
 		ModelAndView modelAndView = new ModelAndView(this.jsonview);// resposta json
 				
 		try {
-			 casaFacade.acionar( getCasa() ,keyDispositivo);
+			 
+			 dispFacade.acionar( getCasa() ,idDispositivoCript);
 			 modelAndView.addObject("status", ResponseStatus.OK);
 			 modelAndView.addObject("msg",  "Dispositivo acionado com sucesso!!");
 	

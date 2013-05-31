@@ -2,9 +2,9 @@ package br.com.emersondeandrade.modelo.core.casa;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -16,11 +16,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 
 import br.com.emersondeandrade.modelo.core.arduino.Arduino;
 import br.com.emersondeandrade.modelo.core.dispositivo.Dispositivo;
+import br.com.emersondeandrade.modelo.core.historico.Historico;
 import br.com.emersondeandrade.modelo.core.mobile.RegistroMobile;
 import br.com.emersondeandrade.modelo.core.usuario.Usuario;
 
@@ -30,12 +30,7 @@ public class Casa implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
-	
-	@OneToMany(mappedBy="casa",fetch = FetchType.LAZY)
-	private List<Dispositivo> dispositivos = new ArrayList<Dispositivo>();
-	
-	
-	
+			
 
 	@Id
 	@SequenceGenerator(name = "sequenceGenerator", sequenceName = "casa_seq", allocationSize = 1)
@@ -45,9 +40,8 @@ public class Casa implements Serializable {
 	
 	
 		
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="id_arduino",nullable = false)
-	private Arduino arduino;
+	@OneToMany(mappedBy="casa",fetch = FetchType.LAZY)
+	private List<Arduino> arduinos;
 	
 	
 	@OneToMany(mappedBy="casa",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -60,36 +54,15 @@ public class Casa implements Serializable {
 	
 	@Column(nullable = false,length = 30)
 	private String nome;
+	
+	@OneToMany(mappedBy = "casa", fetch = FetchType.LAZY)
+	private List<Area> areas;
 		
 	
-	
-	
-	//@JsonManagedReference("dispositivo")
-	public List<Dispositivo> getDispositivos() {
-		return dispositivos;
-	}
-	
-	public Casa ordenaDispositivos(Comparator<Dispositivo> comparator){
-		Collections.sort(getDispositivos(),comparator);
-		return this;
-	}
-	
-	public Casa ordenaRegistrosMobile(Comparator<RegistroMobile> comparator){
-		Collections.sort(getRegistrosMobile() ,comparator );
-		return this;
-	}
-	
-	public void setDispositivos(List<Dispositivo> dispositivos) {
-		this.dispositivos = dispositivos;
-	}
+	@OneToMany(mappedBy="casa",fetch = FetchType.LAZY)
+	private List<Historico> historicos;
 
-	public Arduino getArduino() {
-		return arduino;
-	}
-
-	public void setArduino(Arduino arduino) {
-		this.arduino = arduino;
-	}
+	
 
 	public int getId() {
 		return id;
@@ -130,21 +103,57 @@ public class Casa implements Serializable {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
 	
-	public List<Dispositivo> getDispositivosAtivos(){
-		List<Dispositivo> result = new ArrayList<Dispositivo>();
-		
-		for(Dispositivo d : getDispositivos()){
-			if(d.isAtivo())
-				result.add(d);
+
+	public List<Arduino> getArduinos() {
+		return arduinos;
+	}
+
+	public void setArduino(List<Arduino> arduinos) {
+		this.arduinos = arduinos;
+	}
+	
+	public Arduino getArduinoPrincipal(){
+		for (Arduino arduino : getArduinos()){
+			if(arduino.isPrincipal() ) return arduino;
 		}
 		
-		return result;
-		
-		
-		
+		throw new RuntimeException("Casa " + getNome() + " não possui um arduino principal..");
 	}
+	
+	public List<Dispositivo> getDispositivosAtivos(){
+				
+		Set<Dispositivo> result = new TreeSet<Dispositivo>();
+		
+		for(Dispositivo d : getAllDispositivos()){
+			if(d.isAtivo()) result.add(d);
+		}
+		
+		return new ArrayList<Dispositivo>(result);
+	}
+	
+	public List<Dispositivo> getAllDispositivos(){
+		
+		Set<Dispositivo> result = new TreeSet<Dispositivo>();
+		for(Arduino a: getArduinos()){
+			
+			result.addAll(a.getDispositivos());
+			
+		}
+		
+		return new ArrayList<Dispositivo>(result);  
+	}
+
+	public List<Area> getAreas() {
+		return areas;
+	}
+
+	public void setAreas(List<Area> areas) {
+		this.areas = areas;
+	}
+	
+	
+	
 	
 
 }

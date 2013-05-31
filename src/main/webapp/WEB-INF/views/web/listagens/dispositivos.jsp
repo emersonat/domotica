@@ -24,15 +24,34 @@
 						<div class="no-margin">
 							<display:column title="Nome"  sortName="nome"  sortable="true"> 
 								${dispositivos.nome}
+							</display:column>
+							
+							<display:column title="Area"  sortName="area"  sortable="true"> 
+								${dispositivos.area.nome}
+							</display:column>		
+							
+							<display:column title="Modulo"    sortable="false"> 
+								${dispositivos.arduino.nome}
 							</display:column>	
 							
-							<display:column title="Numero Porta" sortName="numeroPorta"  sortable="true"> 
-								${dispositivos.numeroPorta}
+							
+							<display:column title="Portas"  sortable="false"> 
+								<strong><spring:message code="saida" text="Saida...:"/></strong>
+								<c:forEach items="${dispositivos.portasOutput}" var="out">
+									<c:out value="${out.numero}"/>&nbsp;
+								</c:forEach>
+								<br/>
+								<strong><spring:message code="entrada" text="Entrada:"/> </strong> 
+								<c:forEach items="${dispositivos.portasInput}" var="in">
+									<c:out value="${in.numero}"/>&nbsp;
+								</c:forEach>
+								
 							</display:column>	
 							
 							<display:column title="Tipo Comando"  sortable="false"> 
 								<spring:message code="${dispositivos.tipoComando.i18n}" /> 
 							</display:column>	
+							
 							
 							<display:column title="Ativar/Desativar" style="text-align:center"  sortable="false"> 
 								
@@ -45,6 +64,8 @@
 								 </c:if>
 							
 							</display:column>	
+							
+						
 							
 							
 							

@@ -71,6 +71,8 @@ public class ArduinoWIZNET_W5100 extends Arduino {
 				
 		requestHttp(parametros);
 		
+		
+		
 	}
 
 

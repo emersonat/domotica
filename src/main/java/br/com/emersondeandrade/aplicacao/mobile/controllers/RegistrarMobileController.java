@@ -99,7 +99,7 @@ public class RegistrarMobileController  extends ControllerMobile {
 		} else {
 			Casa casa = controleMobile.getCasa();
 			model.addAttribute("casa", casa);
-			model.addAttribute("arduinoOn", casa.getArduino().isConected());
+			model.addAttribute("arduinoOn", casa.getArduinoPrincipal().isConected());
 			return "mobile/painelControle";
 			
 		}

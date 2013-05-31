@@ -4,20 +4,24 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
-import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.OneToOne;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -34,7 +38,6 @@ import br.com.emersondeandrade.modelo.exeption.NotConectedExeption;
 @Table(uniqueConstraints=@UniqueConstraint(columnNames={"key"}))
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "modelo", discriminatorType = DiscriminatorType.INTEGER)
-@DiscriminatorValue(value = "")
 public abstract class Arduino implements Serializable {
 		
 	
@@ -46,7 +49,11 @@ public abstract class Arduino implements Serializable {
 	@Column(name = "id_arduino", unique = true, nullable = false)
 	private int id;
 	
-	@Column(length= 20,nullable = false)
+	@Column(nullable = true,length = 30)
+	private String nome;
+	
+	
+	@Column(length= 30,nullable = false)
 	private String ip;
 	
 	
@@ -62,19 +69,23 @@ public abstract class Arduino implements Serializable {
 	@Column(name="modelo",	insertable = false, updatable = false)
 	private ModeloArduino modelo;
 	
-	@OneToOne(mappedBy = "arduino")
+	@ManyToOne
+	@JoinColumn(name="id_casa",nullable = false)
 	private Casa casa;
 	
+	@OneToMany(mappedBy="arduino",fetch = FetchType.LAZY)
+	private List<Porta> portas;
 	
-	@Column(nullable = false)
-	private String portas;
-	
-	@Transient
-	private List<Integer> listaPortas = new ArrayList<Integer>();
+		
 	
 	@Transient
 	Map<String,Boolean> statusPortas;
 	
+	public boolean isPrincipal(){
+		return getIp() != null && !"".equals(getIp());
+			
+		
+	}
 	
 	public Arduino() {
 		
@@ -150,36 +161,6 @@ public abstract class Arduino implements Serializable {
 		}
 		return statusPortas.get(porta);
 	}
-	
-	
-	public  List<Integer> getPortasLivres(){
-		List<Integer> toRemove = new ArrayList<Integer>();
-		for(Dispositivo d :getCasa().getDispositivos() ){
-			if( d.isAtivo()  ){
-				toRemove.add(Integer.parseInt( d.getNumeroPorta()) );
-			}
-		}
-		
-		List<Integer> result = new ArrayList<Integer>(getTodasPortas());
-		result.removeAll(toRemove);
-		
-		return result;
-	}
-	
-	
-	
-	public List<Integer> getTodasPortas() {
-		if(listaPortas.isEmpty()){
-			String[] split = portas.split(";");
-			for(String s : split){
-				listaPortas.add(Integer.parseInt(s)  );
-			}
-		}
-		return listaPortas;
-	
-	}
-	
-	
 		
 	
 	
@@ -271,6 +252,35 @@ public abstract class Arduino implements Serializable {
 		this.casa = casa;
 	}
 
+	public List<Porta> getPortas() {
+		return portas;
+	}
+
+	public void setPortas(List<Porta> portas) {
+		this.portas = portas;
+	}
+
+	@Transient
+	public List<Dispositivo> getDispositivos(){
+		Set<Dispositivo> set = new TreeSet<Dispositivo>();
+		
+		for(Porta p : getPortas()){
+			if(p.getDispositivo() != null){
+				set.add(p.getDispositivo());
+			}
+		}
+		
+		return new ArrayList<Dispositivo>(set);
+		
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
 	
 	
 

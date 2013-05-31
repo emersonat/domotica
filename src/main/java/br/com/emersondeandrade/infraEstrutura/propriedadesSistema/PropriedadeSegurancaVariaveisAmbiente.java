@@ -20,18 +20,18 @@ public class PropriedadeSegurancaVariaveisAmbiente implements PropriedadesSegura
 		
 	}
 
-	@Override
+	
 	public String getURLBanco() {
 		return System.getenv("DOMOTICA_URL_BANCO");
 	}
 
-	@Override
+	
 	public String getUsernameBanco() {
 		return System.getenv("DOMOTICA_USER_BANCO");
 		
 	}
 
-	@Override
+	
 	public String getSenhaBanco() {
 		return System.getenv("DOMOTICA_SENHA_BANCO");
 		

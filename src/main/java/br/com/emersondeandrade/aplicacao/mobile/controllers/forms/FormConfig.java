@@ -14,7 +14,7 @@ public class FormConfig {
 	
 	
 	@NotEmpty(message = "*")
-	@Size(max=2,min=2,message = "*")
+	@Size(max=4,min=2,message = "*")
 	private String porta;
 	
 	

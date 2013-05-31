@@ -143,7 +143,7 @@ public class Teste {
 
 		CasaFacadeImp casaFacade = cx.getBean(CasaFacadeImp.class);
 
-		Dispositivo disp = casaFacade.getDispositovoById(10);
+		//Dispositivo disp = casaFacade.getDispositovoById(10);
 
 		//casaFacade.acionar("d1");
 	}

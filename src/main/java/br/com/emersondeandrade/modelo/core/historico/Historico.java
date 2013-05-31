@@ -8,12 +8,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import br.com.emersondeandrade.modelo.core.dispositivo.Dispositivo;
+import br.com.emersondeandrade.modelo.core.casa.Casa;
 
 @Entity
 public class Historico {
@@ -29,11 +29,64 @@ public class Historico {
 	@Column(nullable = false)
 	private Date data;
 	
-	@OneToOne
-	@JoinColumn(name = "id_dispositivo", nullable = false)	
-	private Dispositivo dispositivo;
+	@Column(nullable = false,length = 50)
+	private String nomeDispositivo;
+	
+	@Column(nullable = false,length = 50)
+	private String nomeArea;
 	
 	
+	@ManyToOne
+	@JoinColumn(name = "id_casa",nullable = false)
+	private Casa casa;
+	
+	public Historico() {}
+	
+	
+	
+	
+	
+	public Historico(String nomeDispositivo, String nomeArea, Casa casa) {
+		this.nomeDispositivo = nomeDispositivo;
+		this.nomeArea = nomeArea;
+		this.casa = casa;
+		this.data = new Date();
+	}
+
+
+
+
+
+	public String getNomeDispositivo() {
+		return nomeDispositivo;
+	}
+
+
+	public void setNomeDispositivo(String nomeDispositivo) {
+		this.nomeDispositivo = nomeDispositivo;
+	}
+
+
+	public String getNomeArea() {
+		return nomeArea;
+	}
+
+
+	public void setNomeArea(String nomeArea) {
+		this.nomeArea = nomeArea;
+	}
+
+
+	public Casa getCasa() {
+		return casa;
+	}
+
+
+	public void setCasa(Casa casa) {
+		this.casa = casa;
+	}
+
+
 	public int getId() {
 		return id;
 	}
@@ -54,14 +107,7 @@ public class Historico {
 	}
 
 
-	public Dispositivo getDispositivo() {
-		return dispositivo;
-	}
-
-
-	public void setDispositivo(Dispositivo dispositivo) {
-		this.dispositivo = dispositivo;
-	}
+	
 
 
 	

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import br.com.emersondeandrade.infraEstrutura.criptografia.Criptografia;
+import br.com.emersondeandrade.modelo.core.arduino.Arduino;
 import br.com.emersondeandrade.modelo.core.casa.Casa;
 import br.com.emersondeandrade.modelo.core.mobile.RegistroMobile;
 import br.com.emersondeandrade.modelo.repositorio.CasaRepositorio;
@@ -32,12 +33,13 @@ public class CasaDao extends DaoPadrao<Casa> implements CasaRepositorio{
 	public Casa getCasaByKeyArduino(String key)	throws EntityNotFoundException {
 				
 				
-		TypedQuery<Casa> query = entityManager.createQuery("from Casa c where c.arduino.key = :key", Casa.class);
+		TypedQuery<Arduino> query = entityManager.createQuery("from Arduino a where a.key = :key", Arduino.class);
 		
 		query.setParameter("key",  criptService.encodeMD5(key) );
 				
 		try{
-			return query.getSingleResult();
+			Arduino a = query.getSingleResult();
+			return  a.getCasa();
 		} catch (NoResultException e) {
 			throw new EntityNotFoundException();
 		}

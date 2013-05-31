@@ -2,7 +2,7 @@ package br.com.emersondeandrade.aplicacao.web.controllers;
 
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.TreeSet;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -36,7 +36,7 @@ public class ListagemDispositivosController extends ControllerWeb {
 				
 		
 		
-		mv.addAttribute("dispositivos", new TreeSet<Dispositivo>(getCasa().getDispositivos() )  );   
+		mv.addAttribute("dispositivos", getCasa().getArduinoPrincipal().getDispositivos()   );   
 				
 		return "web/listagens/dispositivos";
 		
@@ -68,18 +68,20 @@ public class ListagemDispositivosController extends ControllerWeb {
 	@RequestMapping(value = "/sort")
 	public String sort(ModelMap mv,HttpServletRequest request){
 		Casa casa = getCasa();
-				
+		
+		List<Dispositivo> allDispositivos = casa.getAllDispositivos();
+		
 		String sortAttribute = getSortAtributeDisplayTag("dispositivos");
 		
+		Collections.sort(allDispositivos, getComparator(sortAttribute) );
 		
-		casa.ordenaDispositivos( getComparator(sortAttribute) );
 		
-		
+		// TODO verificar ordenacao
 		if(isOrderDisplayTagReverse("dispositivos"))
-			Collections.reverse(casa.getDispositivos()); 		
+			Collections.reverse( allDispositivos   ); 		
 		
 			
-		mv.addAttribute("dispositivos", casa.getDispositivos() );   
+		mv.addAttribute("dispositivos", allDispositivos );   
 		
 	
 		return "web/listagens/dispositivos";
@@ -90,11 +92,11 @@ public class ListagemDispositivosController extends ControllerWeb {
 	
 	private Comparator<Dispositivo> getComparator( String sortAtribute){
 				
-		if("numeroPorta".equals(sortAtribute)){
+		if("area".equals(sortAtribute)){
 			
 			return new Comparator<Dispositivo>() {
 				public int compare(Dispositivo d1, Dispositivo d2) {
-					return d1.getNumeroPorta().compareTo(d2.getNumeroPorta());
+					return d1.getArea().getNome().compareTo(d2.getArea().getNome());
 				}
 								
 			};

@@ -86,8 +86,9 @@ public class ListagemControlesWeb extends ControllerWeb {
 		Casa casa = getCasa();
 				
 		String sortAttribute = getSortAtributeDisplayTag("controles");
-				
-		casa.ordenaRegistrosMobile( getComparator(sortAttribute) );
+			
+		//TODO verificar ordenacao
+		//casa.getRegistrosMobile(getComparator(sortAttribute) );
 				
 		if(isOrderDisplayTagReverse("controles"))
 			Collections.reverse(casa.getRegistrosMobile()); 		

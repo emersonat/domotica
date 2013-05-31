@@ -4,6 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
+ <%@taglib uri="/WEB-INF/myTagLib.tld" prefix="mytag"%>
 
 
 
@@ -28,11 +29,11 @@
 					<li>
 						
 							<c:if test="${d.ligado}">
-								<img style="cursor: pointer;" src="${contextPath}/imagens/dispositivos/${d.imagenOn}" width="48" height="48" onclick="acionar('${d.key}')" >
+								<img style="cursor: pointer;" src="${contextPath}/imagens/dispositivos/${d.imagenOn}" width="48" height="48" onclick="acionar('${mytag:cript(d.id)}')" >
 							</c:if>
 													
 							<c:if test="${!d.ligado}">
-								<img style="cursor: pointer;" src="${contextPath}/imagens/dispositivos/${d.imagenOff}" width="48" height="48" onclick="acionar('${d.key}')" >
+								<img style="cursor: pointer;" src="${contextPath}/imagens/dispositivos/${d.imagenOff}" width="48" height="48" onclick="acionar('${mytag:cript(d.id)}')" >
 							</c:if>
 						
 								

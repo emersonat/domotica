@@ -44,7 +44,7 @@
 						<c:forEach items="${historicos}" var="h">
 							
 							<tr>
-								<td>${h.dispositivo.nome}</td>
+								<td>${h.nomeDispositivo}</td>
 								<td>
 									<strong><fmt:formatDate value='${h.data }' type="both"	pattern="dd/MM-hh:mm" /></strong>
 									<fmt:formatDate value='${h.data }' type="both" pattern="a"/>

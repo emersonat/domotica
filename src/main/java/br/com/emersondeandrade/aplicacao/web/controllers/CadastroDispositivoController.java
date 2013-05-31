@@ -46,7 +46,8 @@ public class CadastroDispositivoController extends ControllerWeb {
 			
 		modelAndView.addAttribute("dispositivo", new Dispositivo());
 		modelAndView.addAttribute("casa", getCasa());
-		modelAndView.addAttribute("listaPortas", getCasa().getArduino().getPortasLivres());
+		//TODO verificar quando for implementar cruds
+		//modelAndView.addAttribute("listaPortas", getCasa().getArduinoPrincipal().getPortasLivres());
 		modelAndView.addAttribute("listaComandosPossiveis",  Collections.EMPTY_LIST  );
 			
 		
@@ -64,7 +65,7 @@ public class CadastroDispositivoController extends ControllerWeb {
 	
 	@RequestMapping(value="/salvar")
 	public String salvar(@Valid Dispositivo disp,BindingResult result,ModelMap mv, HttpServletRequest r ){
-		Locale locale = r.getLocale();				
+		/*Locale locale = r.getLocale();				
 		
 		if(hasErrors(result, "nome","numeroPorta","tipoComando")){
 			mv.addAttribute("listaPortas", getCasa().getArduino().getPortasLivres());
@@ -78,8 +79,9 @@ public class CadastroDispositivoController extends ControllerWeb {
 		
 		disp.setCasa( getCasa() );
 		
-		casaFacade.salvarDispositivo(disp);
+		casaFacade.salvarDispositivo(disp);*/
 			
+		// TODO verificar quando for implementar cruds
 		return "web/cadastros/dispositivo";
 	}
 	
@@ -87,7 +89,7 @@ public class CadastroDispositivoController extends ControllerWeb {
 	@RequestMapping(value = "/changeAtivo")
 	public ModelAndView  changeAtivo(@RequestParam("ativo") boolean ativo, HttpServletRequest r){
 						
-		Locale locale = r.getLocale();
+		/*Locale locale = r.getLocale();
 				
 		Arduino arduino = getCasa().getArduino();
 				
@@ -101,9 +103,10 @@ public class CadastroDispositivoController extends ControllerWeb {
 			modelAndView.addObject(String.valueOf( porta ), porta );
 			
 		}
-			
+			*/
 		
-		return modelAndView;
+		// TODO verificar quando for implementar cruds
+		return null;
 	}
 	
 	
@@ -112,7 +115,7 @@ public class CadastroDispositivoController extends ControllerWeb {
 	@RequestMapping(value = "/comandos")
 	public ModelAndView  getComandos(@RequestParam("numeroPorta") int porta, HttpServletRequest r){
 		
-		Locale locale = r.getLocale();
+		/*Locale locale = r.getLocale();
 		
 				
 		Arduino arduino = getCasa().getArduino();
@@ -126,11 +129,11 @@ public class CadastroDispositivoController extends ControllerWeb {
 			modelAndView.addObject(String.valueOf( c.getId()), i18n.getMessage(c.getI18n() , null, locale) );
 			
 		}
+		*/
 		
 		
 		
-		
-		return modelAndView;
+		return null;
 	}
 	
 	

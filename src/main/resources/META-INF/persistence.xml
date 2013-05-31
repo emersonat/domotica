@@ -15,7 +15,9 @@
 		<class>br.com.emersondeandrade.modelo.core.arduino.Arduino</class>
 		<class>br.com.emersondeandrade.modelo.core.arduino.ArduinoWIZNET_W5100</class>
 		<class>br.com.emersondeandrade.modelo.core.arduino.ArduinoTeste</class>
+		<class>br.com.emersondeandrade.modelo.core.arduino.Porta</class>		
 		<class>br.com.emersondeandrade.modelo.core.casa.Casa</class>
+		<class>br.com.emersondeandrade.modelo.core.casa.Area</class>
 		<class>br.com.emersondeandrade.modelo.core.dispositivo.Dispositivo</class>	
 		<class>br.com.emersondeandrade.infraEstrutura.propriedadesSistema.PropriedadeSistema </class>
 		<class>br.com.emersondeandrade.modelo.core.historico.Historico</class>

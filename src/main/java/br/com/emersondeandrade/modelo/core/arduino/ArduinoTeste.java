@@ -22,8 +22,8 @@ public class ArduinoTeste extends Arduino {
 	
 	private static HashMap<String, Boolean> status = new HashMap<String, Boolean>();
 	static{
-		status.put("06",false);
-		status.put("07",false);
+		status.put("13",true);
+		
 	}
 	
 	
@@ -43,7 +43,7 @@ public class ArduinoTeste extends Arduino {
 	@Override
 	public boolean isConected() {
 		log.info("Verificando status ARDUINO teste") ;
-		return false;
+		return true;
 	}
 
 

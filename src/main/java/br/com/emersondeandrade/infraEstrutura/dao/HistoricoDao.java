@@ -28,18 +28,14 @@ public class HistoricoDao extends DaoPadrao<Historico> implements HistoricoRepos
 	
 	
 	
-	public List<Historico> buscaTodosHistoricos(String keyArduino,int initResult,int maxResult,String atributo, int ordem) {
+	public List<Historico> buscaTodosHistoricos(Casa casa,int initResult,int maxResult,String atributo, int ordem) {
 		
 		CriteriaBuilder builder = entityManager.getCriteriaBuilder();// builder 
 		CriteriaQuery<Historico> query = builder.createQuery(Historico.class);// retorno da query
 		Root<Historico> historico = query.from(Historico.class);// classe base onde será feito o select	
 		
-		/**
-		 * Alias
-		 */
-		Join<Historico, Dispositivo> dispo = historico.join("dispositivo");
-		Join<Dispositivo, Casa> casa = dispo.join("casa");
-		Join<Casa, Arduino> ard = casa.join("arduino");
+		
+		
 			
 		Order order = null;
 		if(ordem > 0){
@@ -53,7 +49,7 @@ public class HistoricoDao extends DaoPadrao<Historico> implements HistoricoRepos
 		TypedQuery<Historico> typedQuery = entityManager.createQuery(
 			query.select(historico)
 				.where( 
-					builder.equal(ard.get("key"), keyArduino)	
+					builder.equal(historico.get("casa").get("id")  , casa.getId())	
 				 ).orderBy(order)
 		);
 		
